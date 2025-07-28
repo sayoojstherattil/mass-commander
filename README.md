@@ -1,1 +1,1 @@
-# ssher
+required packages: sshpass, nmap
