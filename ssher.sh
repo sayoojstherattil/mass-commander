@@ -37,7 +37,7 @@ IFS=' ' read -r -a address_array <<< "$address_string"
 command_string_to_execute_from_using_machine="echo starting in using system..."
 
 
-for address in ${address_array[@]}
+for address in ${address_array[@]};
 do
 	if [ "$address" != "$network_address_without_subnet" ]; then
 		command_string_to_execute_from_using_machine="$command_string_to_execute_from_using_machine & sshpass -p \"$accessing_system_password\" ssh -t -o \"StrictHostKeyChecking no\" -o UserKnownHostsFile=/dev/null \"$accessing_system_username\"@\"$address\" \"$command_string_for_accessing_system\""
