@@ -1,7 +1,7 @@
 #!/bin/bash
 
-accessing_system_password="dell"
 accessing_system_username="dell"
+accessing_system_password="dell"
 
 network_address=$(ip a | grep /24 | awk -F' ' '{printf "%s", $2}')
 network_address_without_subnet=$(echo "$network_address" | awk -F'/' '{printf "%s", $1}')
