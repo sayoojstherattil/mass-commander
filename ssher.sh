@@ -155,5 +155,5 @@ elif [ "$power_choice" == "r" ]; then
 	fi
 fi
 
-echo "$command_string_to_execute_from_using_machine"
-#bash -c "$command_string_to_execute_from_using_machine"
+#echo "$command_string_to_execute_from_using_machine"
+bash -c "$command_string_to_execute_from_using_machine"
