@@ -1,1 +1,0 @@
-required packages: sshpass, nmap
