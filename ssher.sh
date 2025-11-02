@@ -2,9 +2,7 @@
 
 set -e
 
-last_thing_to_do
 app_package_name="nautilus"
-
 
 if [ "$wish_of_user" = "adding_users" ]; then
 	user_adder
@@ -17,7 +15,9 @@ elif [ "$wish_of_user" = "deb_file_installer" ]; then
 elif [ "$wish_of_user" = "custom_commanding" ]; then
 	custom_commanding="on"
 	user_setter
-	custom_commands_fetcher_and_generator
+	custom_commands_fetcher
+	command_files_generator
+	command_files_sender_and_executor
 else
 	echo -ne "You wished something not in the list\n"
 fi
