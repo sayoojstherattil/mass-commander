@@ -1,0 +1,12 @@
+program to reprompt when user choice goes wrong
+make a common folder for all runtime files
+proceed verification before actually running. also inform the number of hosts on. 
+command runnner script from runtime files
+tell the proper path for inner scripts 
+line spacer for cleanliness in main program
+commands for each distro to be specified in files
+toggle commands to run as normal user and root user in the invoking script. to prevent non-existing file reading. pass it as a parameter to the commander script
+set -e flag in commands to run as user; for both root and normal. to stop when a command fail.
+user setter must call user fetcher with a parameter on who is called
+also specify the file from where to execute commands to the remote host while sshing 
+store the users listed by the script user to a file in user-fetcher script. to ssh to all those users
