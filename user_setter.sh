@@ -1,13 +1,13 @@
 #!/bin/bash
 
+set -e
+
 echo -ne "Does any of the commands require root priviledges? (y)es/(n)o: "
-choice_verifier
+#prompt verification here
 
 if [ "$root_privilege_choice" = "y" ]; then
-	commanding_as_root="yes"
+	commanding_as_root=1
 else 
-	commanding_as_root="no"
-	user_fetcher
+	commanding_as_root=0
+	user-fetcher
 fi
-
-echo -ne "\n"

@@ -1,22 +1,26 @@
 #!/bin/bash
 
+user_to_run_as="$1"
+
 echo -ne "Enter the commands one by one and hit enter"
-while read read_line; do
-	commands_array+=("$read_line")
-done
 
-echo -ne "\n"
+if [ "$user_to_run_as" = "r" ]; then
+	while read entered_command; do
+		echo "$entered_command" >> commands-to-run-as-root-user
+	done
 
-echo -ne "What do you wish to perform at the end? (r)eboot/(p)ower off/(o)pen predefined gui application: "
-read last_thing_to_do_choice
-choice_verifier
+	echo -ne "would you like to (r)eboot or (s)hutdown or (n)othing? "
+	#prompt verifier
+	read user_choice
 
-if [ "$last_thing_to_do_choice" = "r" ]; then
-	last_thing_to_do="reboot"
-elif [ "$last_thing_to_do_choice" = "p" ]; then
-	last_thing_to_do="poweroff"
-elif [ "$last_thing_to_do_choice" = "o" ]; then
-	last_thing_to_do="open_gui_app"
+	if [ "$user_choice" = "r" ]; then
+		echo "$reboot_command" >> commands-to-run-as-root-user
+	elif [ "$user_choice" = "s" ]; then
+		echo "$shutdown_command" >> commands-to-run-as-root-user
+	fi
+else
+	while read entered_command; do
+		echo "$entered_command" >> commands-to-run-as-normal-user
+		echo "$app_open_command" >> commands-to-run-as-normal-user
+	done
 fi
-
-echo -ne "\n"

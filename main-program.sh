@@ -16,8 +16,7 @@ elif [ "$wish_of_user" = "custom_commanding" ]; then
 	custom_commanding="on"
 	user_setter
 	custom_commands_fetcher
-	command_files_generator
-	command_files_sender_and_executor
+	commander
 else
 	echo -ne "You wished something not in the list\n"
 fi
