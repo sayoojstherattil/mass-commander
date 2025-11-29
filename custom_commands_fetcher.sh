@@ -1,26 +1,23 @@
 #!/bin/bash
 
-user_to_run_as="$1"
+set -e
+
+echo -ne "Does any of the commands require root priviledges? (y)es/(n)o: "
+echo -ne "y\nn\n" > choices
+choice_validator.sh
+
+if [ "$root_privilege_choice" = "y" ]; then
+	echo "root_user" > user-login-type
+else 
+	echo "normal_user" > user-login-type
+	user-fetcher
+fi
 
 echo -ne "Enter the commands one by one and hit enter"
 
-if [ "$user_to_run_as" = "r" ]; then
-	while read entered_command; do
-		echo "$entered_command" >> commands-to-run-as-root-user
-	done
+while read entered_command; do
+	echo "$entered_command" >> custom-commands
+done
 
-	echo -ne "would you like to (r)eboot or (s)hutdown or (n)othing? "
-	#prompt verifier
-	read user_choice
+#commanding
 
-	if [ "$user_choice" = "r" ]; then
-		echo "$reboot_command" >> commands-to-run-as-root-user
-	elif [ "$user_choice" = "s" ]; then
-		echo "$shutdown_command" >> commands-to-run-as-root-user
-	fi
-else
-	while read entered_command; do
-		echo "$entered_command" >> commands-to-run-as-normal-user
-		echo "$app_open_command" >> commands-to-run-as-normal-user
-	done
-fi

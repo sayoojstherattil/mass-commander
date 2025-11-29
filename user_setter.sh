@@ -3,7 +3,8 @@
 set -e
 
 echo -ne "Does any of the commands require root priviledges? (y)es/(n)o: "
-#prompt verification here
+echo -ne "y\nn\n" > choices
+choice_validator.sh
 
 if [ "$root_privilege_choice" = "y" ]; then
 	commanding_as_root=1
