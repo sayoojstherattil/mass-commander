@@ -3,25 +3,25 @@
 set -e
 
 echo -ne "how would you like to login? (r)oot or (n)ormal user?"
-echo -ne "r\nn\n" > ./runtime-files/input-options
-./scripts/user-input-validator.sh
-
-user_input=$(cat ./runtime-files/user-input)
+echo -ne "r\nn\n" > /$USER/mass-commander/runtime-files/input-options
+/$USER/mass-commander/scripts/user-input-validator.sh
 
 echo -ne "Enter the commands one by one and hit enter\n"
 
 while read entered_command; do
-	echo "$entered_command" >> custom-commands
+	echo "$entered_command" >> /$USER/mass-commander/runtime-files/custom-commands
 done
+
+user_input=$(cat /$USER/mass-commander/runtime-files/user-input)
 
 if [ "$user_input" = "n" ]; then
 	user-fetcher.sh
 	
 	while read username; do
-		echo "su - $username -c ' \\" >> ./runtime-files/commands-to-run
-		cat ./runtime-files/custom-commands >> ./runtime-files/commands-to-run
-		echo "'" >> ./runtime-files/commands-to-run
-	done < normal-users-to-run-commands
+		echo "su - $username -c ' \\" >> /$USER/mass-commander/runtime-files/commands-to-run
+		cat /$USER/mass-commander/runtime-files/custom-commands >> /$USER/mass-commander/runtime-files/commands-to-run
+		echo "'" >> /$USER/mass-commander/runtime-files/commands-to-run
+	done < /$USER/mass-commander/runtime-files/normal-users-to-run-commands
 fi
 
-commander.sh
+/$USER/mass-commander/scripts/commander.sh

@@ -20,4 +20,4 @@ while [ $input_is_valid -e 0 ]; do
 	fi
 done
 
-echo "$input" > user_input
+echo "$input" > /$USER/mass-commander/runtime-files/user_input

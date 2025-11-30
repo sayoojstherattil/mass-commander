@@ -9,10 +9,10 @@ echo -ne "(a)dd users\n"
 echo -ne "(d)elete users\n"
 echo -ne "(c)ustom commanding\n"
 
-echo -ne "i\nr\na\nd\nc\n" > input_options
-user_input_validator.sh
+echo -ne "i\nr\na\nd\nc\n" > /$USER/mass-commander/runtime-files/input-options
+user-input-validator.sh
 
-user_input=$(cat user_input)
+user_input=$(cat /$USER/mass-commander/runtime-files/user_input)
 
 if [ "$user_input" = "i" ]; then
 	user_choice="install_packages"
@@ -34,4 +34,4 @@ if [ "$user_input" = "c" ]; then
 	user_choice="custom_commanding"
 fi
 
-echo "$user_choice" > user-choice
+echo "$user_choice" >> /$USER/mass-commander/runtime-files/user-choice

@@ -4,14 +4,16 @@ set -e
 
 prompt.sh
 
-if [ "$wish_of_user" = "add_users" ]; then
-	./scripts/user-adder.sh
-elif [ "$wish_of_user" = "delete_users" ]; then
-	./scripts/user-deletor.sh
-elif [ "$wish_of_user" = "install_packages" ]; then
-	./scripts/packages-installer.sh
-elif [ "$wish_of_user" = "remove_packages" ]; then
-	./scripts/packages-remover.sh
-elif [ "$wish_of_user" = "custom_commanding" ]; then
-	./scripts/custom-commander.sh
+user_choice=$(cat /$USER/mass-commander/runtime-files/user-choice)
+
+if [ "$user_choice" = "add_users" ]; then
+	/$USER/mass-commander/scripts/user-adder.sh
+elif [ "$user_choice" = "delete_users" ]; then
+	/$USER/mass-commander/scripts/user-deletor.sh
+elif [ "$user_choice" = "install_packages" ]; then
+	/$USER/mass-commander/scripts/packages-installer.sh
+elif [ "$user_choice" = "remove_packages" ]; then
+	/$USER/mass-commander/scripts/packages-remover.sh
+elif [ "$user_choice" = "custom_commanding" ]; then
+	/$USER/mass-commander/scripts/custom-commander.sh
 fi

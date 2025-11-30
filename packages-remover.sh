@@ -5,11 +5,12 @@ set -e
 echo -ne "enter names of packages one by one: "
 
 while read package_name; do
-	echo "$package_name" >> ./runtime-files/packages-to-remove
-	echo 'apt remove $(cat ./files-from-server/packages-to-remove) -y' > ./runtime-files/commands-to-run
-	echo "apt autoremove -y" >> ./runtime-files/commands-to-run
+	echo "$package_name" >> /$USER/mass-commander/runtime-files/packages-to-remove
 done
 
-echo './runtime-files/packages-to-remove' >> files-to-tar
+echo 'apt remove $(cat /$USER/mass-commander/files-from-server/packages-to-remove) -y' > /$USER/mass-commander/runtime-files/commands-to-run
+echo "apt autoremove -y" >> /$USER/mass-commander/runtime-files/commands-to-run
 
-./scripts/commander.sh
+echo '/$USER/mass-commander/runtime-files/packages-to-remove' >> files-to-tar
+
+/$USER/mass-commander/scripts/commander.sh

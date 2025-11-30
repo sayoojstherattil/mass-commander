@@ -2,7 +2,7 @@
 
 set -e
 
-server_ip=$(cat ./permanent-files/server-ip)
+server_ip=$(cat /$USER/mass-commander/permanent-files/server-ip)
 
 mkdir /root/mass-commander/files-from-server/
 cd /root/mass-commander/files-from-server/

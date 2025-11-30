@@ -28,18 +28,18 @@ while [ $looping -e 1 ]; do
 
 	password_fetcher
 
-	echo "useradd $username -m -s /bin/bash" >> ./runtime-files/commands-to-run
-	echo "echo '$username:$password' | chpasswd" >> ./runtime-files/commands-to-run
+	echo "useradd $username -m -s /bin/bash" >> /$USER/mass-commander/runtime-files/commands-to-run
+	echo "echo '$username:$password' | chpasswd" >> /$USER/mass-commander/runtime-files/commands-to-run
 
 	echo -ne "do you like to add more users? (y)es/(n)o "
-	echo -ne "y\nn\n" > ./runtime-files/input-choices
-	./scripts/user-input-validator.sh
+	echo -ne "y\nn\n" > /$USER/mass-commander/runtime-files/input-options
+	/$USER/mass-commander/mass-commander/scripts/user-input-validator.sh
 
-	user_input=$(cat ./runtime-files/user_input)
+	user_input=$(cat /$USER/mass-commander/runtime-files/user_input)
 
 	if [ "$user_input" = "y" ]; then
 		looping=0
 	fi
 done
 
-./scripts/commander.sh
+/$USER/mass-commander/mass-commander/scripts/commander.sh
