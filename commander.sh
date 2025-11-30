@@ -1,8 +1,5 @@
 #!/bin/bash
 
-#shouldn't use here due to fail in opening apps in some users
-#set -e
-
 commander() {
 	while read ip_address; do
 		ssh root@$ip_address "client-side.sh" &
@@ -18,8 +15,11 @@ ip_addresses_finder() {
 	cat ./runtime-files/arp-scan-unwanted-lines-deleted | awk -F' ' '{print $1}' > ./runtime-files/ip-address-pool 
 }
 
-echo './files-from-server/app-opener.sh' >> ./runtime-files/commands-to-run
+echo 'app-opener.sh' >> ./runtime-files/commands-to-run
+
 echo './runtime-files/commands-to-run' >> files-to-tar
+echo './runtime-files/app-opener.sh' >> files-to-tar
+echo './permanent/app-to-open' >> files-to-tar
 
 cd /root/mass-commander/runtime-files/
 tar -czf files-from-server.tar.gz $(cat /root/mass-commander/runtime-files/files-to-tar)
