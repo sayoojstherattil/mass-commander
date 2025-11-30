@@ -28,12 +28,12 @@ while [ $looping -e 1 ]; do
 
 	password_fetcher
 
-	echo "useradd $username -m -s /bin/bash" >> ./runtime-files/commands-to-run-as-root
-	echo "echo '$username:$password' | chpasswd" >> ./runtime-files/commands-to-run-as-root
+	echo "useradd $username -m -s /bin/bash" >> ./runtime-files/commands-to-run
+	echo "echo '$username:$password' | chpasswd" >> ./runtime-files/commands-to-run
 
 	echo -ne "do you like to add more users? (y)es/(n)o "
 	echo -ne "y\nn\n" > ./runtime-files/input-choices
-	choice_validator.sh
+	./scripts/user-input-validator.sh
 
 	user_input=$(cat ./runtime-files/user_input)
 
@@ -42,4 +42,4 @@ while [ $looping -e 1 ]; do
 	fi
 done
 
-echo 'root_user' > ./runtime-files/user-login-type
+./scripts/commander.sh
