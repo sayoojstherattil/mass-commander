@@ -35,9 +35,11 @@ while [ $looping -e 1 ]; do
 	echo -ne "y\nn\n" > choices
 	choice_validator.sh
 
-	user_choice=$(cat user_choice)
+	user_input=$(cat user_input)
 
-	if [ "$user_choice" = "y" ]; then
+	if [ "$user_input" = "y" ]; then
 		looping=0
 	fi
 done
+
+echo 'root_user' > user-login-type

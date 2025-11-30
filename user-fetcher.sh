@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 echo -ne "Enter usernames to act on:\n"
 
 while read username; do

@@ -9,37 +9,28 @@ echo -ne "(a)dd users\n"
 echo -ne "(d)elete users\n"
 echo -ne "(c)ustom commanding\n"
 
-echo -ne "i\nr\na\nd\nc\n" > choices
-choice_validator.sh
+echo -ne "i\nr\na\nd\nc\n" > input_options
+user_input_validator.sh
 
-if [ "$choice" = "i" ]; then
-	echo -ne "How would you like to install?\n"
-	echo -ne "(r)epo installation\n"
-	echo -ne "(d)eb file installation\n"
+user_input=$(cat user_input)
 
-	echo -ne "r\nd\n" > choices
-	choice_validator.sh
-
-	if [ "$choice" = "r" ]; then
-		user_choice="installing_from_repo"
-	elif [ "$choice" = "d" ]; then
-		user_choice="installing_from_deb_file"
-	fi
+if [ "$user_input" = "i" ]; then
+	user_choice="install_packages"
 fi
 
-if [ "$choice" = "r" ]; then
+if [ "$user_input" = "r" ]; then
 	user_choice="remove_packages"
 fi
 
-if [ "$choice" = "a" ]; then
+if [ "$user_input" = "a" ]; then
 	user_choice="add_users"
 fi
 
-if [ "$choice" = "d" ]; then
+if [ "$user_input" = "d" ]; then
 	user_choice="delete_users"
 fi
 
-if [ "$choice" = "c" ]; then
+if [ "$user_input" = "c" ]; then
 	user_choice="custom_commanding"
 fi
 
