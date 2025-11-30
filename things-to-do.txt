@@ -10,3 +10,8 @@ set -e flag in commands to run as user; for both root and normal. to stop when a
 user setter must call user fetcher with a parameter on who is called
 also specify the file from where to execute commands to the remote host while sshing 
 store the users listed by the script user to a file in user-fetcher script. to ssh to all those users
+
+script to setup the env
+packages installer script change needed at #. same for packages remover
+ensure files and scripts locations are correct
+perm ip for server

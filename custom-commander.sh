@@ -3,10 +3,10 @@
 set -e
 
 echo -ne "Does any of the commands require root priviledges? (y)es/(n)o: "
-echo -ne "y\nn\n" > input_options
-choice_validator.sh
+echo -ne "y\nn\n" > ./runtime-files/input-options
+./scripts/choice_validator.sh
 
-user_input=$(cat user_input)
+user_input=$(cat ./runtime-files/user-input)
 
 if [ "$user_input" = "y" ]; then
 	echo "root_user" > user-login-type

@@ -5,7 +5,7 @@ set -e
 prompt.sh
 
 if [ "$wish_of_user" = "add_users" ]; then
-	user-adder.sh
+	./scripts/user-adder.sh
 elif [ "$wish_of_user" = "delete_users" ]; then
 	user-deletor.sh
 elif [ "$wish_of_user" = "install_packages" ]; then
