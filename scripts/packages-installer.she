@@ -1,7 +1,5 @@
 #!/bin/bash -e
 
-trap 'echo -e "[${BASH_SOURCE}:${LINENO}]\t$BASH_COMMAND" ; read' DEBUG
-
 
 #current_files_in_archive_fetcher
 ls /var/cache/apt/archives > /$USER/mass-commander/runtime-files/files-in-archive-old

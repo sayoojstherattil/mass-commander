@@ -1,7 +1,5 @@
 #!/bin/bash -e
 
-trap 'echo -e "[${BASH_SOURCE}:${LINENO}]\t$BASH_COMMAND" ; read' DEBUG
-
 #shouldn't use here due to fail in opening apps in some users
 
 app_to_open=$(cat /$USER/mass-commander/files-from-server/app-to-open)

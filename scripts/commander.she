@@ -1,7 +1,5 @@
 #!/bin/bash -e
 
-trap 'echo -e "[${BASH_SOURCE}:${LINENO}]\t$BASH_COMMAND" ; read' DEBUG
-
 commander() {
 	while read ip_address; do
 		ssh root@$ip_address "client-side.sh" &

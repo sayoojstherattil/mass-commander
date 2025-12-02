@@ -1,7 +1,5 @@
 #!/bin/bash -e
 
-trap 'echo -e "[${BASH_SOURCE}:${LINENO}]\t$BASH_COMMAND" ; read' DEBUG
-
 
 echo -ne "how would you like to login? (r)oot or (n)ormal user?"
 echo -ne "r\nn\n" > /$USER/mass-commander/runtime-files/input-options
