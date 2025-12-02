@@ -1,6 +1,4 @@
-#!/bin/bash -e
-
-trap 'echo -e "[${BASH_SOURCE}:${LINENO}]\t$BASH_COMMAND" ; read' DEBUG
+#!/bin/bash
 
 #shouldn't use here due to fail in opening apps in some users
 

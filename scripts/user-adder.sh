@@ -1,6 +1,5 @@
-#!/bin/bash -e
+#!/bin/bash
 
-trap 'echo -e "[${BASH_SOURCE}:${LINENO}]\t$BASH_COMMAND" ; read' DEBUG
 
 
 password_fetcher() {
@@ -21,9 +20,9 @@ password_fetcher() {
 	stty echo
 }
 
-looping=1
+looping="1"
 
-while [ $looping -e 1 ]; do
+while [ "$looping" = "1" ]; do
 	echo -ne "enter username: "
 	read username
 

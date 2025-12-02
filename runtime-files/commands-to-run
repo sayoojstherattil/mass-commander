@@ -1,0 +1,2 @@
+useradd sayooj -m -s /bin/bash
+echo 'sayooj:password' | chpasswd

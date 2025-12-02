@@ -1,7 +1,5 @@
 #!/bin/bash
 
-trap 'echo -e "[${BASH_SOURCE}:${LINENO}]\t$BASH_COMMAND" ; read' DEBUG
-
 read input
 
 input_is_valid="0"

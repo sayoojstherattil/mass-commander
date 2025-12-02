@@ -1,11 +1,14 @@
-#!/bin/bash -e
+#!/bin/bash
 
-trap 'echo -e "[${BASH_SOURCE}:${LINENO}]\t$BASH_COMMAND" ; read' DEBUG
-
+if [ -d /root/mass-commander/runtime-files ]; then
+	echo "recreated the dir"
+	rm -r /root/mass-commander/runtime-files
+	mkdir /root/mass-commander/runtime-files
+fi
 
 /root/mass-commander/scripts/prompt.sh
 
-user_choice=$(cat /$USER/mass-commander/runtime-files/user-choice)
+user_choice=$(cat /root/mass-commander/runtime-files/user-choice)
 
 if [ "$user_choice" = "add_users" ]; then
 	/$USER/mass-commander/scripts/user-adder.sh

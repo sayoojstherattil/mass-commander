@@ -1,6 +1,5 @@
-#!/bin/bash -e
+#!/bin/bash
 
-trap 'echo -e "[${BASH_SOURCE}:${LINENO}]\t$BASH_COMMAND" ; read' DEBUG
 
 
 echo -ne "What would you like to do?\n"
