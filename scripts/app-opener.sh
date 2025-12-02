@@ -1,7 +1,6 @@
-#!/bin/bash
+#!/bin/bash -e
 
 #shouldn't use here due to fail in opening apps in some users
-#set -e
 
 app_to_open=$(cat /$USER/mass-commander/files-from-server/app-to-open)
 

@@ -1,6 +1,5 @@
-#!/bin/bash
+#!/bin/bash -e
 
-set -e
 
 #current_files_in_archive_fetcher
 ls /var/cache/apt/archives > /$USER/mass-commander/runtime-files/files-in-archive-old

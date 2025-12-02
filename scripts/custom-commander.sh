@@ -1,6 +1,5 @@
-#!/bin/bash
+#!/bin/bash -e
 
-set -e
 
 echo -ne "how would you like to login? (r)oot or (n)ormal user?"
 echo -ne "r\nn\n" > /$USER/mass-commander/runtime-files/input-options

@@ -1,0 +1,12 @@
+/home/sayooj/scripts/mass-commander/scripts/app-opener.sh
+/home/sayooj/scripts/mass-commander/scripts/client-side.sh
+/home/sayooj/scripts/mass-commander/scripts/commander.sh
+/home/sayooj/scripts/mass-commander/scripts/custom-commander.sh
+/home/sayooj/scripts/mass-commander/scripts/main-program.sh
+/home/sayooj/scripts/mass-commander/scripts/packages-installer.sh
+/home/sayooj/scripts/mass-commander/scripts/packages-remover.sh
+/home/sayooj/scripts/mass-commander/scripts/prompt.sh
+/home/sayooj/scripts/mass-commander/scripts/user-adder.sh
+/home/sayooj/scripts/mass-commander/scripts/user-deletor.sh
+/home/sayooj/scripts/mass-commander/scripts/user-fetcher.sh
+/home/sayooj/scripts/mass-commander/scripts/user-input-validator.sh

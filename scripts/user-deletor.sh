@@ -1,6 +1,5 @@
-#!/bin/bash
+#!/bin/bash -e
 
-set -e
 
 echo -ne "enter usernames one by one: "
 while read username; do

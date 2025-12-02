@@ -1,6 +1,5 @@
-#!/bin/bash
+#!/bin/bash -e
 
-set -e
 
 echo -ne "What would you like to do?\n"
 echo -ne "(i)nstall packages\n"

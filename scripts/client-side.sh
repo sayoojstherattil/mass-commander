@@ -1,6 +1,5 @@
-#!/bin/bash
+#!/bin/bash -e
 
-set -e
 
 server_ip=$(cat /$USER/mass-commander/permanent-files/server-ip)
 

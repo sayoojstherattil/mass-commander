@@ -1,6 +1,5 @@
-#!/bin/bash
+#!/bin/bash -e
 
-set -e
 
 echo -ne "Enter usernames to act on:\n"
 
