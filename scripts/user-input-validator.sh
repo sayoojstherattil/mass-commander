@@ -23,4 +23,4 @@ while [ "$input_is_valid" = "0" ]; do
 	fi
 done
 
-echo "$input" > /$USER/mass-commander/runtime-files/user-input
+echo "$input" > /root/mass-commander/runtime-files/user-input

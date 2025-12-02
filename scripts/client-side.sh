@@ -2,7 +2,7 @@
 
 
 
-server_ip=$(cat /$USER/mass-commander/permanent-files/server-ip)
+server_ip=$(cat /root/mass-commander/permanent-files/server-ip)
 
 mkdir /root/mass-commander/runtime-files/
 cd /root/mass-commander/runtime-files/

@@ -7,8 +7,10 @@ password_fetcher() {
 
 	echo -ne "enter password: "
 	read entered_password
+	echo
 	echo -ne "enter again: "
 	read rentered_password
+	echo
 
 	if [ "$entered_password" != "$rentered_password" ]; then
 		echo -ne "sorry, the passwords do not match\n"
@@ -28,18 +30,18 @@ while [ "$looping" = "1" ]; do
 
 	password_fetcher
 
-	echo "useradd $username -m -s /bin/bash" >> /$USER/mass-commander/runtime-files/commands-to-run
-	echo "echo '$username:$password' | chpasswd" >> /$USER/mass-commander/runtime-files/commands-to-run
+	echo "useradd $username -m -s /bin/bash" >> /root/mass-commander/runtime-files/commands-to-run
+	echo "echo '$username:$password' | chpasswd" >> /root/mass-commander/runtime-files/commands-to-run
 
 	echo -ne "do you like to add more users? (y)es/(n)o "
-	echo -ne "y\nn\n" > /$USER/mass-commander/runtime-files/input-options
-	/$USER/mass-commander/mass-commander/scripts/user-input-validator.sh
+	echo -ne "y\nn\n" > /root/mass-commander/runtime-files/input-options
+	/root/mass-commander/scripts/user-input-validator.sh
 
-	user_input=$(cat /$USER/mass-commander/runtime-files/user_input)
+	user_input=$(cat /root/mass-commander/runtime-files/user-input)
 
-	if [ "$user_input" = "y" ]; then
+	if [ "$user_input" = "n" ]; then
 		looping=0
 	fi
 done
 
-/$USER/mass-commander/mass-commander/scripts/commander.sh
+/root/mass-commander/scripts/commander.sh

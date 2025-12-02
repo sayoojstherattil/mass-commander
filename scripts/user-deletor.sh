@@ -4,7 +4,7 @@
 
 echo -ne "enter usernames one by one: "
 while read username; do
-	echo "userdel $username -r" >> /$USER/mass-commander/runtime-files/commands-to-run
+	echo "userdel $username -r" >> /root/mass-commander/runtime-files/commands-to-run
 done
 
-/$USER/mass-commander/scripts/commander.sh
+/root/mass-commander/scripts/commander.sh
