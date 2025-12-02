@@ -3,7 +3,7 @@
 trap 'echo -e "[${BASH_SOURCE}:${LINENO}]\t$BASH_COMMAND" ; read' DEBUG
 
 
-prompt.sh
+/root/mass-commander/scripts/prompt.sh
 
 user_choice=$(cat /$USER/mass-commander/runtime-files/user-choice)
 
