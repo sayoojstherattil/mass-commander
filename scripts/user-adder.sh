@@ -1,7 +1,5 @@
 #!/bin/bash
 
-
-
 password_fetcher() {
 	stty -echo
 
@@ -30,18 +28,18 @@ while [ "$looping" = "1" ]; do
 
 	password_fetcher
 
-	echo "useradd $username -m -s /bin/bash" >> /root/mass-commander/runtime-files/commands-to-run
-	echo "echo '$username:$password' | chpasswd" >> /root/mass-commander/runtime-files/commands-to-run
+	echo "useradd $username -m -s /bin/bash" >> $runtime_files_dir/commands-to-run
+	echo "echo '$username:$password' | chpasswd" >> $runtime_files_dir/commands-to-run
 
 	echo -ne "do you like to add more users? (y)es/(n)o "
-	echo -ne "y\nn\n" > /root/mass-commander/runtime-files/input-options
-	/root/mass-commander/scripts/user-input-validator.sh
+	echo -ne "y\nn\n" > $runtime_files_dir/input-options
+	user-input-validator.sh
 
-	user_input=$(cat /root/mass-commander/runtime-files/user-input)
+	user_input=$(cat $runtime_files_dir/user-input)
 
 	if [ "$user_input" = "n" ]; then
 		looping=0
 	fi
 done
 
-/root/mass-commander/scripts/commander.sh
+commander.sh

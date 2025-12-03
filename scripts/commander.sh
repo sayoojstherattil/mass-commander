@@ -2,48 +2,48 @@
 
 commander() {
 	while read ip_address; do
-		ssh root@$ip_address "/root/mass-commander/scripts/client-side.sh" &
-	done</root/mass-commander/runtime-files/ip-address-pool
+		ssh root@$ip_address "client-side.sh" &
+	done<$runtime_files_dir/ip-address-pool
 }
 
 ip_addresses_finder() {
 	perm_ip_addr_with_sub_mask=$(cat /root/mass-commander/permanent-files/permanent-ip-address-with-subnet-mask)
-	arp-scan "$perm_ip_addr_with_sub_mask" > /root/mass-commander/runtime-files/arp-scan-output
-	no_of_lines=$(wc -l /root/mass-commander/runtime-files/arp-scan-output | awk -F' ' '{print $1}')
+	arp-scan "$perm_ip_addr_with_sub_mask" > $runtime_files_dir/arp-scan-output
+	no_of_lines=$(wc -l $runtime_files_dir/arp-scan-output | awk -F' ' '{print $1}')
 	
 	line_just_below_result=$(($no_of_lines - 2))
-	cat /root/mass-commander/runtime-files/arp-scan-output | sed "${line_just_below_result},${no_of_lines}d" | sed '1,2d' > /root/mass-commander/runtime-files/arp-scan-unwanted-lines-deleted
-	cat /root/mass-commander/runtime-files/arp-scan-unwanted-lines-deleted | awk -F' ' '{print $1}' > /root/mass-commander/runtime-files/ip-address-pool 
+	cat $runtime_files_dir/arp-scan-output | sed "${line_just_below_result},${no_of_lines}d" | sed '1,2d' > $runtime_files_dir/arp-scan-unwanted-lines-deleted
+	cat $runtime_files_dir/arp-scan-unwanted-lines-deleted | awk -F' ' '{print $1}' > $runtime_files_dir/ip-address-pool 
 }
 
 files_tarrer() {
-	ls /root/mass-commander/runtime-files/file-tarring-area > /root/mass-commander/runtime-files/filenames-to-tar-without-path
-	tar -czf /root/mass-commander/runtime-files/files-from-server.tar.gz -C /root/mass-commander/runtime-files/file-tarring-area $(cat /root/mass-commander/runtime-files/filenames-to-tar-without-path)
+	ls $runtime_files_dir/files-tarring-area >> $runtime_files_dir/files-to-tar
+	tar -czf $runtime_files_dir/files-from-server.tar.gz -C $runtime_files_dir/files-tarring-area $(cat $runtime_files_dir/files-to-tar)
 }
 
-files_to_tar_loc_copier() {
-	if [ -d /root/mass-commander/runtime-files/file-tarring-area ]; then
-		rm -r /root/mass-commander/runtime-files/file-tarring-area
-		mkdir /root/mass-commander/runtime-files/file-tarring-area
+always_required_files_to_tarring_area_copier() {
+	cp $runtime_files_dir/commands-to-run $runtime_files_dir/files-to-tar
+	cp app-opener.sh $runtime_files_dir/files-to-tar
+	cp /root/mass-commander/permanent-files/app-to-open $runtime_files_dir/files-to-tar
+}
+
+files_tarring_area_dir_ensurer() {
+	if [ -d $runtime_files_dir/files-tarring-area ]; then
+		rm -r $runtime_files_dir/files-tarring-area
+		mkdir $runtime_files_dir/files-tarring-area
 	else
-		mkdir /root/mass-commander/runtime-files/file-tarring-area
+		mkdir $runtime_files_dir/files-tarring-area
 	fi
-
-	while read file_location; do 
-		cp $file_location /root/mass-commander/runtime-files/file-tarring-area
-	done</root/mass-commander/runtime-files/files-to-tar
 }
 
-echo '/root/mass-commander/runtime-files/files-from-server/app-opener.sh' >> /root/mass-commander/runtime-files/commands-to-run
+#is always done after successful completion of job
+echo '$runtime_files_dir/files-from-server/app-opener.sh' >> $runtime_files_dir/commands-to-run
 
-echo '/root/mass-commander/runtime-files/commands-to-run' >> /root/mass-commander/runtime-files/files-to-tar
-echo '/root/mass-commander/scripts/app-opener.sh' >> /root/mass-commander/runtime-files/files-to-tar
-echo '/root/mass-commander/permanent-files/app-to-open' >> /root/mass-commander/runtime-files/files-to-tar
-
-files_to_tar_loc_copier
+files_tarring_area_dir_ensurer
+always_required_files_to_tarring_area_copier
 files_tarrer
 
-cp /root/mass-commander/runtime-files/files-from-server.tar.gz /srv/sftp/data
+cp $runtime_files_dir/files-from-server.tar.gz /srv/sftp/data
 
 ip_addresses_finder
 commander

@@ -1,1 +1,0 @@
-make ssh command to run client-side.sh in a way the session can be detached and the command/script keeps on running. also, make password asking for new user account secure by reading it and saving as hash instead of plain text

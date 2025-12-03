@@ -1,25 +1,42 @@
 #!/bin/bash
 
-if [ -d /root/mass-commander/runtime-files ]; then
-	echo "recreated the dir"
-	rm -r /root/mass-commander/runtime-files
-	mkdir /root/mass-commander/runtime-files
-else
-	mkdir /root/mass-commander/runtime-files
-fi
+directory_ensurer() {
+	dir_name="$1"
 
-/root/mass-commander/scripts/prompt.sh
+	if [ -d $dir_name ]; then
+		echo "recreated the dir"
+		rm -r $dir_name
+		mkdir $dir_name else
+		mkdir $dir_name
+	fi
+}
 
-user_choice=$(cat /root/mass-commander/runtime-files/user-choice)
+necessary_directories_ensurer() {
+	directory_ensurer "$runtime_files_dir"
+}
+
+script_necessary_variables_changer() {
+	export PATH="$PATH:/root/mass-commander/scripts"
+	export runtime_files_dir="$/root/mass-commander/runtime-files"
+}
+
+
+script_necessary_variables_changer
+necessary_directories_ensurer
+
+#prompter
+prompt.sh
+
+user_choice=$(cat $runtime_files_dir/user-choice)
 
 if [ "$user_choice" = "add_users" ]; then
-	/root/mass-commander/scripts/user-adder.sh
+	user-adder.sh
 elif [ "$user_choice" = "delete_users" ]; then
-	/root/mass-commander/scripts/user-deletor.sh
+	user-deletor.sh
 elif [ "$user_choice" = "install_packages" ]; then
-	/root/mass-commander/scripts/packages-installer.sh
+	packages-installer.sh
 elif [ "$user_choice" = "remove_packages" ]; then
-	/root/mass-commander/scripts/packages-remover.sh
+	packages-remover.sh
 elif [ "$user_choice" = "custom_commanding" ]; then
-	/root/mass-commander/scripts/custom-commander.sh
+	custom-commander.sh
 fi

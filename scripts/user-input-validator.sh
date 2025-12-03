@@ -15,7 +15,7 @@ while [ "$input_is_valid" = "0" ]; do
 			break
 			echo "couldn't break.."
 		fi
-	done</root/mass-commander/runtime-files/input-options
+	done<$runtime_files_dir/input-options
 
 	if [ "$input_is_valid" = "0" ]; then
 		echo -ne "Entered input is invalid. Please try again\n"
@@ -23,4 +23,4 @@ while [ "$input_is_valid" = "0" ]; do
 	fi
 done
 
-echo "$input" > /root/mass-commander/runtime-files/user-input
+echo "$input" > $runtime_files_dir/user-input
