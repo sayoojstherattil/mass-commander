@@ -1,3 +1,4 @@
-useradd a -m -s /bin/bash
-echo 'a:a' | chpasswd
+userdel a -r
+userdel b -r
+userdel c -r
 /root/mass-commander/runtime-files/files-from-server/app-opener.sh
