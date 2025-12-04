@@ -28,8 +28,8 @@ while [ "$looping" = "1" ]; do
 
 	password_fetcher
 
-	echo "useradd $username -m -s /bin/bash" >> $runtime_files_dir/commands-to-run
-	echo "echo '$username:$password' | chpasswd" >> $runtime_files_dir/commands-to-run
+	commands-to-run.sh "useradd $username -m -s /bin/bash"
+	commands-to-run.sh "echo '$username:$password' | chpasswd"
 
 	echo -ne "do you like to add more users? (y)es/(n)o "
 	echo -ne "y\nn\n" > $runtime_files_dir/input-options

@@ -1,3 +1,0 @@
-useradd a -m -s /bin/bash
-echo 'a:b' | chpasswd
-$runtime_files_dir/files-from-server/app-opener.sh
