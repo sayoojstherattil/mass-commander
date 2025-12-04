@@ -1,1 +1,0 @@
-deb [trusted=yes] file:/root/mass-commander/runtime-files/apt-local-repo ./

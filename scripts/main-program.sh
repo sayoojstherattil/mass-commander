@@ -18,11 +18,13 @@ directory_ensurer() {
 necessary_directories_ensurer() {
 	directory_ensurer "$runtime_files_dir"
 	directory_ensurer "$runtime_files_dir/files-tarring-area"
+	directory_ensurer "$runtime_files_dir/local-repo-creation"
 }
 
 script_necessary_variables_changer() {
 	export PATH="$PATH:/root/mass-commander/scripts"
 	export runtime_files_dir="/root/mass-commander/runtime-files"
+	export permanent_files_dir="/root/mass-commander/permanent-files"
 	export scripts_dir="/root/mass-commander/scripts"
 }
 
