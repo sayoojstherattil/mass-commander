@@ -1,6 +1,7 @@
 #!/bin/bash
 
 
+echo "executing user deletor"
 
 echo "enter usernames one by one: "
 while read username; do

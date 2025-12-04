@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "executing package remover"
+
 echo -ne "enter names of packages one by one: "
 
 while read package_name; do

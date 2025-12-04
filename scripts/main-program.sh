@@ -4,20 +4,26 @@ directory_ensurer() {
 	dir_name="$1"
 
 	if [ -d $dir_name ]; then
-		echo "recreated the dir"
 		rm -r $dir_name
-		mkdir $dir_name else
 		mkdir $dir_name
+
+		echo "recreated $dir_name"
+	else
+		mkdir $dir_name
+
+		echo "made $dir_name"
 	fi
 }
 
 necessary_directories_ensurer() {
 	directory_ensurer "$runtime_files_dir"
+	directory_ensurer "$runtime_files_dir/files-tarring-area"
 }
 
 script_necessary_variables_changer() {
 	export PATH="$PATH:/root/mass-commander/scripts"
-	export runtime_files_dir="$/root/mass-commander/runtime-files"
+	export runtime_files_dir="/root/mass-commander/runtime-files"
+	export scripts_dir="/root/mass-commander/scripts"
 }
 
 

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "executing package installer"
+
 commands_to_run_file_appender() {
 	req_command="$1"
 

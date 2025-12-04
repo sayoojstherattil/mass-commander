@@ -1,5 +1,3 @@
-/root/mass-commander/permanent-files/temp-sources-file
-/root/mass-commander/runtime-files/packages-to-install
-/root/mass-commander/runtime-files/commands-to-run
-/root/mass-commander/scripts/app-opener.sh
-/root/mass-commander/permanent-files/app-to-open
+app-opener.sh
+app-to-open
+commands-to-run

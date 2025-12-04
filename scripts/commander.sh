@@ -22,24 +22,14 @@ files_tarrer() {
 }
 
 always_required_files_to_tarring_area_copier() {
-	cp $runtime_files_dir/commands-to-run $runtime_files_dir/files-to-tar
-	cp app-opener.sh $runtime_files_dir/files-to-tar
-	cp /root/mass-commander/permanent-files/app-to-open $runtime_files_dir/files-to-tar
-}
-
-files_tarring_area_dir_ensurer() {
-	if [ -d $runtime_files_dir/files-tarring-area ]; then
-		rm -r $runtime_files_dir/files-tarring-area
-		mkdir $runtime_files_dir/files-tarring-area
-	else
-		mkdir $runtime_files_dir/files-tarring-area
-	fi
+	cp $runtime_files_dir/commands-to-run $runtime_files_dir/files-tarring-area
+	cp $scripts_dir/app-opener.sh $runtime_files_dir/files-tarring-area
+	cp /root/mass-commander/permanent-files/app-to-open $runtime_files_dir/files-tarring-area
 }
 
 #is always done after successful completion of job
-echo '$runtime_files_dir/files-from-server/app-opener.sh' >> $runtime_files_dir/commands-to-run
+echo "$runtime_files_dir/files-from-server/app-opener.sh" >> $runtime_files_dir/commands-to-run
 
-files_tarring_area_dir_ensurer
 always_required_files_to_tarring_area_copier
 files_tarrer
 

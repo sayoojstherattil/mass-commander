@@ -1,0 +1,28 @@
+#!/bin/bash
+
+#shouldn't use here due to fail in opening apps in some users
+
+app_to_open=$(cat /root/mass-commander/files-from-server/app-to-open)
+
+
+app_opening_commands_generator() {
+	line="$1"
+
+	username=$(echo "$line" | awk -F' ' '{print $1}')
+	display_number=$(echo "$line" | awk -F' ' '{print $11}')
+
+	echo "su - $username -c '\\" >> $runtime_files_dir/app-opening-commands
+	echo "export DISPLAY=$display_number" >> $runtime_files_dir/app-opening-commands
+	echo "nohup $app_to_open &" >> $runtime_files_dir/app-opening-commands
+	echo "'" >> $runtime_files_dir/app-opening-commands
+}
+
+
+w > $runtime_files_dir/w-output
+sed -i '1,2d' $runtime_files_dir/w-output
+
+while read line; do
+	app_opening_commands_generator "$line"
+done < $runtime_files_dir/w-output
+
+source $runtime_files_dir/app-opening-commands
