@@ -1,9 +1,6 @@
 #!/bin/bash
 
-#shouldn't use here due to fail in opening apps in some users
-
-app_to_open=$(cat /root/mass-commander/files-from-server/app-to-open)
-
+app_to_open=$(cat $runtime_files_dir/files-from-server/app-to-open)
 
 app_opening_commands_generator() {
 	line="$1"
@@ -13,7 +10,7 @@ app_opening_commands_generator() {
 
 	echo "su - $username -c '\\" >> $runtime_files_dir/app-opening-commands
 	echo "export DISPLAY=$display_number" >> $runtime_files_dir/app-opening-commands
-	echo "nohup $app_to_open &" >> $runtime_files_dir/app-opening-commands
+	echo "$app_to_open &" >> $runtime_files_dir/app-opening-commands
 	echo "'" >> $runtime_files_dir/app-opening-commands
 }
 

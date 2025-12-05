@@ -9,7 +9,7 @@ local_repo_files_to_tarring_area_copier() {
 	ls $runtime_files_dir/local-repo-creation >> $runtime_files_dir/files-in-local-repo
 
 	while read local_repo_filename; do
-		cp $runtime_files_dir/local-repo-creation/$local_repo_filename $runtime_files_dir/files-tarring-area
+		files-to-tar.sh "$runtime_files_dir/local-repo-creation/$local_repo_filename"
 	done<$runtime_files_dir/files-in-local-repo
 }
 
