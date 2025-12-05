@@ -1,11 +1,5 @@
 #!/bin/bash
 
-commands_to_run_file_appender() {
-	req_command="$1"
-
-	echo "$req_command" >> $runtime_files_dir/commands-to-run
-}
-
 other_files_to_tarring_area_copier() {
 	cp $permanent_files_dir/temporary-sources-file $runtime_files_dir/files-to-tar
 	cp $runtime_files_dir/packages-to-install $runtime_files_dir/files-to-tar
@@ -24,7 +18,7 @@ local_repo_creator() {
 }
 
 fetched_deb_files_to_local_repo_creation_dir_placer() {
-	ls /var/cache/apt/archives >> $runtime_files_dir/all-files-in-apt-archive
+	ls /var/cache/apt/archives > $runtime_files_dir/all-files-in-apt-archive
 	cat $runtime_files_dir/all-files-in-apt-archive | grep -v -f $permanent_files_dir/always-required-things-in-apt-archive > $runtime_files_dir/fetched-deb-files
 
 	while read deb_file_name; do
@@ -41,7 +35,7 @@ deb_files_fetcher() {
 }
 
 deb_files_from_archive_deletor() {
-	ls /var/cache/apt/archives >> $runtime_files_dir/all-files-in-apt-archive
+	ls /var/cache/apt/archives > $runtime_files_dir/all-files-in-apt-archive
 	cat $runtime_files_dir/all-files-in-apt-archive | grep -v -f $permanent_files_dir/always-required-things-in-apt-archive > $runtime_files_dir/deb-files-in-apt-archive
 
 	path_to_apt_archive="/var/cache/apt/archives"
