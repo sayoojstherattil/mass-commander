@@ -33,4 +33,4 @@ if [ "$user_input" = "c" ]; then
 	user_choice="custom_commanding"
 fi
 
-echo "$user_choice" >> $runtime_files_dir/user-choice
+echo "$user_choice" > $runtime_files_dir/user-choice

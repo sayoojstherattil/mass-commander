@@ -6,12 +6,8 @@ directory_ensurer() {
 	if [ -d $dir_name ]; then
 		rm -r $dir_name
 		mkdir $dir_name
-
-		echo "recreated $dir_name"
 	else
 		mkdir $dir_name
-
-		echo "made $dir_name"
 	fi
 }
 
@@ -25,6 +21,9 @@ script_necessary_variables_changer() {
 	export PATH="$PATH:/root/mass-commander/scripts"
 	export runtime_files_dir="/root/mass-commander/runtime-files"
 	export runtime_files_dir_of_client="/root/mass-commander/runtime-files"
+	export scripts_dir="/root/mass-commander/scripts"
+	export scripts_dir_of_client="/root/mass-commander/scripts"
+
 	export permanent_files_dir="/root/mass-commander/permanent-files"
 }
 

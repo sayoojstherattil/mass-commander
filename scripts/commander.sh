@@ -2,7 +2,7 @@
 
 commander() {
 	while read ip_address; do
-		ssh root@$ip_address "client-side.sh" &
+		ssh root@$ip_address "nohup $scripts_dir_of_client/client-side.sh &" &
 	done<$runtime_files_dir/ip-address-pool
 }
 
@@ -17,18 +17,15 @@ ip_addresses_finder() {
 }
 
 files_tarrer() {
-	ls $runtime_files_dir/files-tarring-area >> $runtime_files_dir/files-to-tar
+	ls $runtime_files_dir/files-tarring-area > $runtime_files_dir/files-to-tar
 	tar -czf $runtime_files_dir/files-from-server.tar.gz -C $runtime_files_dir/files-tarring-area $(cat $runtime_files_dir/files-to-tar)
 }
 
 always_required_files_to_tarring_area_copier() {
-	cp $runtime_files_dir/commands-to-run $runtime_files_dir/files-tarring-area
-	cp $scripts_dir/app-opener.sh $runtime_files_dir/files-tarring-area
-	cp /root/mass-commander/permanent-files/app-to-open $runtime_files_dir/files-tarring-area
+	files-to-tar.sh "$runtime_files_dir/commands-to-run"
+	files-to-tar.sh "$scripts_dir/app-opener.sh"
+	files-to-tar.sh "$permanent_files_dir/app-to-open"
 }
-
-#is always done after successful completion of job
-echo "$runtime_files_dir/files-from-server/app-opener.sh" >> $runtime_files_dir/commands-to-run
 
 always_required_files_to_tarring_area_copier
 files_tarrer
