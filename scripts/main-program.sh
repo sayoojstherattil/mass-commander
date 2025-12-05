@@ -25,7 +25,6 @@ script_necessary_variables_changer() {
 	export PATH="$PATH:/root/mass-commander/scripts"
 	export runtime_files_dir="/root/mass-commander/runtime-files"
 	export permanent_files_dir="/root/mass-commander/permanent-files"
-	export scripts_dir="/root/mass-commander/scripts"
 }
 
 
