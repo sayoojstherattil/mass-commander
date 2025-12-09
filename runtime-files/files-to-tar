@@ -1,5 +1,4 @@
 app-opener.sh
 app-to-open
 commands-to-run
-ncdu_1.22-1_amd64.deb
-Packages.gz
+packages-to-remove
