@@ -12,8 +12,11 @@ ip_addresses_finder() {
 	no_of_lines=$(wc -l $runtime_files_dir/arp-scan-output | awk -F' ' '{print $1}')
 	
 	line_just_below_result=$(($no_of_lines - 2))
-	cat $runtime_files_dir/arp-scan-output | sed "${line_just_below_result},${no_of_lines}d" | sed '1,2d' > $runtime_files_dir/arp-scan-unwanted-lines-deleted
-	cat $runtime_files_dir/arp-scan-unwanted-lines-deleted | awk -F' ' '{print $1}' > $runtime_files_dir/ip-address-pool 
+
+	sed -i "${line_just_below_result},${no_of_lines}d" $runtime_files_dir/arp-scan-output
+	sed -i "1,2d" $runtime_files_dir/arp-scan-output
+
+	cat $runtime_files_dir/arp-scan-output | awk -F' ' '{print $1}' > $runtime_files_dir/ip-address-pool 
 }
 
 files_tarrer() {

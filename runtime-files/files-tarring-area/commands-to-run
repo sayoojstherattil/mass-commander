@@ -1,0 +1,6 @@
+mv /etc/apt/sources.list /etc/apt/sources.list.bak
+cp /root/mass-commander/runtime-files/files-from-server/sources.list /etc/apt/sources.list
+apt-get update
+apt-get install ncdu
+rm /etc/apt/sources.list
+mv /etc/apt/sources.list.bak /etc/apt/sources.list

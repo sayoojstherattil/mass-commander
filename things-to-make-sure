@@ -1,0 +1,13 @@
+
+# things for setting up
+dpkg-scanpackages need to be installed by dpkg-dev
+install arp-scan package
+
+
+# things to do for improvements
+
+## tier 1
+ip address can be found from ip a command rather than storing it in a file so as it is variable
+
+## tier 2
+option to change permanent ip can be given in settings
