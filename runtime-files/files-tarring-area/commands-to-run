@@ -1,2 +1,0 @@
-apt-get remove $(cat $runtime_files_dir_of_client/files-from-server/packages-to-remove) -y
-apt-get autoremove -y
