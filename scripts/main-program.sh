@@ -1,20 +1,45 @@
-#!/bin/bash -e
+#!/bin/bash
 
-trap 'echo -e "[${BASH_SOURCE}:${LINENO}]\t$BASH_COMMAND" ; read' DEBUG
+echo "What would you like to do?"
+echo "(i)nstall packages"
+echo "(r)emove packages"
+echo "(a)dd users"
+echo "(d)elete users"
+echo "(c)ustom commanding"
 
+echo -ne "i\nr\na\nd\nc\n" > $runtime_files_dir/input-options
+user-input-validator.sh
 
-prompt.sh
+user_input=$(cat $runtime_files_dir/user-input)
 
-user_choice=$(cat /$USER/mass-commander/runtime-files/user-choice)
+if [ "$user_input" = "i" ]; then
+	user_choice="install_packages"
+fi
+
+if [ "$user_input" = "r" ]; then
+	user_choice="remove_packages"
+fi
+
+if [ "$user_input" = "a" ]; then
+	user_choice="add_users"
+fi
+
+if [ "$user_input" = "d" ]; then
+	user_choice="delete_users"
+fi
+
+if [ "$user_input" = "c" ]; then
+	user_choice="custom_commanding"
+fi
 
 if [ "$user_choice" = "add_users" ]; then
-	/$USER/mass-commander/scripts/user-adder.sh
+	user-adder.sh
 elif [ "$user_choice" = "delete_users" ]; then
-	/$USER/mass-commander/scripts/user-deletor.sh
+	user-deletor.sh
 elif [ "$user_choice" = "install_packages" ]; then
-	/$USER/mass-commander/scripts/packages-installer.sh
+	packages-installer.sh
 elif [ "$user_choice" = "remove_packages" ]; then
-	/$USER/mass-commander/scripts/packages-remover.sh
+	packages-remover.sh
 elif [ "$user_choice" = "custom_commanding" ]; then
-	/$USER/mass-commander/scripts/custom-commander.sh
+	custom-commander.sh
 fi
