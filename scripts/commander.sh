@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash
 
 commander() {
 	while read ip_address; do
