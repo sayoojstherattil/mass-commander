@@ -1,10 +1,6 @@
-#!/bin/bash -e
+#!/bin/bash
 
-trap 'echo -e "[${BASH_SOURCE}:${LINENO}]\t$BASH_COMMAND" ; read' DEBUG
-
-#shouldn't use here due to fail in opening apps in some users
-
-app_to_open=$(cat /$USER/mass-commander/files-from-server/app-to-open)
+app_to_open=$(cat $runtime_files_dir_of_client/app-to-open)
 
 
 app_opening_commands_generator() {
@@ -13,18 +9,18 @@ app_opening_commands_generator() {
 	username=$(echo "$line" | awk -F' ' '{print $1}')
 	display_number=$(echo "$line" | awk -F' ' '{print $11}')
 
-	echo "su - $username -c '\\" >> /$USER/mass-commander/runtime-files/app-opening-commands
-	echo "export DISPLAY=$display_number" >> /$USER/mass-commander/runtime-files/app-opening-commands
-	echo "nohup $app_to_open &" >> /$USER/mass-commander/runtime-files/app-opening-commands
-	echo "'" >> /$USER/mass-commander/runtime-files/app-opening-commands
+	echo "su - $username -c '\\" >> $runtime_files_dir_of_client/app-opening-commands
+	echo "export DISPLAY=$display_number" >> $runtime_files_dir_of_client/app-opening-commands
+	echo "$app_to_open &" >> $runtime_files_dir_of_client/app-opening-commands
+	echo "'" >> $runtime_files_dir_of_client/app-opening-commands
 }
 
 
-w > /$USER/mass-commander/runtime-files/w-output
-sed -i '1,2d' /$USER/mass-commander/runtime-files/w-output
+w > $runtime_files_dir_of_client/w-output
+sed -i '1,2d' $runtime_files_dir_of_client/w-output
 
 while read line; do
 	app_opening_commands_generator "$line"
-done < /$USER/mass-commander/runtime-files/w-output
+done<$runtime_files_dir_of_client/w-output
 
-source /$USER/mass-commander/runtime-files/app-opening-commands
+source $runtime_files_dir_of_client/app-opening-commands
