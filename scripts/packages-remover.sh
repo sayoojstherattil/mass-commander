@@ -1,17 +1,12 @@
-#!/bin/bash -e
+#!/bin/bash
 
-trap 'echo -e "[${BASH_SOURCE}:${LINENO}]\t$BASH_COMMAND" ; read' DEBUG
-
-
-echo -ne "enter names of packages one by one: "
+echo "enter names of packages one by one: "
 
 while read package_name; do
-	echo "$package_name" >> /$USER/mass-commander/runtime-files/packages-to-remove
+	echo "$package_name" >> $runtime_files_dir/packages-to-remove
 done
 
-echo 'apt remove $(cat /$USER/mass-commander/files-from-server/packages-to-remove) -y' > /$USER/mass-commander/runtime-files/commands-to-run
-echo "apt autoremove -y" >> /$USER/mass-commander/runtime-files/commands-to-run
+echo "apt remove $(cat $runtime_files_dir/packages-to-remove) -y" > $runtime_files_dir/commands-for-client-to-run-as-root
+echo "apt autoremove -y" >> $runtime_files_dir/commands-for-client-to-run-as-root
 
-echo '/$USER/mass-commander/runtime-files/packages-to-remove' >> files-to-tar
-
-/$USER/mass-commander/scripts/commander.sh
+commander.sh
