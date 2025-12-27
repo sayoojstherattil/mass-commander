@@ -1,11 +1,8 @@
-#!/bin/bash -e
+#!/bin/bash
 
-trap 'echo -e "[${BASH_SOURCE}:${LINENO}]\t$BASH_COMMAND" ; read' DEBUG
-
-
-echo -ne "enter usernames one by one: "
+echo "enter usernames one by one: "
 while read username; do
-	echo "userdel $username -r" >> /$USER/mass-commander/runtime-files/commands-to-run
+	echo "userdel $username -r" >> $runtime_files_dir/commands-for-client-root-to-run
 done
 
-/$USER/mass-commander/scripts/commander.sh
+commander.sh
