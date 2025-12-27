@@ -1,24 +1,21 @@
-#!/bin/bash -e
-
-trap 'echo -e "[${BASH_SOURCE}:${LINENO}]\t$BASH_COMMAND" ; read' DEBUG
-
-
-read input
+#!/bin/bash
 
 input_is_valid=0
 
 while [ $input_is_valid -e 0 ]; do
+	read input
 	while read input_option; do
-		if [ "$input_option" = "$input" ]; then
+		if [ $input_option -eq $input ]; then
 			input_is_valid=1
 			break
 		fi
-	done < input_options
+	done<$runtime_files_dir/input-options
 
-	if [ $input_is_valid -e 0 ]; then
-		echo -ne "Entered input is invalid. Please try again\n"
-		read input
+	if [ $input_is_valid -eq 1 ]; then
+		break
+	else
+		echo "Entered input is invalid. Please try again"
 	fi
 done
 
-echo "$input" > /$USER/mass-commander/runtime-files/user_input
+echo "$input" > $runtime_files_dir/user_input
