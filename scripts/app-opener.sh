@@ -1,6 +1,6 @@
 #!/bin/bash
 
-app_to_open=$(cat $runtime_files_dir_of_client/app-to-open)
+app_to_open=$1
 
 
 app_opening_commands_generator() {
