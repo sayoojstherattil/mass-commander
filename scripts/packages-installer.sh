@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 
 commands_generator() {
 	commands-for-clients-to-run.sh "wget -P $runtime_files_dir ftp://$server_ip_address/snap_assert_packages_fetched"
@@ -44,19 +44,39 @@ snap_package_fetcher() {
 
 	while read package_name; do
 		snap download $package_name
-	done<$runtime_files_dir/snap_packages
+	done<$runtime_files_dir/snap-packages
 		
 	cd  -
 }
 
 packages_distinguisher() {
-	while read package_name; do
-		snap_finder_output=$(apt search $package_name | grep -e '$package_name/' -A1 | grep -w snap | awk -F'-> ' '{print $2}' | awk -F' snap' '{print $1}')
+	snap_package_existance=0
 
-		if [ $snap_finder_output -z ]; then
-			echo $package_name | tee -a $runtime_files_dir/apt-packages
-		else
+	while read package_name; do
+		snap_finder_output=$(grep -e "$package_name/" $runtime_files_dir/apt-search-output -A1 | grep -w snap | awk -F'-> ' '{print $2}' | awk -F' snap' '{print $1}')
+
+		echo snap finder output is $snap_finder_output
+
+		if [ "$snap_finder_output" != "" ]; then
+			snap_package_existance=1
+			echo snap is present
 			echo $package_name | tee -a $runtime_files_dir/snap-packages
+		fi
+	done<$runtime_files_dir/packages-names-given-by-user
+}
+
+package_searcher() {
+	while read package_name; do
+		apt search $package_name >> $runtime_files_dir/apt-search-output
+		grep -qe "$package_name/" $runtime_files_dir/apt-search-output
+
+		if [ $? = 0 ]; then
+			package_existance=1
+		else
+			package_existance=0
+
+			echo "no package $package_name found"
+			exit 1
 		fi
 	done<$runtime_files_dir/packages-names-given-by-user
 }
@@ -72,11 +92,13 @@ user_inputer() {
 
 # main
 user_inputer
+package_searcher
 packages_distinguisher
 
-no_of_lines_in_snap_package_names_file=$(wc -l $runtime_files_dir/snap_packages | awk -F' ' '{print $1}')
+exit 0
 
-if [ $no_of_lines_in_snap_package_names_file -ne 0 ]; then
+
+if [ $snap_package_existance = 1 ]; then
 	snap_package_fetcher
 fi
 

@@ -1,5 +1,27 @@
 #!/bin/bash
 
+directory_ensurer() {
+	directory_name="$1"
+
+	if [ -d $directory_name ]; then
+		rm -r $directory_name
+		mkdir $directory_name
+	else
+		mkdir $directory_name
+	fi
+}
+
+export mass_commander_base_dir=/home/sayooj/mass-commander
+export runtime_files_dir=$mass_commander_base_dir/runtime-files
+export runtime_files_dir_for_client=$mass_commander_base_dir/runtime-files
+
+
+directory_ensurer $runtime_files_dir
+directory_ensurer $runtime_files_dir/snap-packages-fetching-area
+
+
+PATH="$PATH:$mass_commander_base_dir/scripts"
+
 echo "What would you like to do?"
 echo "(i)nstall packages"
 echo "(r)emove packages"

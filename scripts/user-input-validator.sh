@@ -2,10 +2,13 @@
 
 input_is_valid=0
 
-while [ $input_is_valid -e 0 ]; do
+while [ $input_is_valid = 0 ]; do
 	read input
 	while read input_option; do
-		if [ $input_option -eq $input ]; then
+		echo $input_option
+		echo $input
+
+		if [ $input_option = $input ]; then
 			input_is_valid=1
 			break
 		fi
@@ -18,4 +21,4 @@ while [ $input_is_valid -e 0 ]; do
 	fi
 done
 
-echo "$input" > $runtime_files_dir/user_input
+echo "$input" > $runtime_files_dir/user-input
