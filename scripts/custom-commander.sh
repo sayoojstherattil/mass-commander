@@ -1,28 +1,44 @@
-#!/bin/bash -e
+#!/bin/bash
 
-trap 'echo -e "[${BASH_SOURCE}:${LINENO}]\t$BASH_COMMAND" ; read' DEBUG
+command_generator_for_acting_on_normal_users() {
+	while read username; do
+		echo "su - $username -c ' \\" | tee -a $runtime_files_dir/commands-for-client-root-to-run
+		cat $runtime_files_dir/custom-commands | tee -a $runtime_files_dir/commands-for-client-root-to-run
+		echo "'" | tee -a $runtime_files_dir/commands-for-client-root-to-run
+	done<$runtime_files_dir/normal-users-to-run-commands
+}
+
+custom_commands_fetcher() {
+	echo "Enter the commands one by one and hit enter\n"
+	while read entered_command; do
+		echo "$entered_command" | tee -a $runtime_files_dir/custom-commands
+	done
+}
+
+normal_usernames_fetcher() {
+	echo "Enter usernames to act on:"
+
+	while read username; do
+		echo "$username" | tee -a $runtime_files_dir/normal-users-to-run-commands
+	done
+}
 
 
-echo -ne "how would you like to login? (r)oot or (n)ormal user?"
-echo -ne "r\nn\n" > /$USER/mass-commander/runtime-files/input-options
-/$USER/mass-commander/scripts/user-input-validator.sh
+echo "how would you like to login? (r)oot or (n)ormal user?"
+echo -ne "r\nn\n" > $runtime_files_dir/input-options
 
-echo -ne "Enter the commands one by one and hit enter\n"
+user-input-validator.sh
 
-while read entered_command; do
-	echo "$entered_command" >> /$USER/mass-commander/runtime-files/custom-commands
-done
-
-user_input=$(cat /$USER/mass-commander/runtime-files/user-input)
+user_input=$(cat $runtime_files_dir/user-input)
 
 if [ "$user_input" = "n" ]; then
-	user-fetcher.sh
-	
-	while read username; do
-		echo "su - $username -c ' \\" >> /$USER/mass-commander/runtime-files/commands-to-run
-		cat /$USER/mass-commander/runtime-files/custom-commands >> /$USER/mass-commander/runtime-files/commands-to-run
-		echo "'" >> /$USER/mass-commander/runtime-files/commands-to-run
-	done < /$USER/mass-commander/runtime-files/normal-users-to-run-commands
+	normal_usernames_fetcher
+	custom_commands_fetcher
+	command_generator_for_acting_on_normal_users
+elif [ "$user_input" = "r" ]; then
+	custom_commands_fetcher
+
+	cat $runtime_files_dir/custom-commands | tee -a $runtime_files_dir/commands-for-client-root-to-run
 fi
 
-/$USER/mass-commander/scripts/commander.sh
+commander.sh
