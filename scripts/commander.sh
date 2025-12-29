@@ -1,9 +1,17 @@
 #!/bin/bash
 
+termial_spawn_parameter="$1"
+
 commander() {
-	while read ip_address; do
-		ssh root@$ip_address "source $runtime_files_dir_for_clients/commands-for-clients-to-run" &
-	done<$runtime_files_dir/ip-address-pool
+	if [ "$termial_spawn_parameter" = "terminal_spawn on" ]; then
+		while read ip_address; do
+			ssh root@$ip_address "/root/mass-commander/client-side.sh 'termial_spawn on'" &
+		done<$runtime_files_dir/ip-address-pool
+	elif [ "$termial_spawn_parameter" = "terminal_spawn off" ]; then
+		while read ip_address; do
+			ssh root@$ip_address "/root/mass-commander/client-side.sh 'termial_spawn off'" &
+		done<$runtime_files_dir/ip-address-pool
+	fi
 }
 
 ip_addresses_finder() {
