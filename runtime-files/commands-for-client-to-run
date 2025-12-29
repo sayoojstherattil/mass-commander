@@ -1,0 +1,11 @@
+cd /root/mass-commander/runtime-files/snap-packages-from-server
+
+sftp sftpuser@192.168.122.254<<EOF
+get /data/firefox_7559.assert
+
+
+sftp sftpuser@192.168.122.254<<EOF
+get /data/firefox_7559.snap
+
+cd -
+apt install neovim

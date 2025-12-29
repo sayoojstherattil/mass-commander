@@ -1,0 +1,538 @@
+Sorting...
+Full Text Search...
+amule-gnome-support/jammy,jammy 1:2.3.3-2 all
+  ed2k links handling support for GNOME web browsers
+
+bleachbit/jammy,jammy 4.4.2-1 all
+  delete unnecessary files from the system
+
+buku/jammy,jammy 4.6+ds-1 all
+  Powerful command-line bookmark manager
+
+cbindgen/jammy 0.20.0-1 amd64
+  Generates C bindings from Rust code
+
+chrome-gnome-shell/jammy,jammy 10.1-5 all
+  GNOME Shell extensions integration for web browsers
+
+dh-cargo/jammy,jammy 28 all
+  debhelper buildsystem for Rust crates using Cargo
+
+edubuntu-artwork/jammy,jammy 15.12.1 all
+  edubuntu themes and artwork
+
+elpa-atomic-chrome/jammy,jammy 2.0.0-3 all
+  edit a web-browser text entry area with Emacs
+
+firefox/jammy,now 1:1snap1-0ubuntu2 amd64 [installed,automatic]
+  Transitional package - firefox -> firefox snap
+
+firefox-locale-af/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-af -> firefox snap
+
+firefox-locale-an/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-an -> firefox snap
+
+firefox-locale-ar/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-ar -> firefox snap
+
+firefox-locale-as/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-as -> firefox snap
+
+firefox-locale-ast/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-ast -> firefox snap
+
+firefox-locale-az/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-az -> firefox snap
+
+firefox-locale-be/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-be -> firefox snap
+
+firefox-locale-bg/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-bg -> firefox snap
+
+firefox-locale-bn/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-bn -> firefox snap
+
+firefox-locale-br/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-br -> firefox snap
+
+firefox-locale-bs/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-bs -> firefox snap
+
+firefox-locale-ca/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-ca -> firefox snap
+
+firefox-locale-cak/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-cak -> firefox snap
+
+firefox-locale-cs/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-cs -> firefox snap
+
+firefox-locale-csb/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-csb -> firefox snap
+
+firefox-locale-cy/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-cy -> firefox snap
+
+firefox-locale-da/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-da -> firefox snap
+
+firefox-locale-de/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-de -> firefox snap
+
+firefox-locale-el/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-el -> firefox snap
+
+firefox-locale-en/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-en -> firefox snap
+
+firefox-locale-eo/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-eo -> firefox snap
+
+firefox-locale-es/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-es -> firefox snap
+
+firefox-locale-et/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-et -> firefox snap
+
+firefox-locale-eu/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-eu -> firefox snap
+
+firefox-locale-fa/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-fa -> firefox snap
+
+firefox-locale-fi/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-fi -> firefox snap
+
+firefox-locale-fr/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-fr -> firefox snap
+
+firefox-locale-fy/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-fy -> firefox snap
+
+firefox-locale-ga/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-ga -> firefox snap
+
+firefox-locale-gd/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-gd -> firefox snap
+
+firefox-locale-gl/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-gl -> firefox snap
+
+firefox-locale-gn/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-gn -> firefox snap
+
+firefox-locale-gu/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-gu -> firefox snap
+
+firefox-locale-he/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-he -> firefox snap
+
+firefox-locale-hi/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-hi -> firefox snap
+
+firefox-locale-hr/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-hr -> firefox snap
+
+firefox-locale-hsb/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-hsb -> firefox snap
+
+firefox-locale-hu/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-hu -> firefox snap
+
+firefox-locale-hy/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-hy -> firefox snap
+
+firefox-locale-ia/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-ia -> firefox snap
+
+firefox-locale-id/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-id -> firefox snap
+
+firefox-locale-is/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-is -> firefox snap
+
+firefox-locale-it/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-it -> firefox snap
+
+firefox-locale-ja/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-ja -> firefox snap
+
+firefox-locale-ka/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-ka -> firefox snap
+
+firefox-locale-kab/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-kab -> firefox snap
+
+firefox-locale-kk/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-kk -> firefox snap
+
+firefox-locale-km/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-km -> firefox snap
+
+firefox-locale-kn/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-kn -> firefox snap
+
+firefox-locale-ko/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-ko -> firefox snap
+
+firefox-locale-ku/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-ku -> firefox snap
+
+firefox-locale-lg/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-lg -> firefox snap
+
+firefox-locale-lt/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-lt -> firefox snap
+
+firefox-locale-lv/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-lv -> firefox snap
+
+firefox-locale-mai/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-mai -> firefox snap
+
+firefox-locale-mk/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-mk -> firefox snap
+
+firefox-locale-ml/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-ml -> firefox snap
+
+firefox-locale-mn/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-mn -> firefox snap
+
+firefox-locale-mr/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-mr -> firefox snap
+
+firefox-locale-ms/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-ms -> firefox snap
+
+firefox-locale-my/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-my -> firefox snap
+
+firefox-locale-nb/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-nb -> firefox snap
+
+firefox-locale-ne/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-ne -> firefox snap
+
+firefox-locale-nl/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-nl -> firefox snap
+
+firefox-locale-nn/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-nn -> firefox snap
+
+firefox-locale-nso/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-nso -> firefox snap
+
+firefox-locale-oc/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-oc -> firefox snap
+
+firefox-locale-or/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-or -> firefox snap
+
+firefox-locale-pa/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-pa -> firefox snap
+
+firefox-locale-pl/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-pl -> firefox snap
+
+firefox-locale-pt/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-pt -> firefox snap
+
+firefox-locale-ro/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-ro -> firefox snap
+
+firefox-locale-ru/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-ru -> firefox snap
+
+firefox-locale-si/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-si -> firefox snap
+
+firefox-locale-sk/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-sk -> firefox snap
+
+firefox-locale-sl/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-sl -> firefox snap
+
+firefox-locale-sq/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-sq -> firefox snap
+
+firefox-locale-sr/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-sr -> firefox snap
+
+firefox-locale-sv/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-sv -> firefox snap
+
+firefox-locale-sw/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-sw -> firefox snap
+
+firefox-locale-szl/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-szl -> firefox snap
+
+firefox-locale-ta/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-ta -> firefox snap
+
+firefox-locale-te/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-te -> firefox snap
+
+firefox-locale-th/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-th -> firefox snap
+
+firefox-locale-tr/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-tr -> firefox snap
+
+firefox-locale-uk/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-uk -> firefox snap
+
+firefox-locale-ur/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-ur -> firefox snap
+
+firefox-locale-uz/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-uz -> firefox snap
+
+firefox-locale-vi/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-vi -> firefox snap
+
+firefox-locale-xh/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-xh -> firefox snap
+
+firefox-locale-zh-hans/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-zh-hans -> firefox snap
+
+firefox-locale-zh-hant/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-zh-hant -> firefox snap
+
+firefox-locale-zu/jammy,jammy 1:1snap1-0ubuntu2 all
+  Transitional package - firefox-locale-zu -> firefox snap
+
+fonts-clear-sans/jammy,jammy 1.00-2 all
+  sharp on-screen sans-serif font
+
+fonts-katex/jammy,jammy 0.13.11+~cs6.0.0-2 all
+  Fast math typesetting for the web (fonts)
+
+fonts-lyx/jammy,jammy 2.3.6-1 all
+  TrueType versions of some TeX fonts used by LyX
+
+gnome-shell-extension-gsconnect-browsers/jammy,jammy 50-0ubuntu1 all
+  Browser support of KDE Connect implementation for GNOME Shell
+
+gplanarity/jammy 17906-7build1 amd64
+  simple puzzle game involving untangling planar graphs
+
+html2wml/jammy,jammy 0.4.11+dfsg-2 all
+  converts HTML pages to WML (WAP) or i-mode pages
+
+hunspell-nl/jammy,jammy 2:2.20.19-2 all
+  Dutch dictionary for Hunspell
+
+jsxgraph/jammy,jammy 1.4.2+dfsg1-1 all
+  Interactive Geometry with JavaScript
+
+katex/jammy,jammy 0.13.11+~cs6.0.0-2 all
+  Fast math typesetting for the web (command line interface)
+
+kdocker/jammy 5.3-1 amd64
+  lets you dock any application into the system tray
+
+libcss-parser-pp0v5/jammy 0.87-2 amd64
+  simple CSS1 parser library for C++
+
+libcss-parser0/jammy 0.87-2 amd64
+  simple CSS1 parser library for C
+
+libfirefox-marionette-perl/jammy,jammy 1.22-1 all
+  module to automate the Firefox browser with the Marionette protocol
+
+libhtml-widgets-selectlayers-perl/jammy,jammy 0.07-3 all
+  Perl extension for selectable HTML layers
+
+libhtmlcxx-dev/jammy 0.87-2 amd64
+  simple HTML/CSS1 parser library for C++ (development)
+
+libhtmlcxx3v5/jammy 0.87-2 amd64
+  simple HTML parser library for C++
+
+libjs-excanvas/jammy,jammy 0.r4~git20090427.0000000-4 all
+  HTML5 Canvas for Internet Explorer
+
+libjs-expect.js/jammy,jammy 0.3.1+dfsg+~0.3.29-2 all
+  behavior driven test assertions - JavaScript library
+
+libjs-graphael/jammy,jammy 0.5+dfsg-1.1 all
+  charts for raphael
+
+libjs-jquery-jush/jammy,jammy 12-3 all
+  jQuery Syntax Highlighter
+
+libjs-jquery.sparkline/jammy,jammy 2.1.2-3 all
+  library for jQuery to generate sparklines
+
+libjs-katex/jammy,jammy 0.13.11+~cs6.0.0-2 all
+  Fast math typesetting for the web (for browsers)
+
+libjs-require-css/jammy,jammy 0.1.10+ds-2.1 all
+  requiring and optimization with almond support
+
+libjs-requirejs/jammy,jammy 2.3.6+ds-1 all
+  JavaScript file and module loader
+
+libjs-textarea-caret/jammy,jammy 3.0.2-2 all
+  JS library to get the xy coords of a textarea or input's caret
+
+libmozjs-102-0/jammy-updates,jammy-security 102.15.1-0ubuntu0.22.04.1 amd64
+  SpiderMonkey JavaScript library
+
+libmozjs-102-dev/jammy-updates,jammy-security 102.15.1-0ubuntu0.22.04.1 amd64
+  SpiderMonkey JavaScript library - development headers
+
+libmozjs-78-0/jammy 78.15.0-4ubuntu1 amd64
+  SpiderMonkey JavaScript library
+
+libmozjs-78-dev/jammy 78.15.0-4ubuntu1 amd64
+  SpiderMonkey JavaScript library - development headers
+
+libmozjs-91-0/jammy-updates,jammy-security,now 91.10.0-0ubuntu1 amd64 [installed,automatic]
+  SpiderMonkey JavaScript library
+
+libmozjs-91-dev/jammy-updates,jammy-security 91.10.0-0ubuntu1 amd64
+  SpiderMonkey JavaScript library - development headers
+
+libparse-http-useragent-perl/jammy,jammy 0.42-1 all
+  parser for the HTTP User Agent string
+
+libproxy-vole-java/jammy,jammy 1.0.3-3 all
+  Proxy Vole
+
+libreoffice/jammy-updates,jammy-security 1:7.3.7-0ubuntu0.22.04.10 amd64
+  office productivity suite (metapackage)
+
+lz4json/jammy 2-2 amd64
+  unpack lz4json files, usually generated by Mozilla programs
+
+mozilla-devscripts/jammy,jammy 0.54.2 all
+  Development scripts used by Mozilla's addons packages
+
+mozillavpn/jammy 2.2.0-1 amd64
+  Fast, secure and easy to use VPN.
+
+node-buble/jammy,jammy 0.20.0+~0.20.1-1 all
+  Fast ES2015 compiler for Node.js
+
+node-dompurify/jammy,jammy 2.3.3+dfsg-1 all
+  DOM-only, super-fast, uber-tolerant XSS sanitizer
+
+node-expect.js/jammy,jammy 0.3.1+dfsg+~0.3.29-2 all
+  behavior driven test assertions - Node.js module
+
+node-html5shiv/jammy,jammy 3.7.3+dfsg-4 all
+  enable use of HTML5 sectioning elements in legacy browser
+
+node-mousetrap/jammy,jammy 1.6.5~ds+~1.6.8-1 all
+  Simple library for handling keyboard shortcuts
+
+node-url-parse/jammy,jammy 1.5.9+~1.4.8-1 all
+  Parse URL in node using the URL module and in the browser using the DOM
+
+nss-passwords/jammy 0.3-2 amd64
+  read passwords from a Mozilla keyring
+
+os-autoinst/jammy 4.6.1632799442.f77d4e1-1build2 amd64
+  automated testing of Operating Systems
+
+passwordmaker-cli/jammy 1.5+dfsg-4 amd64
+  creates unique, secure passwords - CLI version
+
+pcmanfm/jammy 1.3.2-1 amd64
+  extremely fast and lightweight file manager
+
+plasma-browser-integration/jammy 5.24.4-0ubuntu1 amd64
+  Chromium, Google Chrome, Firefox integration for Plasma
+
+python3-geventhttpclient/jammy 1.5.3-1build1 amd64
+  high performance, concurrent HTTP client library for Python using gevent
+
+python3-selenium/jammy,jammy 4.0.0~a1+dfsg1-1.1 all
+  Python3 bindings for Selenium
+
+ruby-http-cookie/jammy,jammy 1.0.3-1 all
+  Ruby library to handle HTTP Cookies based on RFC 6265
+
+ruby-rails-assets-jquery-fullscreen-plugin/jammy,jammy 0.5.0+dfsg-5 all
+  jQuery fullscreen plugin for rails applications
+
+squareness/jammy,jammy 2.3.0-7 all
+  suite of skins for different applications
+
+thunderbird-mozsymbols/jammy-updates,jammy-security 1:128.12.0+build1-0ubuntu0.22.04.1 amd64
+  Email, RSS and newsgroup client - Breakpad symbols
+
+tor/jammy 0.4.6.10-1 amd64
+  anonymizing overlay network for TCP
+
+ubuntu-defaults-builder/jammy,jammy 0.57 all
+  create Ubuntu customization packages
+
+uget/jammy 2.2.3-2build1 amd64
+  easy-to-use download manager written in GTK+
+
+webext-browserpass/jammy-updates,jammy-security 3.7.2-1ubuntu0.22.04.1 amd64
+  web extension for the password manager pass
+
+webext-foxyproxy/jammy,jammy 7.5.1+dfsg-2 all
+  Advanced proxy management for Firefox
+
+webext-keepassxc-browser/jammy,jammy 1.7.11+repack1-1 all
+  Web browser extension to organize web site credentials in KeePassXC
+
+webext-ublock-origin/jammy,jammy 1.40.2+dfsg-1 all
+  transitional package
+
+webext-ublock-origin-firefox/jammy,jammy 1.40.2+dfsg-1 all
+  lightweight and efficient ads, malware, trackers blocker (Firefox)
+
+x2gothinclient-minidesktop/jammy,jammy 1.5.0.1-7 all
+  Minimal desktop for X2Go Thin Client chroot (based on MATE)
+
+xssproxy/jammy 1.0.0-1 amd64
+  Forward freedesktop.org Idle Inhibition Service calls to Xss
+
+xul-ext-ubufox/jammy,jammy 3.4-0ubuntu1.17.10.1 all
+  Ubuntu modifications for Firefox
+
+Sorting...
+Full Text Search...
+dh-vim-addon/jammy,jammy 0.4 all
+  debhelper addon to help package Vim/Neovim addons
+
+lua-nvim/jammy 0.2.2-1-1 amd64
+  Lua client for Neovim
+
+lua-nvim-dev/jammy 0.2.2-1-1 amd64
+  Lua client for Neovim
+
+neovim/jammy 0.6.1-3 amd64
+  heavily refactored vim fork
+
+neovim-qt/jammy 0.2.16-1 amd64
+  neovim client library and GUI
+
+neovim-runtime/jammy,jammy 0.6.1-3 all
+  heavily refactored vim fork (runtime files)
+
+python3-neovim/jammy,jammy 0.4.2-1 all
+  transitional dummy package
+
+python3-pynvim/jammy,jammy 0.4.2-1 all
+  Python3 library for scripting Neovim processes through its msgpack-rpc API
+
+ruby-neovim/jammy,jammy 0.8.1-1 all
+  Ruby client for Neovim
+
+vim-ale/jammy,jammy 3.1.0-1 all
+  Asynchronous Lint Engine for Vim 8 and NeoVim
+
+vim-redact-pass/jammy,jammy 1.7.4-5 all
+  stop pass(1) passwords ending up in Vim cache files
+
