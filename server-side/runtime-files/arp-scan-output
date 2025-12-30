@@ -4,4 +4,4 @@ Starting arp-scan 1.9.7 with 256 hosts (https://github.com/royhills/arp-scan)
 192.168.122.194	52:54:00:10:f7:a5	QEMU
 
 2 packets received by filter, 0 packets dropped by kernel
-Ending arp-scan 1.9.7: 256 hosts scanned in 1.909 seconds (134.10 hosts/sec). 2 responded
+Ending arp-scan 1.9.7: 256 hosts scanned in 1.914 seconds (133.75 hosts/sec). 2 responded

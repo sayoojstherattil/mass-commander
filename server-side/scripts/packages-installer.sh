@@ -1,8 +1,34 @@
 #!/bin/bash
 
+snap_packages_install_command_generator() {
+	while read snap_package; do
+		commands-for-clients-to-run.sh "snap install $snap_package"
+	done<$runtime_files_dir/actual-snap-packages
+}
+
+snap_packages_acknowledge_command_generator() {
+	while read snap_package; do
+		commands-for-clients-to-run.sh "snap ack $snap_package"
+	done<$runtime_files_dir/assert-snap-packages
+}
+
 snap_packages_fetching_command_generator() {
 	while read snap_package; do
-		sftp $sftp_username@$sftp_server_ip <<< $"get /data/firefox_7559.snap"	
+		commands-for-clients-to-run.sh "sftp $sftp_username@$sftp_server_ip <<< $'get /data/firefox_7559.snap'"
+	done<$runtime_files_dir/actual-names-of-snap-packages
+}
+
+snap_packages_distinguisher() {
+	while read snap_package; do
+		echo "$snap_package" | grep -qe '.assert'
+		if [ $? != 0 ]; then
+			echo "$snap_package" >> $runtime_files_dir/assert-snap-packages
+		fi
+
+		echo "$snap_package" | grep -qe '.snap'
+		if [ $? != 0 ]; then
+			echo "$snap_package" >> $runtime_files_dir/actual-snap-packages
+		fi
 	done<$runtime_files_dir/actual-names-of-snap-packages
 }
 
@@ -11,7 +37,10 @@ commands_generator() {
 		no_of_lines_in_snap_package_names_file=$(wc -l $runtime_files_dir/snap-packages | awk -F' ' '{print $1}')
 
 		if [ $no_of_lines_in_snap_package_names_file != 0 ]; then
+			snap_packages_distinguisher
 			snap_packages_fetching_command_generator
+			snap_packages_acknowledge_command_generator
+			snap_packages_install_command_generator
 		fi
 	fi
 
