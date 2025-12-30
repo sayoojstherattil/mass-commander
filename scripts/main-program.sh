@@ -13,19 +13,18 @@ directory_ensurer() {
 
 export mass_commander_base_dir=/root/mass-commander
 export runtime_files_dir=$mass_commander_base_dir/runtime-files
-export runtime_files_dir_for_client=$mass_commander_base_dir/runtime-files
+export runtime_files_dir_of_client=$mass_commander_base_dir/runtime-files
 export sftp_directory=/srv/sftpuser/data
 export sftp_dir_for_client=/data
 
 export sftp_username="sftpuser"
-export sftp_server_ip="172.17.103.19"
+export sftp_server_ip="172.17.103.254"
 export permanent_files_dir="$mass_commander_base_dir/permanent-files"
 
 export PATH="$PATH:$mass_commander_base_dir/scripts"
 
 directory_ensurer $runtime_files_dir
 directory_ensurer $runtime_files_dir/snap-packages-fetching-area
-directory_ensurer $runtime_files_dir/sftp-directory
 
 
 echo "What would you like to do?"
