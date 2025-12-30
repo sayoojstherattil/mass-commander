@@ -3,7 +3,8 @@
 export mass_commander_base_dir="/root/mass-commander"
 export runtime_files_dir="$mass_commander_base_dir/runtime-files"
 export sftp_username="sftpuser"
-export sftp_server_ip="172.17.103.254"
+perm_ip_addr_with_sub_mask=$(cat $permanent_files_dir/permanent-ip-address-with-subnet-mask)
+export sftp_server_ip="echo $perm_ip_addr_with_sub_mask | awk -F'/' '{print $1}'"
 export sftp_directory="/data"
 
 commands_to_run_file_fetcher() {

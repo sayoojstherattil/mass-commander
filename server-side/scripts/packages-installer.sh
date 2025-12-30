@@ -1,28 +1,18 @@
-#!/bin/bash -x
+#!/bin/bash
 
 snap_packages_fetching_command_generator() {
-	echo values are... 
-	echo $sftp_username
-
-	commands-for-clients-to-run.sh "cd $runtime_files_dir_for_client/snap-packages-from-server"
-
 	while read snap_package; do
-		commands-for-clients-to-run.sh ""
-
-		commands-for-clients-to-run.sh "sftp $sftp_username@$sftp_server_ip<<EOF"
-		commands-for-clients-to-run.sh "get $sftp_dir_for_client/$snap_package"
-
-		commands-for-clients-to-run.sh ""
+		sftp $sftp_username@$sftp_server_ip <<< $"get /data/firefox_7559.snap"	
 	done<$runtime_files_dir/actual-names-of-snap-packages
-
-	commands-for-clients-to-run.sh "cd -"
 }
 
 commands_generator() {
-	no_of_lines_in_snap_package_names_file=$(wc -l $runtime_files_dir/snap-packages | awk -F' ' '{print $1}')
+	if [ -f $runtime_files_dir/snap-packages ]; then
+		no_of_lines_in_snap_package_names_file=$(wc -l $runtime_files_dir/snap-packages | awk -F' ' '{print $1}')
 
-	if [ $no_of_lines_in_snap_package_names_file != 0 ]; then
-		snap_packages_fetching_command_generator
+		if [ $no_of_lines_in_snap_package_names_file != 0 ]; then
+			snap_packages_fetching_command_generator
+		fi
 	fi
 
 	commands-for-clients-to-run.sh "apt install $(cat $runtime_files_dir/apt-packages)"
@@ -36,6 +26,14 @@ installable_and_assert_snap_packages_distinguisher() {
 			echo $snap_package >> $runtime_files_dir/snap_installable_packages_fetched
 		fi
 	done<$runtime_files_dir/actual-names-of-snap-packages
+}
+
+sftp_directory_files_permission_changer() {
+	ls $sftp_directory > $runtime_files_dir/files-in-sftp
+
+	while read filename; do
+		chmod 644 ${sftp_directory}/${filename}
+	done<$runtime_files_dir/files-in-sftp
 }
 
 snap_packages_in_ftp_directory_placer() {
@@ -70,7 +68,11 @@ packages_distinguisher() {
 		fi
 	done<$runtime_files_dir/packages-names-given-by-user
 
-	cat $runtime_files_dir/packages-names-given-by-user | grep -vf $runtime_files_dir/snap-packages > $runtime_files_dir/apt-packages
+	if [ -f $runtime_files_dir/snap-packages ]; then
+		cat $runtime_files_dir/packages-names-given-by-user | grep -vf $runtime_files_dir/snap-packages > $runtime_files_dir/apt-packages
+	else
+		cp $runtime_files_dir/packages-names-given-by-user $runtime_files_dir/apt-packages	
+	fi
 }
 
 package_searcher() {
@@ -105,10 +107,11 @@ packages_distinguisher
 
 
 if [ $snap_package_existance = 1 ]; then
-snap_package_fetcher
+	snap_package_fetcher
 fi
 
 snap_packages_in_ftp_directory_placer
+sftp_directory_files_permission_changer
 commands_generator
 
 commander.sh

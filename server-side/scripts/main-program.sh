@@ -14,11 +14,13 @@ directory_ensurer() {
 export mass_commander_base_dir=/root/mass-commander
 export runtime_files_dir=$mass_commander_base_dir/runtime-files
 export runtime_files_dir_of_client=$mass_commander_base_dir/runtime-files
+export permanent_files_dir=$mass_commander_base_dir/permanent-files
 export sftp_directory=/srv/sftpuser/data
-export sftp_dir_for_client=/data
+export sftp_dir_of_client=/data
 
 export sftp_username="sftpuser"
-export sftp_server_ip="172.17.103.254"
+perm_ip_addr_with_sub_mask=$(cat $permanent_files_dir/permanent-ip-address-with-subnet-mask)
+export sftp_server_ip=$(echo $perm_ip_addr_with_sub_mask | awk -F'/' '{print $1}')
 export permanent_files_dir="$mass_commander_base_dir/permanent-files"
 
 export PATH="$PATH:$mass_commander_base_dir/scripts"

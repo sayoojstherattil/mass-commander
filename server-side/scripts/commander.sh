@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 
 commander() {
 	while read ip_address; do
@@ -17,6 +17,8 @@ ip_addresses_finder() {
 	cat $runtime_files_dir/arp-scan-output | sed "${line_just_below_result},${last_line_number}d" | sed '1,2d' > $runtime_files_dir/arp-scan-unwanted-lines-deleted
 	cat $runtime_files_dir/arp-scan-unwanted-lines-deleted | awk -F' ' '{print $1}' > $runtime_files_dir/ip-address-pool 
 }
+
+cp $runtime_files_dir/commands-to-run-of-client /srv/sftpuser/data
 
 ip_addresses_finder
 commander

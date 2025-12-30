@@ -84,7 +84,7 @@ firefox-locale-de/jammy,jammy 1:1snap1-0ubuntu2 all
 firefox-locale-el/jammy,jammy 1:1snap1-0ubuntu2 all
   Transitional package - firefox-locale-el -> firefox snap
 
-firefox-locale-en/jammy,jammy,now 1:1snap1-0ubuntu2 all [installed]
+firefox-locale-en/jammy,jammy 1:1snap1-0ubuntu2 all
   Transitional package - firefox-locale-en -> firefox snap
 
 firefox-locale-eo/jammy,jammy 1:1snap1-0ubuntu2 all
@@ -387,9 +387,6 @@ libmozjs-102-0/jammy-updates,jammy-security 102.15.1-0ubuntu0.22.04.1 amd64
 libmozjs-102-dev/jammy-updates,jammy-security 102.15.1-0ubuntu0.22.04.1 amd64
   SpiderMonkey JavaScript library - development headers
 
-libmozjs-68-0/now 68.6.0-1ubuntu1 amd64 [installed,local]
-  SpiderMonkey JavaScript library
-
 libmozjs-78-0/jammy 78.15.0-4ubuntu1 amd64
   SpiderMonkey JavaScript library
 
@@ -501,6 +498,6 @@ x2gothinclient-minidesktop/jammy,jammy 1.5.0.1-7 all
 xssproxy/jammy 1.0.0-1 amd64
   Forward freedesktop.org Idle Inhibition Service calls to Xss
 
-xul-ext-ubufox/jammy,jammy,now 3.4-0ubuntu1.17.10.1 all [installed,auto-removable]
+xul-ext-ubufox/jammy,jammy 3.4-0ubuntu1.17.10.1 all
   Ubuntu modifications for Firefox
 

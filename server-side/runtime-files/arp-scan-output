@@ -1,49 +1,7 @@
-Interface: enp2s0, type: EN10MB, MAC: f4:8e:38:80:75:29, IPv4: 172.17.103.19
-Starting arp-scan 1.9.7 with 512 hosts (https://github.com/royhills/arp-scan)
-172.17.103.1	7c:5a:1c:cb:2b:59	Sophos Ltd
-172.17.103.11	f4:8e:38:80:46:32	Dell Inc.
-172.17.103.121	22:49:e5:9c:48:96	(Unknown: locally administered)
-172.17.103.122	dc:84:03:6d:98:3b	(Unknown)
-172.17.103.144	6a:86:ea:80:c9:b1	(Unknown: locally administered)
-172.17.103.145	4e:b5:3a:df:7a:24	(Unknown: locally administered)
-172.17.103.124	06:ba:38:a2:3a:40	(Unknown: locally administered)
-172.17.103.124	06:ba:38:a2:3a:40	(Unknown: locally administered) (DUP: 2)
-172.17.103.155	4c:f2:02:0e:45:f3	(Unknown)
-172.17.103.162	9e:0d:e6:f6:9a:fe	(Unknown: locally administered)
-172.17.103.163	e2:37:96:25:54:09	(Unknown: locally administered)
-172.17.103.173	44:48:c1:c5:fc:b8	Hewlett Packard Enterprise
-172.17.103.185	2c:7b:a0:9d:cf:47	(Unknown)
-172.17.103.154	f6:bf:3d:d2:04:af	(Unknown: locally administered)
-172.17.103.191	4c:eb:bd:12:0e:db	CHONGQING FUGUI ELECTRONICS CO.,LTD.
-172.17.103.148	96:51:01:ca:a6:de	(Unknown: locally administered)
-172.17.103.133	72:ab:d0:4e:f7:27	(Unknown: locally administered)
-172.17.103.210	34:5a:60:1a:9b:c2	(Unknown)
-172.17.103.140	ee:42:31:0e:12:7f	(Unknown: locally administered)
-172.17.103.161	e6:cc:a9:d3:cd:d0	(Unknown: locally administered)
-172.17.103.194	56:00:28:a3:f5:a3	(Unknown: locally administered)
-172.17.103.181	20:2b:20:d8:dc:ad	(Unknown)
-172.17.103.192	6e:f0:80:40:f4:38	(Unknown: locally administered)
-172.17.103.227	a8:bd:27:c3:5d:a6	Hewlett Packard Enterprise
-172.17.103.180	d6:b2:65:62:57:03	(Unknown: locally administered)
-172.17.103.240	3c:a0:67:f1:f4:7f	Liteon Technology Corporation
-172.17.103.147	0e:89:a1:09:06:b3	(Unknown: locally administered)
-172.17.103.174	7e:18:cf:f3:fc:74	(Unknown: locally administered)
-172.17.103.174	7e:18:cf:f3:fc:74	(Unknown: locally administered) (DUP: 2)
-172.17.103.243	68:34:21:cb:c2:80	(Unknown)
-172.17.103.139	8e:0a:c4:23:03:3d	(Unknown: locally administered)
-172.17.103.212	f2:f1:07:0d:26:cf	(Unknown: locally administered)
-172.17.103.238	82:e5:2f:40:1a:6d	(Unknown: locally administered)
-172.17.103.232	4a:6e:ca:52:5e:dd	(Unknown: locally administered)
-172.17.103.229	c2:1f:5d:b5:14:87	(Unknown: locally administered)
-172.17.103.141	0e:32:1a:69:b3:e6	(Unknown: locally administered)
-172.17.103.217	ea:a8:f6:20:db:40	(Unknown: locally administered)
-172.17.103.226	86:97:d9:ae:46:c2	(Unknown: locally administered)
-172.17.103.214	52:e0:20:54:b6:6a	(Unknown: locally administered)
-172.17.103.214	52:e0:20:54:b6:6a	(Unknown: locally administered) (DUP: 2)
-172.17.103.214	52:e0:20:54:b6:6a	(Unknown: locally administered) (DUP: 3)
-172.17.103.199	82:97:75:9a:02:ae	(Unknown: locally administered)
-172.17.103.249	16:c0:75:93:22:7e	(Unknown: locally administered)
-172.17.103.232	4a:6e:ca:52:5e:dd	(Unknown: locally administered) (DUP: 2)
+Interface: enp1s0, type: EN10MB, MAC: 52:54:00:cd:34:2b, IPv4: 192.168.122.254
+Starting arp-scan 1.9.7 with 256 hosts (https://github.com/royhills/arp-scan)
+192.168.122.1	52:54:00:0e:64:d7	QEMU
+192.168.122.194	52:54:00:10:f7:a5	QEMU
 
-44 packets received by filter, 0 packets dropped by kernel
-Ending arp-scan 1.9.7: 512 hosts scanned in 2.852 seconds (179.52 hosts/sec). 44 responded
+2 packets received by filter, 0 packets dropped by kernel
+Ending arp-scan 1.9.7: 256 hosts scanned in 1.909 seconds (134.10 hosts/sec). 2 responded
