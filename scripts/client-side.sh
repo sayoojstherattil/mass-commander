@@ -3,7 +3,7 @@
 export mass_commander_base_dir="/root/mass-commander"
 export runtime_files_dir="$mass_commander_base_dir/runtime-files"
 export sftp_username="sftpuser"
-export sftp_server_ip="192.168.122.254"
+export sftp_server_ip="172.17.103.254"
 export sftp_directory="/data"
 
 commands_to_run_file_fetcher() {
@@ -43,4 +43,4 @@ command_output_file_ensurer
 tail -f -n +1 $runtime_files_dir/command-output &
 
 commands_to_run_file_fetcher
-source $runtime_files_dir/commands-to-run-for-client
+source $runtime_files_dir/commands-to-run-for-client > $runtime_files_dir/command-output
