@@ -18,7 +18,8 @@ export sftp_directory=/srv/sftpuser/data
 export sftp_dir_for_client=/data
 
 export sftp_username="sftpuser"
-export sftp_server_ip="192.168.122.254"
+export sftp_server_ip="172.17.103.19"
+export permanent_files_dir="$mass_commander_base_dir/permanent-files"
 
 export PATH="$PATH:$mass_commander_base_dir/scripts"
 

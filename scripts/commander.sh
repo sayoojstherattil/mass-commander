@@ -1,21 +1,13 @@
-#!/bin/bash
-
-termial_spawn_parameter="$1"
+#!/bin/bash -x
 
 commander() {
-	if [ "$termial_spawn_parameter" = "terminal_spawn on" ]; then
-		while read ip_address; do
-			ssh root@$ip_address "/root/mass-commander/client-side.sh 'termial_spawn on'" &
-		done<$runtime_files_dir/ip-address-pool
-	elif [ "$termial_spawn_parameter" = "terminal_spawn off" ]; then
-		while read ip_address; do
-			ssh root@$ip_address "/root/mass-commander/client-side.sh 'termial_spawn off'" &
-		done<$runtime_files_dir/ip-address-pool
-	fi
+	while read ip_address; do
+		ssh root@$ip_address "/root/mass-commander/scripts/client-side.sh" &
+	done<$runtime_files_dir/ip-address-pool
 }
 
 ip_addresses_finder() {
-	perm_ip_addr_with_sub_mask=$(cat $settings_dir/permanent-ip-address-with-subnet-mask)
+	perm_ip_addr_with_sub_mask=$(cat $permanent_files_dir/permanent-ip-address-with-subnet-mask)
 
 	arp-scan "$perm_ip_addr_with_sub_mask" > $runtime_files_dir/arp-scan-output
 

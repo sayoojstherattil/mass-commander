@@ -5,9 +5,6 @@ input_is_valid=0
 while [ $input_is_valid = 0 ]; do
 	read input
 	while read input_option; do
-		echo $input_option
-		echo $input
-
 		if [ $input_option = $input ]; then
 			input_is_valid=1
 			break

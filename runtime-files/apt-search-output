@@ -84,7 +84,7 @@ firefox-locale-de/jammy,jammy 1:1snap1-0ubuntu2 all
 firefox-locale-el/jammy,jammy 1:1snap1-0ubuntu2 all
   Transitional package - firefox-locale-el -> firefox snap
 
-firefox-locale-en/jammy,jammy 1:1snap1-0ubuntu2 all
+firefox-locale-en/jammy,jammy,now 1:1snap1-0ubuntu2 all [installed]
   Transitional package - firefox-locale-en -> firefox snap
 
 firefox-locale-eo/jammy,jammy 1:1snap1-0ubuntu2 all
@@ -387,6 +387,9 @@ libmozjs-102-0/jammy-updates,jammy-security 102.15.1-0ubuntu0.22.04.1 amd64
 libmozjs-102-dev/jammy-updates,jammy-security 102.15.1-0ubuntu0.22.04.1 amd64
   SpiderMonkey JavaScript library - development headers
 
+libmozjs-68-0/now 68.6.0-1ubuntu1 amd64 [installed,local]
+  SpiderMonkey JavaScript library
+
 libmozjs-78-0/jammy 78.15.0-4ubuntu1 amd64
   SpiderMonkey JavaScript library
 
@@ -498,41 +501,6 @@ x2gothinclient-minidesktop/jammy,jammy 1.5.0.1-7 all
 xssproxy/jammy 1.0.0-1 amd64
   Forward freedesktop.org Idle Inhibition Service calls to Xss
 
-xul-ext-ubufox/jammy,jammy 3.4-0ubuntu1.17.10.1 all
+xul-ext-ubufox/jammy,jammy,now 3.4-0ubuntu1.17.10.1 all [installed,auto-removable]
   Ubuntu modifications for Firefox
-
-Sorting...
-Full Text Search...
-dh-vim-addon/jammy,jammy 0.4 all
-  debhelper addon to help package Vim/Neovim addons
-
-lua-nvim/jammy 0.2.2-1-1 amd64
-  Lua client for Neovim
-
-lua-nvim-dev/jammy 0.2.2-1-1 amd64
-  Lua client for Neovim
-
-neovim/jammy 0.6.1-3 amd64
-  heavily refactored vim fork
-
-neovim-qt/jammy 0.2.16-1 amd64
-  neovim client library and GUI
-
-neovim-runtime/jammy,jammy 0.6.1-3 all
-  heavily refactored vim fork (runtime files)
-
-python3-neovim/jammy,jammy 0.4.2-1 all
-  transitional dummy package
-
-python3-pynvim/jammy,jammy 0.4.2-1 all
-  Python3 library for scripting Neovim processes through its msgpack-rpc API
-
-ruby-neovim/jammy,jammy 0.8.1-1 all
-  Ruby client for Neovim
-
-vim-ale/jammy,jammy 3.1.0-1 all
-  Asynchronous Lint Engine for Vim 8 and NeoVim
-
-vim-redact-pass/jammy,jammy 1.7.4-5 all
-  stop pass(1) passwords ending up in Vim cache files
 

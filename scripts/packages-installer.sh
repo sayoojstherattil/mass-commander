@@ -1,4 +1,4 @@
-#!/bin/bash -xe
+#!/bin/bash -x
 
 snap_packages_fetching_command_generator() {
 	echo values are... 
@@ -105,10 +105,10 @@ packages_distinguisher
 
 
 if [ $snap_package_existance = 1 ]; then
-	snap_package_fetcher
+snap_package_fetcher
 fi
 
 snap_packages_in_ftp_directory_placer
 commands_generator
 
-#commander.sh
+commander.sh
