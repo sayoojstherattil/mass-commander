@@ -1,2 +1,0 @@
-useradd new -m -s /bin/bash
-echo 'new:abc' | chpasswd

@@ -2,16 +2,16 @@
 
 command_generator_for_acting_on_normal_users() {
 	while read username; do
-		echo "su - $username -c ' \\" | tee -a $runtime_files_dir/commands-for-client-root-to-run
-		cat $runtime_files_dir/custom-commands | tee -a $runtime_files_dir/commands-for-client-root-to-run
-		echo "'" | tee -a $runtime_files_dir/commands-for-client-root-to-run
+		commands-for-clients-to-run.sh "su - $username -c '\\"
+		commands-for-clients-to-run.sh "$(cat $runtime_files_dir/custom-commands)"
+		commands-for-clients-to-run.sh "'"
 	done<$runtime_files_dir/normal-users-to-run-commands
 }
 
 custom_commands_fetcher() {
-	echo "Enter the commands one by one and hit enter\n"
+	echo "Enter the commands one by one and hit enter"
 	while read entered_command; do
-		echo "$entered_command" | tee -a $runtime_files_dir/custom-commands
+		echo "$entered_command" >> $runtime_files_dir/custom-commands
 	done
 }
 
@@ -19,7 +19,7 @@ normal_usernames_fetcher() {
 	echo "Enter usernames to act on:"
 
 	while read username; do
-		echo "$username" | tee -a $runtime_files_dir/normal-users-to-run-commands
+		echo "$username" >> $runtime_files_dir/normal-users-to-run-commands
 	done
 }
 
@@ -37,8 +37,7 @@ if [ "$user_input" = "n" ]; then
 	command_generator_for_acting_on_normal_users
 elif [ "$user_input" = "r" ]; then
 	custom_commands_fetcher
-
-	cat $runtime_files_dir/custom-commands | tee -a $runtime_files_dir/commands-for-client-root-to-run
+	commands-for-clients-to-run.sh "$(cat $runtime_files_dir/custom-commands)"
 fi
 
 commander.sh

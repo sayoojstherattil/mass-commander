@@ -1,7 +1,0 @@
-Interface: enp1s0, type: EN10MB, MAC: 52:54:00:cd:34:2b, IPv4: 192.168.122.254
-Starting arp-scan 1.9.7 with 256 hosts (https://github.com/royhills/arp-scan)
-192.168.122.1	52:54:00:0e:64:d7	QEMU
-192.168.122.194	52:54:00:10:f7:a5	QEMU
-
-2 packets received by filter, 0 packets dropped by kernel
-Ending arp-scan 1.9.7: 256 hosts scanned in 1.857 seconds (137.86 hosts/sec). 2 responded
