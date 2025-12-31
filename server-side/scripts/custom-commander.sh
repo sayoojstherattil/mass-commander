@@ -2,7 +2,7 @@
 
 command_generator_for_acting_on_normal_users() {
 	while read username; do
-		commands-for-clients-to-run.sh "su - $username -c '\\"
+		commands-for-clients-to-run.sh "su - $username -c '"
 		commands-for-clients-to-run.sh "$(cat $runtime_files_dir/custom-commands)"
 		commands-for-clients-to-run.sh "'"
 	done<$runtime_files_dir/normal-users-to-run-commands
