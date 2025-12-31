@@ -1,5 +1,0 @@
-sftp sftpuser@192.168.122.254 <<< $'get /data/firefox_7559.snap'
-sftp sftpuser@192.168.122.254 <<< $'get /data/firefox_7559.snap'
-snap ack firefox_7559.snap
-snap install firefox_7559.assert
-apt install 

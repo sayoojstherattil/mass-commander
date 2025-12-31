@@ -1,33 +1,45 @@
 #!/bin/bash
 
 snap_packages_install_command_generator() {
+	commands-for-clients-to-run.sh "cd $runtime_files_dir_of_client"
+
 	while read snap_package; do
 		commands-for-clients-to-run.sh "snap install $snap_package"
-	done<$runtime_files_dir/actual-snap-packages
+	done<$runtime_files_dir/installable-snap-packages
+
+	commands-for-clients-to-run.sh "cd -"
 }
 
 snap_packages_acknowledge_command_generator() {
+	commands-for-clients-to-run.sh "cd $runtime_files_dir_of_client"
+
 	while read snap_package; do
 		commands-for-clients-to-run.sh "snap ack $snap_package"
 	done<$runtime_files_dir/assert-snap-packages
+
+	commands-for-clients-to-run.sh "cd -"
 }
 
 snap_packages_fetching_command_generator() {
+	commands-for-clients-to-run.sh "cd $runtime_files_dir_of_client"
+
 	while read snap_package; do
-		commands-for-clients-to-run.sh "sftp $sftp_username@$sftp_server_ip <<< $'get /data/firefox_7559.snap'"
+		commands-for-clients-to-run.sh "sftp $sftp_username@$sftp_server_ip <<< $'get /data/$snap_package'"
 	done<$runtime_files_dir/actual-names-of-snap-packages
+
+	commands-for-clients-to-run.sh "cd -"
 }
 
 snap_packages_distinguisher() {
 	while read snap_package; do
-		echo "$snap_package" | grep -qe '.assert'
-		if [ $? != 0 ]; then
+		echo "$snap_package" | grep -qe '\.assert'
+		if [ $? = 0 ]; then
 			echo "$snap_package" >> $runtime_files_dir/assert-snap-packages
 		fi
 
-		echo "$snap_package" | grep -qe '.snap'
-		if [ $? != 0 ]; then
-			echo "$snap_package" >> $runtime_files_dir/actual-snap-packages
+		echo "$snap_package" | grep -qe '\.snap'
+		if [ $? = 0 ]; then
+			echo "$snap_package" >> $runtime_files_dir/installable-snap-packages
 		fi
 	done<$runtime_files_dir/actual-names-of-snap-packages
 }

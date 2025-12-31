@@ -9,11 +9,11 @@ export sftp_server_ip=$(echo $perm_ip_addr_with_sub_mask | awk -F'/' '{print $1}
 export sftp_directory="/data"
 
 command_output_file_ensurer() {
-	if [ -f $runtime_files_dir/command-output ]; then
-		rm $runtime_files_dir/command-output
-		touch $runtime_files_dir/command-output
+	if [ -f /home/command-output ]; then
+		rm /home/command-output
+		touch /home/command-output
 	else
-		touch $runtime_files_dir/command-output
+		touch /home/command-output
 	fi
 }
 
