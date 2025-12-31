@@ -11,7 +11,13 @@ command_generator_for_acting_on_normal_users() {
 custom_commands_fetcher() {
 	echo "Enter the commands one by one and hit enter"
 	while read entered_command; do
-		echo "$entered_command" >> $runtime_files_dir/custom-commands
+		#special_character_detector
+		echo "$entered_command" | grep -qe '"' || echo "$entered_command" | grep -qe "'"
+		if [ $? = 0 ]; then
+			echo "please don't use quotations"
+		else
+			echo "$entered_command" >> custom-commands
+		fi
 	done
 }
 
