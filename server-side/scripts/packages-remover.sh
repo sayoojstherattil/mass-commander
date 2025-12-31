@@ -6,7 +6,7 @@ while read package_name; do
 	echo "$package_name" >> $runtime_files_dir/packages-to-remove
 done
 
-echo "apt remove $(cat $runtime_files_dir/packages-to-remove) -y" > $runtime_files_dir/commands-for-client-to-run-as-root
-echo "apt autoremove -y" >> $runtime_files_dir/commands-for-client-to-run-as-root
+commands-for-clients-to-run.sh "apt remove $(cat $runtime_files_dir/packages-to-remove) -y"
+commands-for-clients-to-run.sh "apt autoremove -y"
 
 commander.sh
