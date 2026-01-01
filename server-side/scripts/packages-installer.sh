@@ -56,7 +56,9 @@ commands_generator() {
 		fi
 	fi
 
-	commands-for-clients-to-run.sh "apt install $(cat $runtime_files_dir/apt-packages)"
+	if [ -f $runtime_files_dir/apt-packages ]; then
+		commands-for-clients-to-run.sh "apt install $(cat $runtime_files_dir/apt-packages)"
+	fi
 }
 
 installable_and_assert_snap_packages_distinguisher() {
