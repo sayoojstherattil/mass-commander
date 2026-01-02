@@ -18,7 +18,17 @@ ip_addresses_finder() {
 	cat $runtime_files_dir/arp-scan-unwanted-lines-deleted | awk -F' ' '{print $1}' > $runtime_files_dir/ip-address-pool 
 }
 
-cp $runtime_files_dir/commands-to-run-of-client /srv/sftpuser/data
+sftp_directory_files_permission_changer() {
+	ls $sftp_directory > $runtime_files_dir/files-in-sftp
 
+	while read filename; do
+		chmod 644 ${sftp_directory}/${filename}
+	done<$runtime_files_dir/files-in-sftp
+}
+
+
+cp $runtime_files_dir/commands-to-run-of-client $sftp_directory 
+
+sftp_directory_files_permission_changer
 ip_addresses_finder
-commander
+ommander

@@ -1,13 +1,5 @@
 #!/bin/bash
 
-sftp_directory_clearer() {
-	ls $sftp_directory > $runtime_files_dir/files-in-sftp-directory	
-	
-	while read filename; do
-		rm $sftp_directory/$filename
-	done<$runtime_files_dir/files-in-sftp-directory
-}
-
 directory_ensurer() {
 	directory_name="$1"
 
@@ -36,7 +28,7 @@ export PATH="$PATH:$mass_commander_base_dir/scripts"
 directory_ensurer $runtime_files_dir
 directory_ensurer $runtime_files_dir/snap-packages-fetching-area
 
-sftp_directory_clearer
+rm $sftp_directory/commands-to-run-of-client
 
 echo "What would you like to do?"
 echo "(i)nstall packages"

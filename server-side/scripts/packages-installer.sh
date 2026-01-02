@@ -71,14 +71,6 @@ installable_and_assert_snap_packages_distinguisher() {
 	done<$runtime_files_dir/actual-names-of-snap-packages
 }
 
-sftp_directory_files_permission_changer() {
-	ls $sftp_directory > $runtime_files_dir/files-in-sftp
-
-	while read filename; do
-		chmod 644 ${sftp_directory}/${filename}
-	done<$runtime_files_dir/files-in-sftp
-}
-
 snap_packages_in_ftp_directory_placer() {
 	ls $runtime_files_dir/snap-packages-fetching-area > $runtime_files_dir/actual-names-of-snap-packages
 
@@ -91,7 +83,19 @@ snap_package_fetcher() {
 	cd $runtime_files_dir/snap-packages-fetching-area
 
 	while read package_name; do
-		snap download $package_name
+		ls $sftp_directory > $runtime_files_dir/sftp-directory-contents
+		actual_package_name=$(grep $runtime_files_dir/sftp-directory-contents -e '$package_name')
+		
+		if [ $? = 0 ]; then
+			echo "package $actual_package_name exists"
+			echo -n "Replace? (y)/(n) "
+			read package_replace_choice
+		fi
+
+		if [ $package_replace_choice = "y" ]; then
+			rm $sftp_directory/$actual_package_name 
+			snap download $package_name
+		fi
 	done<$runtime_files_dir/snap-packages
 		
 	cd  -
@@ -154,7 +158,6 @@ if [ $snap_package_existance = 1 ]; then
 fi
 
 snap_packages_in_ftp_directory_placer
-sftp_directory_files_permission_changer
 commands_generator
 
 commander.sh
