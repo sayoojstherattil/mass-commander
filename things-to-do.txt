@@ -17,3 +17,4 @@ ensure files and scripts locations are correct
 perm ip for server
 add the deb files location to 'files to tar' for package installation. also, other required scripts like app-opener.sh
 change ./runtime-files/filename to full path as scripts are in another subdirectory and the previous location will fail. including scripts that point to deb files pointed
+prevention of all files in a SFTP. delete comments to run of client
