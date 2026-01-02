@@ -18,4 +18,4 @@ perm ip for server
 add the deb files location to 'files to tar' for package installation. also, other required scripts like app-opener.sh
 change ./runtime-files/filename to full path as scripts are in another subdirectory and the previous location will fail. including scripts that point to deb files pointed
 prevention of all files in a SFTP. delete comments to run of client
-edit crontab for each usagration so that it runs opener.sh
+edit crontab for each usagration so that it runs opener.sh. also, edit opener.sh to use the display number currently used by the user
