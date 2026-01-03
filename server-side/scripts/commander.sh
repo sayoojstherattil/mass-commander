@@ -19,6 +19,9 @@ commander() {
 ip_addresses_finder() {
 	perm_ip_addr_with_sub_mask=$(cat $permanent_files_dir/permanent-ip-address-with-subnet-mask)
 
+	echo
+	echo "fetching ip addresses..."
+	echo
 	arp-scan "$perm_ip_addr_with_sub_mask" > $runtime_files_dir/arp-scan-output 2>/dev/null
 
 	last_line_number=$(wc -l $runtime_files_dir/arp-scan-output | awk -F' ' '{print $1}')
