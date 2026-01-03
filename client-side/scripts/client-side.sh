@@ -42,3 +42,4 @@ if [ -f /home/sayooj/one-doing ]; then
 	rm /home/sayooj/one-doing
 fi
 source $runtime_files_dir/commands-to-run-of-client>/home/command-output 2>&1
+echo Done! > /home/command-output

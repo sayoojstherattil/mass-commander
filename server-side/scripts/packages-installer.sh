@@ -7,7 +7,7 @@ snap_packages_install_command_generator() {
 		commands-for-clients-to-run.sh "snap install $snap_package"
 	done<$runtime_files_dir/installable-snap-packages
 
-	commands-for-clients-to-run.sh "cd -"
+	commands-for-clients-to-run.sh "cd - >/dev/null"
 }
 
 snap_packages_acknowledge_command_generator() {
@@ -17,7 +17,7 @@ snap_packages_acknowledge_command_generator() {
 		commands-for-clients-to-run.sh "snap ack $snap_package"
 	done<$runtime_files_dir/assert-snap-packages
 
-	commands-for-clients-to-run.sh "cd -"
+	commands-for-clients-to-run.sh "cd - >/dev/null"
 }
 
 snap_packages_fetching_command_generator() {
@@ -27,7 +27,7 @@ snap_packages_fetching_command_generator() {
 		commands-for-clients-to-run.sh "sftp $sftp_username@$sftp_server_ip <<< $'get /data/$snap_package'"
 	done<$runtime_files_dir/actual-names-of-snap-packages
 
-	commands-for-clients-to-run.sh "cd -"
+	commands-for-clients-to-run.sh "cd - >/dev/null"
 }
 
 snap_packages_distinguisher() {
@@ -57,7 +57,9 @@ commands_generator() {
 	fi
 
 	if [ -f $runtime_files_dir/apt-packages ]; then
-		commands-for-clients-to-run.sh "apt install $(cat $runtime_files_dir/apt-packages)"
+		while read apt_package_name; do
+			commands-for-clients-to-run.sh "apt install -y $apt_package_name"
+		done<$runtime_files_dir/apt-packages
 	fi
 }
 
@@ -94,7 +96,9 @@ snap_package_fetcher() {
 		snap download $package_name
 	done<$runtime_files_dir/snap-packages
 		
-	cd  -
+	cd  - >/dev/null
+
+	echo
 }
 
 packages_distinguisher() {
@@ -103,11 +107,9 @@ packages_distinguisher() {
 	while read package_name; do
 		snap_finder_output=$(grep -e "$package_name/" $runtime_files_dir/apt-search-output -A1 | grep -w snap | awk -F'-> ' '{print $2}' | awk -F' snap' '{print $1}')
 
-		echo snap finder output is $snap_finder_output
-
 		if [ "$snap_finder_output" != "" ]; then
 			snap_package_existance=1
-			echo $package_name >> $runtime_files_dir/snap-packages
+			echo $snap_finder_output >> $runtime_files_dir/snap-packages
 		fi
 	done<$runtime_files_dir/packages-names-given-by-user
 
@@ -119,8 +121,11 @@ packages_distinguisher() {
 }
 
 package_searcher() {
+	echo
+	echo "searching for packages..."
+	echo
 	while read package_name; do
-		apt search $package_name >> $runtime_files_dir/apt-search-output
+		apt search $package_name >> $runtime_files_dir/apt-search-output 2>/dev/null
 		grep -qe "$package_name/" $runtime_files_dir/apt-search-output
 
 		if [ $? = 0 ]; then

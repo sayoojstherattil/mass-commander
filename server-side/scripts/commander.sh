@@ -1,15 +1,25 @@
 #!/bin/bash
 
 commander() {
+	echo -n "starting in 3.."
+	sleep 1
+	echo -n "2.."
+	sleep 1
+	echo -n "1.."
+	sleep 1
+
+	echo
+	echo begun
+
 	while read ip_address; do
-		ssh root@$ip_address "/root/mass-commander/scripts/client-side.sh" &
+		commanding.sh "$ip_address"
 	done<$runtime_files_dir/ip-address-pool
 }
 
 ip_addresses_finder() {
 	perm_ip_addr_with_sub_mask=$(cat $permanent_files_dir/permanent-ip-address-with-subnet-mask)
 
-	arp-scan "$perm_ip_addr_with_sub_mask" > $runtime_files_dir/arp-scan-output
+	arp-scan "$perm_ip_addr_with_sub_mask" > $runtime_files_dir/arp-scan-output 2>/dev/null
 
 	last_line_number=$(wc -l $runtime_files_dir/arp-scan-output | awk -F' ' '{print $1}')
 	line_just_below_result=$(($last_line_number - 2))

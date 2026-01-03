@@ -47,6 +47,7 @@ echo "(c)ustom commanding"
 
 echo -ne "i\nr\na\nd\nc\n" > $runtime_files_dir/input-options
 user-input-validator.sh
+echo
 
 user_input=$(cat $runtime_files_dir/user-input)
 
