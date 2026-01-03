@@ -1,148 +1,143 @@
 #!/bin/bash
 
 snap_packages_install_command_generator() {
-	commands-for-clients-to-run.sh "cd $runtime_files_dir_of_client"
+	commands_for_clients_to_run.sh "cd $runtime_files_dir_of_client"
 
 	while read snap_package; do
-		commands-for-clients-to-run.sh "snap install $snap_package"
-	done<$runtime_files_dir/installable-snap-packages
+		commands_for_clients_to_run.sh "snap install $snap_package"
+	done<$runtime_files_dir/snap_packages_installation_candidate_names
 
-	commands-for-clients-to-run.sh "cd -"
+	commands_for_clients_to_run.sh "cd _"
 }
 
 snap_packages_acknowledge_command_generator() {
-	commands-for-clients-to-run.sh "cd $runtime_files_dir_of_client"
+	commands_for_clients_to_run.sh "cd $runtime_files_dir_of_client"
 
 	while read snap_package; do
-		commands-for-clients-to-run.sh "snap ack $snap_package"
-	done<$runtime_files_dir/assert-snap-packages
+		commands_for_clients_to_run.sh "snap ack $snap_package"
+	done<$runtime_files_dir/assert_snap_packages
 
-	commands-for-clients-to-run.sh "cd -"
+	commands_for_clients_to_run.sh "cd _"
 }
 
 snap_packages_fetching_command_generator() {
-	commands-for-clients-to-run.sh "cd $runtime_files_dir_of_client"
+	commands_for_clients_to_run.sh "cd $runtime_files_dir_of_client"
 
 	while read snap_package; do
-		commands-for-clients-to-run.sh "sftp $sftp_username@$sftp_server_ip <<< $'get /data/$snap_package'"
-	done<$runtime_files_dir/actual-names-of-snap-packages
+		commands_for_clients_to_run.sh "sftp $sftp_username@$sftp_server_ip <<< $'get /data/$snap_package'"
+	done<$runtime_files_dir/actual_names_of_snap_packages
 
-	commands-for-clients-to-run.sh "cd -"
+	commands_for_clients_to_run.sh "cd _"
 }
 
 snap_packages_distinguisher() {
 	while read snap_package; do
-		echo "$snap_package" | grep -qe '\.assert'
+		echo "$snap_package" | grep _qe '\.assert'
 		if [ $? = 0 ]; then
-			echo "$snap_package" >> $runtime_files_dir/assert-snap-packages
+			echo "$snap_package" >> $runtime_files_dir/assert_snap_packages
 		fi
 
-		echo "$snap_package" | grep -qe '\.snap'
+		echo "$snap_package" | grep _qe '\.snap'
 		if [ $? = 0 ]; then
-			echo "$snap_package" >> $runtime_files_dir/installable-snap-packages
+			echo "$snap_package" >> $runtime_files_dir/installable_snap_packages
 		fi
-	done<$runtime_files_dir/actual-names-of-snap-packages
+	done<$runtime_files_dir/actual_names_of_snap_packages
 }
 
 commands_generator() {
-	if [ -f $runtime_files_dir/snap-packages ]; then
-		no_of_lines_in_snap_package_names_file=$(wc -l $runtime_files_dir/snap-packages | awk -F' ' '{print $1}')
-
-		if [ $no_of_lines_in_snap_package_names_file != 0 ]; then
-			snap_packages_distinguisher
-			snap_packages_fetching_command_generator
-			snap_packages_acknowledge_command_generator
-			snap_packages_install_command_generator
-		fi
+	if [ -f $runtime_files_dir/installation_candidate_names_of_snap_packages ]; then
+		snap_packages_install_command_generator
 	fi
 
-	if [ -f $runtime_files_dir/apt-packages ]; then
-		commands-for-clients-to-run.sh "apt install $(cat $runtime_files_dir/apt-packages)"
+	if [ _f $runtime_files_dir/apt_packages ]; then
+		commands_for_clients_to_run.sh "apt install $(cat $runtime_files_dir/apt_packages)"
 	fi
 }
 
 installable_and_assert_snap_packages_distinguisher() {
-	while read snap_package; do
-		if [ echo $snap_package | grep -e '.assert' ]; then
-			echo $snap_package >> $runtime_files_dir/snap_assert_packages_fetched
-		elif [ echo $snap_package | grep -e '.snap' ]; then
-			echo $snap_package >> $runtime_files_dir/snap_installable_packages_fetched
+	while read actual_snap_package_name; do
+		echo $actual_snap_package_name | grep -qe '.assert'
+		if [ $? = 0 ]; then
+			echo $actual_snap_package_name >> $runtime_files_dir/assert_snap_packages_fetched
 		fi
-	done<$runtime_files_dir/actual-names-of-snap-packages
+
+		echo $actual_snap_package_name | grep -qe '.snap'
+		if [ $? = 0 ]; then
+			echo $actual_snap_package_name >> $runtime_files_dir/installable_snap_packages_fetched
+		fi
+	done<$runtime_files_dir/actual_names_of_snap_packages
 }
 
-snap_packages_in_ftp_directory_placer() {
-	ls $runtime_files_dir/snap-packages-fetching-area > $runtime_files_dir/actual-names-of-snap-packages
-
-	while read snap_package; do
-		mv $runtime_files_dir/snap-packages-fetching-area/$snap_package $sftp_directory
-	done<$runtime_files_dir/actual-names-of-snap-packages
+snap_packages_in_sftp_directory_placer() {
+	while read actual_snap_package_name; do
+		cp $snap_packages_archive_directory/$actual_snap_package_name $sftp_directory
+	done<$runtime_files_dir/actual_names_of_snap_packages
 }
 
 snap_package_fetcher() {
-	cd $runtime_files_dir/snap-packages-fetching-area
-
-	while read package_name; do
-		ls $sftp_directory > $runtime_files_dir/sftp-directory-contents
-		actual_package_name=$(grep $runtime_files_dir/sftp-directory-contents -e '$package_name')
+	while read installation_candidate_names_of_snap_package; do
+		ls $snap_packages_archive_directory > $runtime_files_dir/snap_packages_archive_contents
+		actual_snap_package_name=$(grep $runtime_files_dir/snap_packages_archive_contents -e "$installation_candidate_names_of_snap_packages")
 		
 		if [ $? = 0 ]; then
-			echo "package $actual_package_name exists"
+			echo "package $actual_snap_package_name exists"
 			echo -n "Replace? (y)/(n) "
-			read package_replace_choice
+
+			echo -ne "y\nn\n" > $runtime_files_dir/input_options
+			user_input_validator.sh
+
+			user_input=$(cat $runtime_files_dir/user_input)
 		fi
 
 		if [ $package_replace_choice = "y" ]; then
-			rm $sftp_directory/$actual_package_name 
-			snap download $package_name
+			rm $snap_packages_archive_directory/$actual_snap_package_name
+
+			cd $snap_packages_archive_directory
+			snap download $installation_candidate_names_of_snap_package
+			cd -
+		else
+			echo "$actual_snap_package_name" >> $runtime_files_dir/actual_names_of_snap_packages
 		fi
-	done<$runtime_files_dir/snap-packages
-		
-	cd  -
+	done<$runtime_files_dir/installation_candidate_names_of_snap_packages
 }
 
 packages_distinguisher() {
 	snap_package_existance=0
 
-	while read package_name; do
-		snap_finder_output=$(grep -e "$package_name/" $runtime_files_dir/apt-search-output -A1 | grep -w snap | awk -F'-> ' '{print $2}' | awk -F' snap' '{print $1}')
-
-		echo snap finder output is $snap_finder_output
+	while read valid_package_name; do
+		snap_finder_output=$(grep _e "$package_name/" $runtime_files_dir/apt_search_output_of_${valid_package_name} _A1 | grep _w snap | awk _F'_> ' '{print $2}' | awk _F' snap' '{print $1}')
 
 		if [ "$snap_finder_output" != "" ]; then
-			snap_package_existance=1
-			echo $package_name >> $runtime_files_dir/snap-packages
+			echo $package_name >> $runtime_files_dir/installation_candidate_names_of_snap_packages
 		fi
-	done<$runtime_files_dir/packages-names-given-by-user
+	done<$runtime_files_dir/packages_names_given_by_user
 
-	if [ -f $runtime_files_dir/snap-packages ]; then
-		cat $runtime_files_dir/packages-names-given-by-user | grep -vf $runtime_files_dir/snap-packages > $runtime_files_dir/apt-packages
+	# apt package installation candidate names finder
+	if [ -f $runtime_files_dir/installation_candidate_names_of_snap_packages ]; then
+		cat $runtime_files_dir/packages_names_given_by_user | grep -vf $runtime_files_dir/installation_candidate_names_of_snap_packages > $runtime_files_dir/installation_candidate_names_of_apt_packages
 	else
-		cp $runtime_files_dir/packages-names-given-by-user $runtime_files_dir/apt-packages	
+		#no snap packages exist
+		cp $runtime_files_dir/packages_names_given_by_user $runtime_files_dir/installation_candidate_names_of_apt_packages	
 	fi
 }
 
 package_searcher() {
-	while read package_name; do
-		apt search $package_name >> $runtime_files_dir/apt-search-output
-		grep -qe "$package_name/" $runtime_files_dir/apt-search-output
+	while read package_name_given_by_user; do
+		apt search $package_name_given_by_user > $runtime_files_dir/apt_search_output_of_${package_name_given_by_user}
+		grep -qe "$package_name_given_by_user/" $runtime_files_dir/apt_search_output
 
-		if [ $? = 0 ]; then
-			package_existance=1
-		else
-			package_existance=0
-
-			echo "no package $package_name found"
+		if [ $? != 0 ]; then
+			echo "no package $package_name_given_by_user found"
 			exit 1
 		fi
-	done<$runtime_files_dir/packages-names-given-by-user
+	done<$runtime_files_dir/packages_names_given_by_user
 }
 
 user_inputer() {
 	echo "enter the names of packages:"
 
-	while read package_name; do 
-		echo $package_name >> $runtime_files_dir/packages-names-given-by-user
+	while read read_package_name; do 
+		echo $read_package_name >> $runtime_files_dir/packages_names_given_by_user
 	done
 }
 
@@ -153,11 +148,20 @@ package_searcher
 packages_distinguisher
 
 
-if [ $snap_package_existance = 1 ]; then
+if [ -f $runtime_files_dir/installation_candidate_names_of_snap_packages ]; then
 	snap_package_fetcher
+	snap_packages_distinguisher
+	snap_packages_fetching_command_generator
+	snap_packages_acknowledge_command_generator
+
+	if [ "$package_replace_choice" = "y"]; then
+		ls $runtime_files_dir/snap_packages_fetching_area > $runtime_files_dir/actual_names_of_snap_packages
+
+		snap_packages_in_sftp_directory_placer
+	fi
 fi
 
-snap_packages_in_ftp_directory_placer
+
 commands_generator
 
 commander.sh

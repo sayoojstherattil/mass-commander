@@ -17,6 +17,7 @@ export runtime_files_dir_of_client=$mass_commander_base_dir/runtime-files
 export permanent_files_dir=$mass_commander_base_dir/permanent-files
 export sftp_directory=/srv/sftpuser/data
 export sftp_dir_of_client=/data
+export snap_packages_archive_directory=$mass_commander_base_dir/snap-packages-archive
 
 export sftp_username="sftpuser"
 perm_ip_addr_with_sub_mask=$(cat $permanent_files_dir/permanent-ip-address-with-subnet-mask)
@@ -26,9 +27,9 @@ export permanent_files_dir="$mass_commander_base_dir/permanent-files"
 export PATH="$PATH:$mass_commander_base_dir/scripts"
 
 directory_ensurer $runtime_files_dir
-directory_ensurer $runtime_files_dir/snap-packages-fetching-area
+directory_ensurer $snap_packages_archive_directory
 
-rm $sftp_directory/commands-to-run-of-client
+sftp_directory_clearer
 
 echo "What would you like to do?"
 echo "(i)nstall packages"

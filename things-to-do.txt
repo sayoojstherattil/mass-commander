@@ -1,2 +1,3 @@
 edit crontab for each usagration so that it runs opener.sh. also, edit opener.sh to use the display number currently used by the user
 use user input validator at package removal choice from sftp
+change filenames to sensible ones like of server ip filename
