@@ -46,12 +46,8 @@ snap_packages_distinguisher() {
 
 commands_generator() {
 	if [ -f $runtime_files_dir/installation_candidate_names_of_snap_packages ]; then
-		snap_packages_install_command_generator
 	fi
 
-	if [ _f $runtime_files_dir/apt_packages ]; then
-		commands_for_clients_to_run.sh "apt install $(cat $runtime_files_dir/apt_packages)"
-	fi
 }
 
 installable_and_assert_snap_packages_distinguisher() {
@@ -124,7 +120,7 @@ packages_distinguisher() {
 package_searcher() {
 	while read package_name_given_by_user; do
 		apt search $package_name_given_by_user > $runtime_files_dir/apt_search_output_of_${package_name_given_by_user}
-		grep -qe "$package_name_given_by_user/" $runtime_files_dir/apt_search_output
+		grep -qe "$package_name_given_by_user/" $runtime_files_dir/apt_search_output_of_${package_name_given_by_user}
 
 		if [ $? != 0 ]; then
 			echo "no package $package_name_given_by_user found"
@@ -147,21 +143,16 @@ user_inputer
 package_searcher
 packages_distinguisher
 
-
 if [ -f $runtime_files_dir/installation_candidate_names_of_snap_packages ]; then
 	snap_package_fetcher
 	snap_packages_distinguisher
 	snap_packages_fetching_command_generator
 	snap_packages_acknowledge_command_generator
-
-	if [ "$package_replace_choice" = "y"]; then
-		ls $runtime_files_dir/snap_packages_fetching_area > $runtime_files_dir/actual_names_of_snap_packages
-
-		snap_packages_in_sftp_directory_placer
-	fi
+	snap_packages_install_command_generator
 fi
 
-
-commands_generator
+if [ -f $runtime_files_dir/apt_packages ]; then
+	commands_for_clients_to_run.sh "apt install $(cat $runtime_files_dir/apt_packages)"
+fi
 
 commander.sh
