@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 
 snap_packages_install_command_generator() {
 	commands_for_clients_to_run.sh "cd $runtime_files_dir_of_client"
@@ -32,22 +32,16 @@ snap_packages_fetching_command_generator() {
 
 snap_packages_distinguisher() {
 	while read snap_package; do
-		echo "$snap_package" | grep _qe '\.assert'
+		echo "$snap_package" | grep -qe '\.assert'
 		if [ $? = 0 ]; then
 			echo "$snap_package" >> $runtime_files_dir/assert_snap_packages
 		fi
 
-		echo "$snap_package" | grep _qe '\.snap'
+		echo "$snap_package" | grep -qe '\.snap'
 		if [ $? = 0 ]; then
 			echo "$snap_package" >> $runtime_files_dir/installable_snap_packages
 		fi
 	done<$runtime_files_dir/actual_names_of_snap_packages
-}
-
-commands_generator() {
-	if [ -f $runtime_files_dir/installation_candidate_names_of_snap_packages ]; then
-	fi
-
 }
 
 installable_and_assert_snap_packages_distinguisher() {
@@ -101,10 +95,10 @@ packages_distinguisher() {
 	snap_package_existance=0
 
 	while read valid_package_name; do
-		snap_finder_output=$(grep _e "$package_name/" $runtime_files_dir/apt_search_output_of_${valid_package_name} _A1 | grep _w snap | awk _F'_> ' '{print $2}' | awk _F' snap' '{print $1}')
+		installation_candidate_name_of_snap_package=$(grep -e "$package_name/" $runtime_files_dir/apt_search_output_of_${valid_package_name} -A1 | grep -w snap | awk -F'-> ' '{print $2}' | awk -F' snap' '{print $1}')
 
-		if [ "$snap_finder_output" != "" ]; then
-			echo $package_name >> $runtime_files_dir/installation_candidate_names_of_snap_packages
+		if [ "$installation_candidate_name_of_snap_package" != "" ]; then
+			echo $installation_candidate_name_of_snap_package >> $runtime_files_dir/installation_candidate_names_of_snap_packages
 		fi
 	done<$runtime_files_dir/packages_names_given_by_user
 
@@ -139,6 +133,7 @@ user_inputer() {
 
 
 # main
+set -e
 user_inputer
 package_searcher
 packages_distinguisher

@@ -1,6 +1,14 @@
 #!/bin/bash
 
-directory_ensurer() {
+sftp_directory_clearer() {
+	ls $sftp_directory > $runtime_files_dir/sftp_directory_contents
+
+	while read filename; do
+		sudo rm $sftp_directory/$filename
+	done<$runtime_files/sftp_directory_contents
+}
+
+directory_recreator() {
 	directory_name="$1"
 
 	if [ -d $directory_name ]; then
@@ -11,25 +19,30 @@ directory_ensurer() {
 	fi
 }
 
-export mass_commander_base_dir=/root/mass-commander
-export runtime_files_dir=$mass_commander_base_dir/runtime-files
-export runtime_files_dir_of_client=$mass_commander_base_dir/runtime-files
-export permanent_files_dir=$mass_commander_base_dir/permanent-files
-export sftp_directory=/srv/sftpuser/data
-export sftp_dir_of_client=/data
-export snap_packages_archive_directory=$mass_commander_base_dir/snap-packages-archive
+exporter() {
+	export mass_commander_base_dir=/home/$USER/mass-commander
+	export runtime_files_dir=$mass_commander_base_dir/runtime-files
+	export runtime_files_dir_of_client=$mass_commander_base_dir/runtime-files
+	export permanent_files_dir=$mass_commander_base_dir/permanent-files
+	export sftp_directory=/srv/sftpuser/data
+	export sftp_dir_of_client=/data
+	export snap_packages_archive_directory=$mass_commander_base_dir/snap-packages-archive
 
-export sftp_username="sftpuser"
-perm_ip_addr_with_sub_mask=$(cat $permanent_files_dir/permanent-ip-address-with-subnet-mask)
-export sftp_server_ip=$(echo $perm_ip_addr_with_sub_mask | awk -F'/' '{print $1}')
-export permanent_files_dir="$mass_commander_base_dir/permanent-files"
+	export sftp_username="sftpuser"
+	perm_ip_addr_with_sub_mask=$(cat $permanent_files_dir/permanent-ip-address-with-subnet-mask)
+	export sftp_server_ip=$(echo $perm_ip_addr_with_sub_mask | awk -F'/' '{print $1}')
+	export permanent_files_dir="$mass_commander_base_dir/permanent-files"
 
-export PATH="$PATH:$mass_commander_base_dir/scripts"
+	export PATH="$PATH:$mass_commander_base_dir/scripts"
+}
 
-directory_ensurer $runtime_files_dir
-directory_ensurer $snap_packages_archive_directory
+set -e
 
+exporter
+directory_recreator $runtime_files_dir
+set +e
 sftp_directory_clearer
+set -e
 
 echo "What would you like to do?"
 echo "(i)nstall packages"
