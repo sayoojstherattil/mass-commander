@@ -14,6 +14,7 @@ snap_remover() {
 	echo "enter names of snaps one by one: "
 
 	while read snap_package_name; do
+		commands-for-clients-to-run.sh "removing ${snap_package_name}..."
 		commands-for-clients-to-run.sh "snap remove $snap_package_name"
 	done
 }
