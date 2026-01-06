@@ -16,7 +16,7 @@ custom_commands_fetcher() {
 		if [ $? = 0 ]; then
 			echo "please don't use quotations"
 		else
-			echo "$entered_command" >> custom-commands
+			echo "$entered_command" >> $runtime_files_dir/custom-commands
 		fi
 	done
 }
