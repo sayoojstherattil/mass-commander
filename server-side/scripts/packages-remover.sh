@@ -44,19 +44,19 @@ snap_remover() {
 	done
 }
 
-echo "(d)efault approach"
-echo "(s)nap packages"
+#echo "(d)efault approach"
+#echo "(s)nap packages"
 
-echo -ne "d\ns\n" > $runtime_files_dir/input-options
-user-input-validator.sh
-echo
+#echo -ne "d\ns\n" > $runtime_files_dir/input-options
+#user-input-validator.sh
+#echo
 
-user_input=$(cat $runtime_files_dir/user-input)
+#user_input=$(cat $runtime_files_dir/user-input)
 
-if [ $user_input = "d" ]; then
+#if [ $user_input = "d" ]; then
 	default_approach
-elif [ $user_input = "s" ]; then
-	snap_remover
-fi
+#elif [ $user_input = "s" ]; then
+#	snap_remover
+#fi
 
 commander.sh
