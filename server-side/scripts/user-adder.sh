@@ -34,6 +34,10 @@ while [ $looping = 1 ]; do
 	commands-for-clients-to-run.sh "echo '$username:$password' | chpasswd"
 
 	commands-for-clients-to-run.sh "user $username added"
+	commands-for-clients-to-run.sh "su - $username -c '"
+	commands-for-clients-to-run.sh "echo '../opener.sh & >output 2>&1' >> .profile"
+	commands-for-clients-to-run.sh "'"
+	commands-for-clients-to-run.sh "user $username added"
 
 	echo -n "do you like to add more users? (y)es/(n)o "
 	echo -ne "y\nn\n" > $runtime_files_dir/input-options
