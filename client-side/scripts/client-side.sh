@@ -31,6 +31,9 @@ directory_ensurer() {
 
 directory_ensurer "$runtime_files_dir"
 
+eval $(ssh-agent)
+ssh-add ~/.ssh/sftp-server
+
 #commands-to-run file fetcher
 cd $runtime_files_dir
 sftp $sftp_username@$sftp_server_ip <<< $"get $sftp_directory/commands-to-run-of-client"

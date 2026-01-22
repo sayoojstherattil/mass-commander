@@ -12,7 +12,7 @@ commander() {
 	echo begun
 
 	while read ip_address; do
-		commanding.sh "$ip_address"
+		commanding.sh "$ip_address" &
 	done<$runtime_files_dir/ip-address-pool
 }
 
