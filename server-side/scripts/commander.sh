@@ -12,7 +12,7 @@ commander() {
 	echo begun
 
 	while read ip_address; do
-		commanding.sh "$ip_address" &
+		ssh -o StrictHostKeyChecking=no root@$ip_address "/root/mass-commander/scripts/client-side.sh > client-side-output">$runtime_files_dir/ssh-output-of-${ip_address} 2>&1 &
 	done<$runtime_files_dir/ip-address-pool
 }
 

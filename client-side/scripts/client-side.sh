@@ -42,7 +42,7 @@ cd -
 
 command_output_file_ensurer
 
-if [ -f /home/sayooj/one-doing ]; then
-	rm /home/sayooj/one-doing
+if [ -f /home/user/one-doing ]; then
+	rm /home/user/one-doing
 fi
 source $runtime_files_dir/commands-to-run-of-client>/home/command-output 2>&1
