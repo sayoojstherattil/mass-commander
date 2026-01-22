@@ -30,6 +30,7 @@ directory_ensurer() {
 
 
 directory_ensurer "$runtime_files_dir"
+command_output_file_ensurer
 
 eval $(ssh-agent)
 ssh-add ~/.ssh/sftp-server
