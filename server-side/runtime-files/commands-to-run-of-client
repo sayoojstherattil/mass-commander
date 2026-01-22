@@ -1,1 +1,5 @@
-echo hi i am sayooj
+set -e
+useradd pluser -m -s /bin/bash
+echo 'pluser:password' | chpasswd
+su - pluser -c "echo '../opener.sh >output 2>&1 &' >> .profile"
+echo user pluser added

@@ -1,36 +1,55 @@
 172.17.103.1	7c:5a:1c:cb:2b:59	Sophos Ltd
+172.17.103.14	f4:8e:38:80:75:c4	Dell Inc.
 172.17.103.64	b8:ac:6f:23:c2:1a	Dell Inc.
-172.17.103.79	04:7c:16:46:e4:6a	Micro-Star INTL CO., LTD.
+172.17.103.73	bc:30:5b:a4:6a:1b	Dell Inc.
+172.17.103.95	f4:8e:38:80:75:1d	Dell Inc.
+172.17.103.124	4c:eb:bd:14:75:83	CHONGQING FUGUI ELECTRONICS CO.,LTD.
 172.17.103.126	34:5a:60:1a:a1:61	(Unknown)
-172.17.103.125	dc:84:03:6d:98:3b	(Unknown)
-172.17.103.129	c6:a8:6a:d5:d8:cb	(Unknown: locally administered)
-172.17.103.139	20:0b:74:94:49:18	(Unknown)
-172.17.103.140	8e:a9:ef:fd:2c:2c	(Unknown: locally administered)
-172.17.103.153	8e:0a:c4:23:03:3d	(Unknown: locally administered)
-172.17.103.132	6a:3b:d7:fd:7b:77	(Unknown: locally administered)
-172.17.103.192	18:3d:a2:e9:51:ec	Intel Corporate
+172.17.103.128	1a:aa:3d:63:d8:15	(Unknown: locally administered)
+172.17.103.122	02:a9:02:d4:4e:e1	(Unknown: locally administered)
+172.17.103.147	1e:af:fb:70:ef:ee	(Unknown: locally administered)
+172.17.103.150	62:61:5a:45:e7:60	(Unknown: locally administered)
+172.17.103.134	0a:2b:c6:d0:a5:6e	(Unknown: locally administered)
 172.17.103.137	f6:e0:b2:f8:bb:c4	(Unknown: locally administered)
+172.17.103.171	f4:8e:38:76:51:d6	Dell Inc.
+172.17.103.175	f4:8e:38:80:75:b9	Dell Inc.
+172.17.103.172	ea:05:a3:81:d9:c7	(Unknown: locally administered)
+172.17.103.125	dc:84:03:6d:98:3b	(Unknown)
 172.17.103.189	3c:e9:f7:3d:9e:4c	Intel Corporate
 172.17.103.189	3c:e9:f7:3d:9e:4c	Intel Corporate (DUP: 2)
-172.17.103.170	4a:6e:ca:52:5e:dd	(Unknown: locally administered)
 172.17.103.158	92:97:db:d4:ad:b2	(Unknown: locally administered)
-172.17.103.207	e2:97:20:80:49:92	(Unknown: locally administered)
-172.17.103.210	34:5a:60:1a:9b:c2	(Unknown)
-172.17.103.177	b6:68:31:95:06:8d	(Unknown: locally administered)
-172.17.103.230	a8:bd:27:c3:5d:a6	Hewlett Packard Enterprise
-172.17.103.237	44:48:c1:c5:fc:b8	Hewlett Packard Enterprise
-172.17.103.246	2c:7b:a0:9d:cf:47	(Unknown)
-172.17.103.201	fe:d5:34:91:81:d7	(Unknown: locally administered)
-172.17.103.204	62:7f:14:2c:67:0d	(Unknown: locally administered)
-172.17.103.215	2a:7e:35:2c:c1:a7	(Unknown: locally administered)
-172.17.103.184	ea:a8:f6:20:db:40	(Unknown: locally administered)
-172.17.103.195	10:3f:44:84:05:62	Xiaomi Communications Co Ltd
-172.17.103.211	b2:5c:d5:92:9d:45	(Unknown: locally administered)
-172.17.103.144	5a:0b:74:95:83:48	(Unknown: locally administered)
-172.17.103.200	50:5a:65:fe:cb:49	AzureWave Technology Inc.
-172.17.103.187	a8:41:f4:0b:97:e9	(Unknown)
-172.17.103.226	6a:7f:c1:d3:bc:e0	(Unknown: locally administered)
-172.17.103.180	86:97:d9:ae:46:c2	(Unknown: locally administered)
-172.17.103.164	06:ba:38:a2:3a:40	(Unknown: locally administered)
 172.17.103.136	0e:32:1a:69:b3:e6	(Unknown: locally administered)
+172.17.103.206	8e:ff:51:91:12:17	(Unknown: locally administered)
+172.17.103.210	34:5a:60:1a:9b:c2	(Unknown)
+172.17.103.227	9e:93:ae:43:08:12	(Unknown: locally administered)
+172.17.103.230	a8:bd:27:c3:5d:a6	Hewlett Packard Enterprise
+172.17.103.231	f4:8e:38:79:71:0f	Dell Inc.
+172.17.103.164	06:ba:38:a2:3a:40	(Unknown: locally administered)
+172.17.103.232	f6:bf:3d:d2:04:af	(Unknown: locally administered)
+172.17.103.200	6a:5d:45:ea:74:09	(Unknown: locally administered)
+172.17.103.237	44:48:c1:c5:fc:b8	Hewlett Packard Enterprise
+172.17.103.234	f2:9c:65:92:2c:3c	(Unknown: locally administered)
+172.17.103.213	26:98:5a:60:a3:68	(Unknown: locally administered)
+172.17.103.144	5a:0b:74:95:83:48	(Unknown: locally administered)
+172.17.103.187	a8:41:f4:0b:97:e9	(Unknown)
+172.17.103.131	c0:35:32:92:54:f3	(Unknown)
+172.17.103.143	6a:7b:df:1a:41:37	(Unknown: locally administered)
+172.17.103.219	d2:e7:cd:af:2a:cb	(Unknown: locally administered)
+172.17.103.199	9e:1f:01:71:e0:1f	(Unknown: locally administered)
+172.17.103.215	2a:7e:35:2c:c1:a7	(Unknown: locally administered)
+172.17.103.202	56:76:fb:c4:a4:df	(Unknown: locally administered)
+172.17.103.209	76:df:e4:dd:70:94	(Unknown: locally administered)
+172.17.103.211	b2:5c:d5:92:9d:45	(Unknown: locally administered)
+172.17.103.221	f2:61:b3:aa:8a:3f	(Unknown: locally administered)
+172.17.103.166	a2:b6:13:b1:f9:90	(Unknown: locally administered)
+172.17.103.168	3a:93:fa:7c:3f:9a	(Unknown: locally administered)
+172.17.103.245	4a:2e:d5:b5:30:ce	(Unknown: locally administered)
+172.17.103.241	42:1e:9a:61:91:80	(Unknown: locally administered)
+172.17.103.236	7a:7d:d9:44:b8:e7	(Unknown: locally administered)
+172.17.103.139	20:0b:74:94:49:18	(Unknown)
+172.17.103.249	ea:36:04:0a:c2:53	(Unknown: locally administered)
 172.17.103.189	3c:e9:f7:3d:9e:4c	Intel Corporate (DUP: 3)
+172.17.103.151	f2:f4:7e:38:ec:70	(Unknown: locally administered)
+172.17.103.184	ea:a8:f6:20:db:40	(Unknown: locally administered)
+172.17.103.198	16:73:0e:dc:63:05	(Unknown: locally administered)
+172.17.103.198	16:73:0e:dc:63:05	(Unknown: locally administered) (DUP: 2)

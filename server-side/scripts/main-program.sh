@@ -38,6 +38,8 @@ directory_ensurer $runtime_files_dir/snap-packages-fetching-area
 
 sftp_directory_clearer
 
+commands-for-clients-to-run.sh "set -e"
+
 echo "What would you like to do?"
 echo "(i)nstall packages"
 echo "(r)emove packages"
