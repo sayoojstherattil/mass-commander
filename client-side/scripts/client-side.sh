@@ -13,13 +13,14 @@ one_doing_remover() {
 		if [ -f /home/$username/one-doing ]; then
 			rm /home/$username/one-doing
 		fi
-	done<$runtime_files_dir/normal-users
+	done<$runtime_files_dir/running-usernames
 }
 
-normal_users_finder() {
-	ls /home > $runtime_files_dir/home-dir-contents
-	grep -f home-dir-contents /etc/passwd > $runtime_files_dir/normal-user-finder-grep-output
-	awk -F':' '{print $1}' $runtime_files_dir/normal-user-finder-grep-output > $runtime_files_dir/normal-users
+running_users_finder() {
+	w > $runtime_files_dir/w-output
+	no_of_lines_in_w_output=$(wc -l w-output | awk -F' ' '{print $1}')
+	sed -n 3,${no_of_lines_in_w_output}p $runtime_files_dir/w-output > $runtime_files_dir/running-users-details
+	sed -n 3,3p w-output | awk -F' ' '{print $1}' > $runtime_files_dir/running-usernames
 }
 
 
