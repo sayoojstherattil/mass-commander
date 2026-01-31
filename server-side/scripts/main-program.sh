@@ -43,11 +43,15 @@ commands-for-clients-to-run.sh "set -e"
 echo "What would you like to do?"
 echo "(i)nstall packages"
 echo "(r)emove packages"
+echo "(u)pgrade packages"
 echo "(a)dd users"
 echo "(d)elete users"
 echo "(c)ustom commanding"
+echo ""
+echo "(S)hutdown systems"
+echo "(R)eboot systems"
 
-echo -ne "i\nr\na\nd\nc\n" > $runtime_files_dir/input-options
+echo -ne "i\nr\nu\na\nd\nc\nS\nR\n" > $runtime_files_dir/input-options
 user-input-validator.sh
 echo
 
@@ -59,6 +63,10 @@ fi
 
 if [ "$user_input" = "r" ]; then
 	user_choice="remove_packages"
+fi
+
+if [ "$user_input" = "u" ]; then
+	user_choice="upgrade_packages"
 fi
 
 if [ "$user_input" = "a" ]; then
@@ -73,6 +81,14 @@ if [ "$user_input" = "c" ]; then
 	user_choice="custom_commanding"
 fi
 
+if [ "$user_input" = "S" ]; then
+	user_choice="shutdown_systems"
+fi
+
+if [ "$user_input" = "R" ]; then
+	user_choice="reboot_systems"
+fi
+
 if [ "$user_choice" = "add_users" ]; then
 	user-adder.sh
 elif [ "$user_choice" = "delete_users" ]; then
@@ -81,6 +97,12 @@ elif [ "$user_choice" = "install_packages" ]; then
 	packages-installer.sh
 elif [ "$user_choice" = "remove_packages" ]; then
 	packages-remover.sh
+elif [ "$user_choice" = "upgrade_packages" ]
+	packages-upgrader.sh
 elif [ "$user_choice" = "custom_commanding" ]; then
 	custom-commander.sh
+elif [ "$user_choice" = "shutdown_systems" ]; then
+	systems-shutdowner.sh
+elif [ "$user_choice" = "reboot_systems" ]; then
+	systems-rebooter.sh
 fi
