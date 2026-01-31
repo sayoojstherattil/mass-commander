@@ -16,9 +16,9 @@ packages_distinguisher() {
 	fi
 }
 
-package_searcher() {
+packages_verifier() {
 	echo
-	echo "searching for packages..."
+	echo "verifying package names..."
 	echo
 	while read package_name; do
 		apt search $package_name >> $runtime_files_dir/apt-search-output 2>/dev/null
@@ -42,5 +42,5 @@ user_inputer() {
 }
 
 user_inputer
-package_searcher
+packages_verifier
 packages_distinguisher
