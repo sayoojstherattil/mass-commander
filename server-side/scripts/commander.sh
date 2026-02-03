@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 
 commander() {
 	echo -n "starting in 3.."

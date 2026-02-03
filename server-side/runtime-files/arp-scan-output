@@ -1,48 +1,48 @@
-Interface: enp2s0, datalink type: EN10MB (Ethernet)
-Starting arp-scan 1.9 with 512 hosts (http://www.nta-monitor.com/tools/arp-scan/)
-172.17.103.1	7c:5a:1c:cb:2b:59	(Unknown)
-172.17.103.12	04:7c:16:46:e4:64	(Unknown)
-172.17.103.121	44:48:c1:c5:fc:b8	(Unknown)
-172.17.103.132	74:56:3c:77:fc:fe	(Unknown)
-172.17.103.133	a8:bd:27:c3:5d:a6	(Unknown)
-172.17.103.127	28:d0:43:85:96:1f	(Unknown)
-172.17.103.143	b8:ac:6f:23:c2:1a	Dell Inc
-172.17.103.142	70:32:17:46:26:9d	(Unknown)
-172.17.103.178	16:dc:8a:3d:a3:ff	(Unknown)
-172.17.103.139	9a:13:9d:53:f5:e6	(Unknown)
+Interface: wlp0s20f3, type: EN10MB, MAC: e4:60:17:e4:98:fa, IPv4: 172.17.103.242
+Starting arp-scan 1.10.0 with 512 hosts (https://github.com/royhills/arp-scan)
+172.17.103.1	7c:5a:1c:cb:2b:59	Sophos Ltd
+172.17.103.121	44:48:c1:c5:fc:b8	Hewlett Packard Enterprise
+172.17.103.126	dc:84:03:6d:98:3b	(Unknown)
+172.17.103.132	74:56:3c:77:fc:fe	GIGA-BYTE TECHNOLOGY CO.,LTD.
+172.17.103.133	a8:bd:27:c3:5d:a6	Hewlett Packard Enterprise
+172.17.103.128	48:8a:e8:28:90:fb	vivo Mobile Communication Co., Ltd.
+172.17.103.143	b8:ac:6f:23:c2:1a	Dell Inc.
+172.17.103.142	70:32:17:46:26:9d	Intel Corporate
+172.17.103.123	50:5a:65:b9:bd:a5	AzureWave Technology Inc.
 172.17.103.170	34:5a:60:1a:a1:c3	(Unknown)
-172.17.103.156	02:09:aa:70:83:38	(Unknown)
-172.17.103.131	96:51:cd:56:3f:23	(Unknown)
-172.17.103.123	50:5a:65:b9:bd:a5	(Unknown)
-172.17.103.122	d6:97:3c:87:15:d4	(Unknown)
-172.17.103.196	04:bf:1b:13:4a:c2	(Unknown)
-172.17.103.140	a6:2a:ca:9f:bb:5a	(Unknown)
-172.17.103.189	4a:96:5f:c3:e6:3b	(Unknown)
-172.17.103.186	52:21:d2:2b:94:3d	(Unknown)
-172.17.103.132	fe:fb:f1:d4:e8:24	(Unknown) (DUP: 2)
-172.17.103.214	f8:89:d2:b2:65:0b	(Unknown)
-172.17.103.218	b8:ac:6f:1a:57:96	Dell Inc
-172.17.103.220	60:f2:62:ad:7a:64	(Unknown)
+172.17.103.124	9e:0d:e6:f6:9a:fe	(Unknown: locally administered)
+172.17.103.169	a2:dc:c6:3c:8a:90	(Unknown: locally administered)
+172.17.103.173	4a:4f:40:38:9b:86	(Unknown: locally administered)
+172.17.103.137	c6:1e:a7:b9:01:07	(Unknown: locally administered)
+172.17.103.165	16:e2:71:34:a9:4b	(Unknown: locally administered)
+172.17.103.140	a6:2a:ca:9f:bb:5a	(Unknown: locally administered)
+172.17.103.131	96:51:cd:56:3f:23	(Unknown: locally administered)
+172.17.103.132	fe:fb:f1:d4:e8:24	(Unknown: locally administered) (DUP: 2)
+172.17.103.122	d6:97:3c:87:15:d4	(Unknown: locally administered)
+172.17.103.202	7a:b0:70:85:49:3d	(Unknown: locally administered)
+172.17.103.206	42:0f:c3:1a:d2:c7	(Unknown: locally administered)
+172.17.103.210	34:5a:60:1a:9b:c2	(Unknown)
+172.17.103.204	7a:cf:ea:61:e3:f0	(Unknown: locally administered)
+172.17.103.176	86:cb:a0:dc:d9:84	(Unknown: locally administered)
 172.17.103.229	34:5a:60:1a:a1:61	(Unknown)
-172.17.103.190	7a:e2:ce:12:df:ec	(Unknown)
-172.17.103.235	fa:c3:94:26:3b:8f	(Unknown)
-172.17.103.231	4a:a0:6a:9d:72:ed	(Unknown)
-172.17.103.246	00:25:64:ba:04:4c	Dell Inc.
-172.17.103.193	32:28:bf:f1:ac:bc	(Unknown)
-172.17.103.203	3a:71:5a:9c:dc:7b	(Unknown)
-172.17.103.225	0e:a6:ed:c6:0d:07	(Unknown)
-172.17.103.230	f6:8f:27:be:34:12	(Unknown)
-172.17.103.227	a6:46:e3:9d:2c:a2	(Unknown)
-172.17.103.228	12:4d:5d:00:ef:d1	(Unknown)
-172.17.103.206	42:0f:c3:1a:d2:c7	(Unknown)
-172.17.103.199	1a:9e:2b:96:ad:99	(Unknown)
-172.17.103.239	be:6a:3c:7c:56:7d	(Unknown)
-172.17.103.219	9a:8c:fd:ed:9e:a2	(Unknown)
-172.17.103.201	3e:cd:62:dc:75:92	(Unknown)
-172.17.103.128	48:8a:e8:28:90:fb	(Unknown)
-172.17.103.243	42:b0:58:92:be:be	(Unknown)
+172.17.103.203	3a:71:5a:9c:dc:7b	(Unknown: locally administered)
+172.17.103.191	fe:ae:63:d9:1c:3e	(Unknown: locally administered)
+172.17.103.190	7a:e2:ce:12:df:ec	(Unknown: locally administered)
+172.17.103.198	a2:57:de:82:fb:0c	(Unknown: locally administered)
+172.17.103.230	f6:8f:27:be:34:12	(Unknown: locally administered)
+172.17.103.225	0e:a6:ed:c6:0d:07	(Unknown: locally administered)
+172.17.103.236	ee:85:16:85:47:95	(Unknown: locally administered)
 172.17.103.238	50:2f:bb:e9:b4:00	(Unknown)
-172.17.103.181	76:74:59:33:de:92	(Unknown)
+172.17.103.235	fa:c3:94:26:3b:8f	(Unknown: locally administered)
+172.17.103.227	a6:46:e3:9d:2c:a2	(Unknown: locally administered)
+172.17.103.192	e2:97:48:96:8d:f9	(Unknown: locally administered)
+172.17.103.231	4a:a0:6a:9d:72:ed	(Unknown: locally administered)
+172.17.103.181	76:74:59:33:de:92	(Unknown: locally administered)
+172.17.103.220	60:f2:62:ad:7a:64	Intel Corporate
+172.17.103.139	9a:13:9d:53:f5:e6	(Unknown: locally administered)
+172.17.103.216	16:ba:b7:93:8c:be	(Unknown: locally administered)
+172.17.103.219	9a:8c:fd:ed:9e:a2	(Unknown: locally administered)
+172.17.103.175	fa:d2:a6:dd:d2:e5	(Unknown: locally administered)
 
 43 packets received by filter, 0 packets dropped by kernel
-Ending arp-scan 1.9: 512 hosts scanned in 3.403 seconds (150.46 hosts/sec). 43 responded
+Ending arp-scan 1.10.0: 512 hosts scanned in 2.979 seconds (171.87 hosts/sec). 42 responded

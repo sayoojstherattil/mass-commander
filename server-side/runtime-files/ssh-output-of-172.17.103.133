@@ -1,3 +1,1 @@
-Permission denied, please try again.
-Permission denied, please try again.
-root@172.17.103.133: Permission denied (password).
+Unable to negotiate with 172.17.103.133 port 22: no matching host key type found. Their offer: ssh-rsa
