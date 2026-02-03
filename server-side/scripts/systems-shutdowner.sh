@@ -8,3 +8,5 @@ commands-for-clients-to-run.sh "echo -n '1..'"
 commands-for-clients-to-run.sh "sleep 1"
 
 commands-for-clients-to-run.sh "systemctl poweroff"
+
+commander.sh

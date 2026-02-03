@@ -1,4 +1,10 @@
 set -e
-apt install -y obs-studio
+echo -n 'Shutting down in 3..'
+sleep 1
+echo -n '2..'
+sleep 1
+echo -n '1..'
+sleep 1
+systemctl poweroff
 echo
 echo DONE!
