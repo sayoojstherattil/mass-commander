@@ -31,6 +31,9 @@ ip_addresses_finder() {
 	cat $runtime_files_dir/arp-scan-unwanted-lines-deleted | awk -F' ' '{print $1}' > $runtime_files_dir/ip-address-pool 
 }
 
+commands-for-clients-to-run.sh "echo"
+commands-for-clients-to-run.sh "echo DONE!"
+
 cp $runtime_files_dir/commands-to-run-of-client /srv/sftpuser/data
 
 ip_addresses_finder

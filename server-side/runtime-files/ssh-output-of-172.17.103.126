@@ -1,2 +1,1 @@
-Identity added: /root/.ssh/sftp-server (/root/.ssh/sftp-server)
-Connected to 172.17.103.163.
+ssh: connect to host 172.17.103.126 port 22: Connection refused

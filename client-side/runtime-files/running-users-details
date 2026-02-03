@@ -1,0 +1,1 @@
+user     :1       :1               15:27   ?xdm?  13.36s  0.00s /usr/lib/gdm3/gdm-x-session --run-script env GNOME_SHELL_SESSION_MODE=ubuntu gnome-session --session=ubuntu

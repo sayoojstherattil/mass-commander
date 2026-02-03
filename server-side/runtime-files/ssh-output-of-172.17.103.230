@@ -1,1 +1,1 @@
-Unable to negotiate with 172.17.103.230 port 22: no matching host key type found. Their offer: ssh-rsa
+ssh: connect to host 172.17.103.230 port 22: Connection refused

@@ -97,7 +97,7 @@ elif [ "$user_choice" = "install_packages" ]; then
 	packages-installer.sh
 elif [ "$user_choice" = "remove_packages" ]; then
 	packages-remover.sh
-elif [ "$user_choice" = "upgrade_packages" ]
+elif [ "$user_choice" = "upgrade_packages" ]; then
 	packages-upgrader.sh
 elif [ "$user_choice" = "custom_commanding" ]; then
 	custom-commander.sh

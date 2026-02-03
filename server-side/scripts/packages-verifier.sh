@@ -22,7 +22,7 @@ packages_verifier() {
 	echo
 	while read package_name; do
 		apt search $package_name >> $runtime_files_dir/apt-search-output 2>/dev/null
-		grep -qe "$package_name/" $runtime_files_dir/apt-search-output
+		grep -qe "^$package_name/" $runtime_files_dir/apt-search-output
 
 		if [ $? = 0 ]; then
 			echo 0 > $runtime_files_dir/status

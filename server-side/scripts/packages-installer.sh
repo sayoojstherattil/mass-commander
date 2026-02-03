@@ -101,21 +101,17 @@ snap_package_fetcher() {
 	echo
 }
 
-user_inputer() {
-	echo "enter the names of packages:"
-
-	while read package_name; do 
-		echo $package_name >> $runtime_files_dir/packages-names-given-by-user
-	done
-}
-
 
 # main
-user_inputer
 packages-verifier.sh
 
+status=$(cat $runtime_files_dir/status)
 
-if [ $snap_package_existance = 1 ]; then
+if [ $status = "1" ]; then
+	exit 1
+fi
+
+if [ -f $runtime_files_dir/snap-packages ]; then
 	snap_package_fetcher
 fi
 
