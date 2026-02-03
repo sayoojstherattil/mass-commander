@@ -37,4 +37,8 @@ commands-for-clients-to-run.sh "echo DONE!"
 cp $runtime_files_dir/commands-to-run-of-client /srv/sftpuser/data
 
 ip_addresses_finder
+
+eval $(ssh-agent)
+ssh-add ${clients_accesing_private_key}
+
 commander
