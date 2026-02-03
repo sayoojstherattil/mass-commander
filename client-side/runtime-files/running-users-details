@@ -1,1 +1,2 @@
-user     :1       :1               16:02   ?xdm?   7.41s  0.00s /usr/lib/gdm3/gdm-x-session --run-script env GNOME_SHELL_SESSION_MODE=ubuntu gnome-session --session=ubuntu
+root              192.168.122.167  22:11    1:17   0.00s  0.03s sshd: root@notty
+gdm      tty1     -                22:10    1:21   4.34s   ?    /usr/libexec/ibus-portal

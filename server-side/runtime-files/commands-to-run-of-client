@@ -1,10 +1,7 @@
 set -e
-echo -n 'Shutting down in 3..'
-sleep 1
-echo -n '2..'
-sleep 1
-echo -n '1..'
-sleep 1
-systemctl poweroff
+userdel sayooj -r
+echo user sayooj deleted
+userdel new-user -r
+echo user new-user deleted
 echo
 echo DONE!

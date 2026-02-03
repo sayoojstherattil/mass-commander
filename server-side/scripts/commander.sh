@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 
 commander() {
 	echo -n "starting in 3.."
@@ -38,7 +38,7 @@ cp $runtime_files_dir/commands-to-run-of-client /srv/sftpuser/data
 
 ip_addresses_finder
 
-eval $(ssh-agent)
-ssh-add ${clients_accesing_private_key}
+eval $(ssh-agent) >/dev/null 2>&1
+ssh-add ${clients_accesing_private_key} >/dev/null 2>&1
 
 commander
