@@ -7,14 +7,14 @@ export sftp_username="sftpuser"
 perm_ip_addr_with_sub_mask=$(cat $permanent_files_dir/permanent-ip-address-with-subnet-mask)
 export sftp_server_ip=$(echo $perm_ip_addr_with_sub_mask | awk -F'/' '{print $1}')
 export sftp_directory="/data"
-export sftp_accessing_private_key_name="id_rsa"
+export sftp_accessing_private_key_name="sftp-server"
 
 one_doing_remover() {
-	while read username; do
-		if [ -f /home/$username/one-doing ]; then
-			rm /home/$username/one-doing
-		fi
-	done<$runtime_files_dir/running-usernames
+	ls /home > $runtime_files_dir/home-contents
+
+	while read content; do
+		su - $content -c 'rm one-doing'
+	done<$runtime_files_dir/home-contents
 }
 
 running_users_finder() {
