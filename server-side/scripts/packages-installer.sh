@@ -3,6 +3,9 @@
 snap_packages_install_command_generator() {
 	commands-for-clients-to-run.sh "cd $runtime_files_dir_of_client"
 
+
+	commands-for-clients-to-run.sh "echo installing snap $snap_package"
+
 	while read snap_package; do
 		commands-for-clients-to-run.sh "snap install $snap_package"
 	done<$runtime_files_dir/installable-snap-packages
@@ -57,6 +60,8 @@ commands_generator() {
 	fi
 
 	if [ -f $runtime_files_dir/apt-packages ]; then
+		commands-for-clients-to-run.sh "echo installing $apt_package_name"
+
 		while read apt_package_name; do
 			commands-for-clients-to-run.sh "apt update"
 			commands-for-clients-to-run.sh "apt install -y $apt_package_name"

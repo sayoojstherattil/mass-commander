@@ -1,7 +1,8 @@
 set -e
-userdel sayooj -r
-echo user sayooj deleted
-userdel new-user -r
-echo user new-user deleted
+echo installing 
+apt update
+apt install -y vlc
+apt update
+apt install -y vim
 echo
 echo DONE!

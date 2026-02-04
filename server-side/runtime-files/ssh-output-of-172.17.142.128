@@ -1,4 +1,5 @@
-Identity added: /root/.ssh/sftp-server (root@ubuntu2)
-Connected to 192.168.122.167.
+Identity added: /root/.ssh/sftp-server (root@box)
+Connected to 172.17.142.254.
 su: user command-output does not exist or the user entry does not contain all the required fields
 su: user opener.sh does not exist or the user entry does not contain all the required fields
+rm: cannot remove 'one-doing': No such file or directory
