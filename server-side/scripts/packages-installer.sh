@@ -6,8 +6,7 @@ snap_packages_install_command_generator() {
 
 	commands-for-clients-to-run.sh "echo installing snap $snap_package"
 
-	while read snap_package; do
-		commands-for-clients-to-run.sh "snap install $snap_package"
+	while read snap_package; do commands-for-clients-to-run.sh "snap install $snap_package"
 	done<$runtime_files_dir/installable-snap-packages
 
 	commands-for-clients-to-run.sh "cd - >/dev/null"
@@ -45,25 +44,6 @@ snap_packages_distinguisher() {
 			echo "$snap_package" >> $runtime_files_dir/installable-snap-packages
 		fi
 	done<$runtime_files_dir/actual-names-of-snap-packages
-}
-
-commands_generator() {
-	if [ -f $runtime_files_dir/snap-packages ]; then
-		no_of_lines_in_snap_package_names_file=$(wc -l $runtime_files_dir/snap-packages | awk -F' ' '{print $1}')
-
-		if [ $no_of_lines_in_snap_package_names_file != 0 ]; then
-			snap_packages_distinguisher
-			snap_packages_fetching_command_generator
-			snap_packages_acknowledge_command_generator
-			snap_packages_install_command_generator
-		fi
-	fi
-
-	if [ -f $runtime_files_dir/apt-packages ]; then
-		commands-for-clients-to-run.sh "apt update"
-		commands-for-clients-to-run.sh "apt install -y $(cat $runtime_files_dir/apt-packages | tr '\n' ' ')"
-
-	fi
 }
 
 installable_and_assert_snap_packages_distinguisher() {
@@ -116,10 +96,18 @@ fi
 
 if [ -f $runtime_files_dir/snap-packages ]; then
 	snap_package_fetcher
+	snap_packages_in_ftp_directory_placer
+	sftp_directory_files_permission_changer
+
+	snap_packages_distinguisher
+	snap_packages_fetching_command_generator
+	snap_packages_acknowledge_command_generator
+	snap_packages_install_command_generator
 fi
 
-snap_packages_in_ftp_directory_placer
-sftp_directory_files_permission_changer
-commands_generator
+if [ -f $runtime_files_dir/apt-packages ]; then
+	commands-for-clients-to-run.sh "apt update"
+	commands-for-clients-to-run.sh "apt install -y $(cat $runtime_files_dir/apt-packages | tr '\n' ' ')"
+fi
 
 commander.sh
