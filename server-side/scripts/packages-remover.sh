@@ -15,7 +15,7 @@ fi
 # remove apt if any
 #----------------------------------------------------------------------
 if [ -f $runtime_files_dir/apt-packages ]; then
-	commands-for-clients-to-run.sh "apt install -y $(cat $runtime_files_dir/apt-packages | tr '\n' ' ')"
+	commands-for-clients-to-run.sh "apt remove -y $(cat $runtime_files_dir/apt-packages | tr '\n' ' ')"
 fi
 
 #----------------------------------------------------------------------
