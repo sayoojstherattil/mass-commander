@@ -60,12 +60,9 @@ commands_generator() {
 	fi
 
 	if [ -f $runtime_files_dir/apt-packages ]; then
-		commands-for-clients-to-run.sh "echo installing $apt_package_name"
+		commands-for-clients-to-run.sh "apt update"
+		commands-for-clients-to-run.sh "apt install -y $(cat $runtime_files_dir/apt-packages | tr '\n' ' ')"
 
-		while read apt_package_name; do
-			commands-for-clients-to-run.sh "apt update"
-			commands-for-clients-to-run.sh "apt install -y $apt_package_name"
-		done<$runtime_files_dir/apt-packages
 	fi
 }
 
