@@ -10,11 +10,9 @@ export sftp_directory="/data"
 export sftp_accessing_private_key_name="sftp-server"
 
 one_doing_remover() {
-	ls /home > $runtime_files_dir/home-contents
-
-	while read content; do
-		su - $content -c 'rm one-doing'
-	done<$runtime_files_dir/home-contents
+	while read username; do
+		su - $username -c 'rm one-doing'
+	done<$runtime_files_dir/running-usernames
 }
 
 running_users_finder() {
