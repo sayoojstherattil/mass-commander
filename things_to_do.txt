@@ -1,0 +1,3 @@
+to do in script file
+ssh keygen
+sftp 
