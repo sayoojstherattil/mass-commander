@@ -1,46 +1,60 @@
+export server_public_key="<replace_with_server_server_public_key>"
+export client_private_key="<replace_with_client_server_public_key>"
+export new_username="pluser"
+export new_user_password="password"
+export openssh_server_package_name="openssh-server"
+
 checker() {
 	if [ $? != 0 ]; then
 		exit 1	
 	fi
 }
 
-export public_key="ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL4IZGz0d1cW4I+uF9f3agvSYRsofcj1S5clHgIVQPD4 root@node0"
+sudo_privilege_ensurer() {
+	echo 'enter sudo $new_user_password for setting up client machine. ensure that the user currently logged in is in sudoers group'
+	sudo whoami >/dev/null
+	echo "successfully became root user"
+}
 
-echo "$password" | sudo -S echo "i am $USER now"
-checker
+display_number_save() {
+	(echo $DISPLAY | sudo tee /root/display_number) >/dev/null
+}
 
-echo $DISPLAY | sudo tee /root/display_number
 
-grep /etc/passwd -e "pluser"
-if [ $? = 0 ]; then
-	echo "found pluser"
-else
-	echo "no pluser, adding...."
-	sudo useradd -m -s /bin/bash pluser -G sudo
-	checker
-	echo "successfully added pluser user"
-fi
+server_root_access_setup() {
+#----------------------------------------------------------------
+# ensure root login parameter is set
+#----------------------------------------------------------------
+	echo "making root login possible..."
 
-echo "just confirming password..."
-echo 'pluser:password' | sudo chpasswd
-checker
+	grep /etc/ssh/ssh_config -e '^PermitRootLogin prohibit-$new_user_password'
+       
+	if [ $? -ne 0 ]; then
+		echo "PermitRootLogin prohibit-password" | sudo tee -a /etc/ssh/sshd_config
+		checker
+	fi
 
-if grep /etc/ssh/ssh_config -e '^PermitRootLogin prohibit-password'; then
-	echo "ssh configurations already set"
-else
-	echo "ssh configurations not set"
-	echo "setting up ssh"
-	echo "PermitRootLogin prohibit-password" | sudo tee -a /etc/ssh/sshd_config
-	checker
+#----------------------------------------------------------------
+# adding pub key for root login
+#----------------------------------------------------------------
+	sudo [ -d /root/.ssh ] || sudo mkdir /root/.ssh
+	echo "$server_public_key" | sudo tee /root/.ssh/authorized_keys
+
+#----------------------------------------------------------------
+# restart ssh service
+#----------------------------------------------------------------
 	sudo systemctl restart ssh
 	checker
+}
 
-	sudo [ -d /root/.ssh ] || sudo mkdir /root/.ssh
-	echo "$public_key" | sudo tee /root/.ssh/authorized_keys
-fi
+ssh_server_package_installation() {
+	sudo su - root -c "apt update && apt install --fix-broken --fix-missing $openssh_server_package_name -y"
+	checker
+}
 
-sudo su - root -c 'apt update && apt install --fix-broken --fix-missing openssh-server -y'
-checker
+sudo_privilege_ensurer
+display_number_save
+server_root_access_setup
+ssh_server_package_installation
 
-clear
-echo "everything set!"
+echo "more things will be done by the server. you can ensure everything is set by seeing this machine reboot. please wait...."
