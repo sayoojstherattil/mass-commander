@@ -33,7 +33,7 @@ export permanent_files_dir="$mass_commander_base_dir/permanent-files"
 
 export PATH="$PATH:$mass_commander_base_dir/scripts"
 
-export clients_accesing_private_key="/root/.ssh/clients"
+export clients_accesing_private_key="/root/.ssh/key_for_accessing_client_machines"
 
 directory_ensurer $runtime_files_dir
 directory_ensurer $runtime_files_dir/snap-packages-fetching-area
