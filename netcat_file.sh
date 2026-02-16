@@ -1,9 +1,3 @@
-export server_public_key="<replace_with_server_server_public_key>"
-export client_private_key="<replace_with_client_server_public_key>"
-export new_username="pluser"
-export new_user_password="password"
-export openssh_server_package_name="openssh-server"
-
 checker() {
 	if [ $? != 0 ]; then
 		exit 1	
@@ -11,7 +5,6 @@ checker() {
 }
 
 sudo_privilege_ensurer() {
-	echo 'enter sudo $new_user_password for setting up client machine. ensure that the user currently logged in is in sudoers group'
 	sudo whoami >/dev/null
 	echo "successfully became root user"
 }

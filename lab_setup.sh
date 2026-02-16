@@ -5,14 +5,36 @@
 #----------------------------------------------------------------
 export working_dir="/root/clients_setup"
 export netcat_file_loc="$working_dir/netcat_file.sh"
+export mass_commander_server_dir_loc="$working_dir/mass-commander/server-side"
+export mass_commander_client_dir_loc="$working_dir/mass-commander/client-side"
 export openssh_server_package_name="openssh-server"
+
+#----------------------------------------------------------------
+# new user details
+#----------------------------------------------------------------
+
+shell_for_new_user="/bin/bash"
+new_user_username="pluser"
+new_user_password="password"
 
 
 prompt() {
 	message="$1"
 
-	echo -n "$message"
+	echo -n "$message [press enter to continue]"
 	read tmp
+}
+
+necessary_files_ensurer() {
+#----------------------------------------------------------------
+# netcat file
+#----------------------------------------------------------------
+	[ -f $netcat_file_loc ] || echo 'couldnt find the file for netcat' ; exit 1
+
+#----------------------------------------------------------------
+# mass commander folder
+#----------------------------------------------------------------
+	[ -d $mass_commander_server_dir_loc] || echo 'couldnt find mass commander folder' ; exit 1
 }
 
 ssh_keys_generator() {
@@ -27,20 +49,19 @@ sed -i "s|<replace_with_server_public_key>|$public_key|g"
 
 	prompt 'generating keys for client machines to access the sftp server'
 	ssh-keygen -t ed25519 -f /root/.ssh/key_for_accessing_sftp_server -N ""
-
-#----------------------------------------------------------------
-# write the sftp accessing private key to netcat file
-#----------------------------------------------------------------
-private_key=$(cat /root/.ssh/key_for_accessing_sftp_server)
-sed -i "s|<replace_with_client_public_key>|$private_key|g"
 }
 
 server_setup() {
 #----------------------------------------------------------------
 # install arp-scan
 #----------------------------------------------------------------
-
 	apt update; apt install arp-scan -y
+
+#----------------------------------------------------------------
+# setup mass-commander folder
+#----------------------------------------------------------------
+	mkdir /root/mass-commander
+	cp -r $mass_commander_server_dir_loc /root/
 }
 
 sftp_setup() {
@@ -92,10 +113,6 @@ sftp_setup() {
 	systemctl restart ssh
 }
 
-netcat_file_ensurer() {
-	[ -f $netcat_file_loc ] || echo 'couldnt find the file for netcat' ; exit 1
-}
-
 netcat_starter() {
 #----------------------------------------------------------------
 # get required details
@@ -127,19 +144,62 @@ netcat_starter() {
 
 ip_address_fetcher() {
 		arp-scan ${server_ip}/${subnet_mask} >$working_dir/arp_scan_output
+
+	last_line_number=$(wc -l $working_dir/arp_scan_output | awk -F' ' '{print $1}')
+	line_just_below_result=$(($last_line_number - 2))
+
+	cat $working_dir/arp_scan_output | sed "${line_just_below_result},${last_line_number}d" | sed '1,2d' > $working_dir/arp_scan_unwanted_lines_deleted
+	cat $working_dir/arp_scan_unwanted_lines_deleted | awk -F' ' '{print $1}' > $working_dir/ip_address_pool 
 }
 
-new_user_creator() {
-	sudo useradd -m -s /bin/bash $new_username -G sudo
-	echo "$new_username:$new_user_password" | sudo chpasswd
+
+client_setup() {
+	while read client_ip_address; do
+#----------------------------------------------------------------
+# sftp access setup
+#----------------------------------------------------------------
+		ssh root@${client_ip_address} "mkdir -p /root/.ssh"
+		scp /root/.ssh/key_for_accessing_sftp_server root@${client_ip_address}:/root/.ssh
+
+#----------------------------------------------------------------
+# mass commander client side setup
+#----------------------------------------------------------------
+
+#----------------------------------------------------------------
+# send, place and configure files appropriately
+#----------------------------------------------------------------
+		ssh root@${client_ip_address} "mkdir /root/mass-commander"
+		scp -r $mass_commander_client_dir_loc root@${client_ip_address}:/root/mass-commander
+
+		mv /root/mass-commander/client-side/scripts/opener.sh /home
+
+#----------------------------------------------------------------
+# user setup
+#----------------------------------------------------------------
+		ssh root@${client_ip_address} "useradd -m -s $shell_for_new_user $new_user_username"
+		ssh root@${client_ip_address} "echo '$new_user_username:$new_user_password' | chpasswd"
+
+		cat /root/mass-commander/client-side/scripts/profile-last-part | tee -a /home/
+
+	done<$working_dir/ip_address_pool
 }
 
+clients_rebooter() {
+	while read client_ip_address; do
+		ssh root@${client_ip_address} "reboot"
+	done<$working_dir/ip_address_pool
+}
+
+
+necessary_files_ensurer
 ssh_keys_generator
 server_setup
 sftp_setup
-netcat_file_ensurer
 netcat_starter
 
+#----------------------------------------------------------------
+# post netcat
+#----------------------------------------------------------------
 ip_address_fetcher
-client_sftp_access_setup
-new_user_creator
+client_setup
+clients_rebooter
