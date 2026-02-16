@@ -13,10 +13,10 @@ export openssh_server_package_name="openssh-server"
 # new user details
 #----------------------------------------------------------------
 
-shell_for_new_user="/bin/bash"
-new_user_username="pluser"
-new_user_password="password"
-
+export shell_for_new_user="/bin/bash"
+export new_user_username="pluser"
+export new_user_password="password"
+export user_profile_loc="/home/$new_user_username/.profile"
 
 prompt() {
 	message="$1"
@@ -162,7 +162,9 @@ client_setup() {
 		scp /root/.ssh/key_for_accessing_sftp_server root@${client_ip_address}:/root/.ssh
 
 #----------------------------------------------------------------
+#----------------------------------------------------------------
 # mass commander client side setup
+#----------------------------------------------------------------
 #----------------------------------------------------------------
 
 #----------------------------------------------------------------
@@ -171,7 +173,9 @@ client_setup() {
 		ssh root@${client_ip_address} "mkdir /root/mass-commander"
 		scp -r $mass_commander_client_dir_loc root@${client_ip_address}:/root/mass-commander
 
-		mv /root/mass-commander/client-side/scripts/opener.sh /home
+		ssh root@${client_ip_address} "mv /root/mass-commander/client-side/scripts/opener.sh /home"
+		display_number=$(cat /root/display_number | tr '\n' '')
+		ssh root@${client_ip_address} "sed -i "s/<replace_with_display_number>/$display_number" /home/opener.sh"
 
 #----------------------------------------------------------------
 # user setup
@@ -179,9 +183,15 @@ client_setup() {
 		ssh root@${client_ip_address} "useradd -m -s $shell_for_new_user $new_user_username"
 		ssh root@${client_ip_address} "echo '$new_user_username:$new_user_password' | chpasswd"
 
-		cat /root/mass-commander/client-side/scripts/profile-last-part | tee -a /home/
-
+		cat /root/mass-commander/client-side/scripts/profile-last-part | tee -a $user_profile_loc
+		chown $new_user_username:$new_user_username $user_profile_loc
 	done<$working_dir/ip_address_pool
+
+#----------------------------------------------------------------
+# clear unwanted files
+#----------------------------------------------------------------
+	rm /root/mass-commander/client-side/opener.sh
+	rm /root/mass-commander/client-side/scripts/profile-last-part
 }
 
 clients_rebooter() {

@@ -4,11 +4,6 @@ checker() {
 	fi
 }
 
-sudo_privilege_ensurer() {
-	sudo whoami >/dev/null
-	echo "successfully became root user"
-}
-
 display_number_save() {
 	(echo $DISPLAY | sudo tee /root/display_number) >/dev/null
 }
@@ -20,7 +15,7 @@ server_root_access_setup() {
 #----------------------------------------------------------------
 	echo "making root login possible..."
 
-	grep /etc/ssh/ssh_config -e '^PermitRootLogin prohibit-$new_user_password'
+	grep /etc/ssh/ssh_config -e '^PermitRootLogin prohibit-password'
        
 	if [ $? -ne 0 ]; then
 		echo "PermitRootLogin prohibit-password" | sudo tee -a /etc/ssh/sshd_config
@@ -45,7 +40,6 @@ ssh_server_package_installation() {
 	checker
 }
 
-sudo_privilege_ensurer
 display_number_save
 server_root_access_setup
 ssh_server_package_installation
