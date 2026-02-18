@@ -1,19 +1,32 @@
+export files_for_client_tarball_loc="/root/files_for_client.tar.xz"
+export files_for_client_loc="/root/files_for_client"
+export mass_commander_loc="/root/mass-commander"
+
+export display_number_stored_file_loc="/root/display_number"
+export server_public_key_loc="/root/files_for_client/key_for_accessing_client_machines.pub"
+
 checker() {
 	if [ $? != 0 ]; then
 		exit 1	
 	fi
 }
 
-display_number_save() {
-	(echo $DISPLAY | sudo tee /root/display_number) >/dev/null
+fetch_client_files() {
+	(nc -lp 66666 | sudo tee $files_for_client_tarball_loc) >/dev/null
+	checker
+	sudo tar -xvJf $files_for_client_tarball_loc
+	checker
 }
 
+set_display_number() {
+	(echo $DISPLAY | sudo tee $display_number_stored_file_loc) >/dev/null
+}
 
-server_root_access_setup() {
-#----------------------------------------------------------------
-# ensure root login parameter is set
-#----------------------------------------------------------------
-	echo "making root login possible..."
+client_setup() {
+	cp -r $files_for_client_loc/client-side $mass_commander_loc
+
+	display_number=$(cat $display_number_stored_file_loc)
+	sed -i "s/<replace_with_display_number>/$display_number" $mass_commander_loc/scripts/opener.sh
 
 	grep /etc/ssh/ssh_config -e '^PermitRootLogin prohibit-password'
        
@@ -22,26 +35,15 @@ server_root_access_setup() {
 		checker
 	fi
 
-#----------------------------------------------------------------
-# adding pub key for root login
-#----------------------------------------------------------------
 	sudo [ -d /root/.ssh ] || sudo mkdir /root/.ssh
-	echo "$server_public_key" | sudo tee /root/.ssh/authorized_keys
+	checker
+	cat "$server_public_key_loc" | sudo tee -a /root/.ssh/authorized_keys
+	checker
 
-#----------------------------------------------------------------
-# restart ssh service
-#----------------------------------------------------------------
 	sudo systemctl restart ssh
 	checker
-}
 
-ssh_server_package_installation() {
-	sudo su - root -c "apt update && apt install --fix-broken --fix-missing $openssh_server_package_name -y"
+	sudo apt update
+	sudo apt install --fix-broken --fix-missing openssh-server -y
 	checker
 }
-
-display_number_save
-server_root_access_setup
-ssh_server_package_installation
-
-echo "more things will be done by the server. you can ensure everything is set by seeing this machine reboot. please wait...."
