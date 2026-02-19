@@ -111,11 +111,11 @@ clients_setup() {
 	ssh-add $key_for_accessing_client_machines_loc
 	while read client_ip_address; do
 		scp -o StrictHostKeyChecking=no  $key_for_accessing_sftp_server_loc $client_ip_address:.ssh
-		scp $mass_commander_dir_loc/client-side $client_ip_address:mass-commander
+		scp -r $mass_commander_dir_loc/client-side $client_ip_address:
 	done<$working_dir/ip_address_pool
 
 	while read client_ip_address; do
-		ssh -o StrictHostKeyChecking=no $client_ip_address "mv /root/mass-commander/scripts/opener.sh /home;cat /root/mass-commander/scripts/profile-last-part | $new_user_profile_loc;chown $new_user_username:$new_user_username $new_user_profile_loc;mv /root/display_number /home/display_number_of_this_machine; reboot" &
+		ssh -o StrictHostKeyChecking=no $client_ip_address "mv /root/client-side /root/mass-commander ; mv /root/mass-commander/scripts/opener.sh /home; useradd -m -s /bin/bash $new_user_username ; echo '$new_user_username:$new_user_password' | chpasswd ; cat /root/mass-commander/scripts/profile-last-part | tee -a $new_user_profile_loc;chown $new_user_username:$new_user_username $new_user_profile_loc;mv /root/display_number /home/display_number_of_this_machine; reboot" &
 	done<$working_dir/ip_address_pool
 }
 
