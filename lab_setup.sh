@@ -110,7 +110,7 @@ clients_setup() {
 	eval $(ssh-agent)
 	ssh-add $key_for_accessing_client_machines_loc
 	while read client_ip_address; do
-		ssh -o StrictHostKeyChecking=no $client_ip_address "scp $key_for_accessing_sftp_server_loc -o StrictHostKeyChecking=no $client_ip_address:.ssh;scp $mass_commander_dir_loc/client-side $client_ip_address:mass-commander;mv /root/mass-commander/scripts/opener.sh /home;cat /root/mass-commander/scripts/profile-last-part | $new_user_profile_loc;chown $new_user_username:$new_user_username $new_user_profile_loc;mv /root/display_number /root/mass-commander/display_number" &
+		ssh -o StrictHostKeyChecking=no $client_ip_address "scp $key_for_accessing_sftp_server_loc -o StrictHostKeyChecking=no $client_ip_address:.ssh;scp $mass_commander_dir_loc/client-side $client_ip_address:mass-commander;mv /root/mass-commander/scripts/opener.sh /home;cat /root/mass-commander/scripts/profile-last-part | $new_user_profile_loc;chown $new_user_username:$new_user_username $new_user_profile_loc;mv /root/display_number /home/display_number_of_this_machine" &
 	done<$working_dir/ip_address_pool
 }
 
