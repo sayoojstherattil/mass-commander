@@ -28,3 +28,7 @@ root_ssh_setup() {
 
 save_display_number
 root_ssh_setup
+
+echo 'please wait for the server to do the further configurations...'
+echo
+echo 'after configuration, the system will reboot'
