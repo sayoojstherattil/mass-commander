@@ -1,3 +1,0 @@
-to do in script file
-use -q for netcat 
-send private key to clients
