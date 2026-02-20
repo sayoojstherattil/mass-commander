@@ -10,6 +10,7 @@ empty_file_remover() {
 
 packages_distinguisher() {
 	while read package_name; do
+		apt search $package_name >$runtime_files_dir/apt-search-output
 		snap_finder_output=$(grep -e "$package_name/" $runtime_files_dir/apt-search-output -A1 | grep -w snap | awk -F'-> ' '{print $2}' | awk -F' snap' '{print $1}')
 
 		if [ "$snap_finder_output" != "" ]; then
@@ -38,8 +39,7 @@ packages_verifier() {
 	echo "verifying package names..."
 	echo
 	while read package_name; do
-		apt search $package_name >> $runtime_files_dir/apt-search-output 2>/dev/null
-		grep -qe "^$package_name/" $runtime_files_dir/apt-search-output
+		apt-cache show $package_name >/dev/null
 
 		if [ $? = 0 ]; then
 			echo 0 > $runtime_files_dir/status

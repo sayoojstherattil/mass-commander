@@ -46,7 +46,14 @@ ssh_keys_generator() {
 server_setup() {
 	apt update; apt install arp-scan openssh-server -y
 
+	echo "enter server ip without subnet"
+	read server_ip
+
+	echo "enter subnet mask"
+	read subnet_mask
+
 	cp -r $mass_commander_dir_loc/server-side /root/mass-commander
+	echo "${server_ip}/${subnet_mask}" | tee /root/mass-commander/permanent-files/permanent-ip-address-with-subnet-mask
 
 	groupadd sftpgroup
 	useradd -G sftpgroup -d /srv/sftpuser -s /sbin/nologin sftpuser
@@ -76,18 +83,12 @@ server_setup() {
 	echo -e "\tForceCommand internal-sftp" | tee -a /etc/ssh/sshd_config
 
 	mkdir /srv/sftpuser/.ssh -p
-	(cat $key_for_accessing_sftp_server_loc | tee /srv/sftpuser/.ssh/authorized_keys) >/dev/null
+	(cat ${key_for_accessing_sftp_server_loc}.pub | tee /srv/sftpuser/.ssh/authorized_keys) >/dev/null
 
 	systemctl restart ssh
 }
 
 clients_setup() {
-	echo "enter server ip without subnet"
-	read server_ip
-
-	echo "enter subnet mask"
-	read subnet_mask
-
 	echo "enter port no to use"
 	read port_no
 
@@ -115,7 +116,7 @@ clients_setup() {
 	done<$working_dir/ip_address_pool
 
 	while read client_ip_address; do
-		ssh -o StrictHostKeyChecking=no $client_ip_address "mv /root/client-side /root/mass-commander ; mv /root/mass-commander/scripts/opener.sh /home; useradd -m -s /bin/bash $new_user_username ; echo '$new_user_username:$new_user_password' | chpasswd ; cat /root/mass-commander/scripts/profile-last-part | tee -a $new_user_profile_loc;chown $new_user_username:$new_user_username $new_user_profile_loc;mv /root/display_number /home/display_number_of_this_machine; reboot" &
+		ssh -o StrictHostKeyChecking=no $client_ip_address "mv /root/client-side /root/mass-commander ; mv /root/mass-commander/scripts/opener.sh /home; echo '$server_ip/$subnet_mask' | tee /root/mass-commander/permanent-files/permanent-ip-address-with-subnet-mask; useradd -m -s /bin/bash $new_user_username ; echo '$new_user_username:$new_user_password' | chpasswd ; cat /root/mass-commander/scripts/profile-last-part | tee -a $new_user_profile_loc;chown $new_user_username:$new_user_username $new_user_profile_loc;mv /root/display_number /home/display_number_of_this_machine; reboot" &
 	done<$working_dir/ip_address_pool
 }
 
