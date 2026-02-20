@@ -1,63 +1,61 @@
 #!/bin/bash
 
-empty_file_remover() {
-		file_loc="$1"
+apt_packages_verification() {
+	echo "enter apt packages names:"
+	while read package_name; do 
+		echo $package_name >> $runtime_files_dir/apt_package_names_given_by_user
+	done
 
-		no_of_lines=$(wc -l "$file_loc" | awk -F' ' '{print $1}')
-
-		[ $no_of_lines -eq 0 ] && rm $file_loc
-}
-
-packages_distinguisher() {
-	while read package_name; do
-		apt search $package_name >$runtime_files_dir/apt-search-output
-		snap_finder_output=$(grep -e "$package_name/" $runtime_files_dir/apt-search-output -A1 | grep -w snap | awk -F'-> ' '{print $2}' | awk -F' snap' '{print $1}')
-
-		if [ "$snap_finder_output" != "" ]; then
-			echo $snap_finder_output >> $runtime_files_dir/snap-packages
-#----------------------------------------------------------------------
-# remove snap-packages file if it doesn't contain anything
-#----------------------------------------------------------------------
-			empty_file_remover "$runtime_files_dir/snap-packages"
-		fi
-	done<$runtime_files_dir/packages-names-given-by-user
-
-	if [ -f $runtime_files_dir/snap-packages ]; then
-		cat $runtime_files_dir/packages-names-given-by-user | grep -vf $runtime_files_dir/snap-packages > $runtime_files_dir/apt-packages
-
-#----------------------------------------------------------------------
-# remove apt-packages file if it doesn't contain anything
-#----------------------------------------------------------------------
-		empty_file_remover "$runtime_files_dir/apt-packages"
-	else
-		cp $runtime_files_dir/packages-names-given-by-user $runtime_files_dir/apt-packages	
-	fi
-}
-
-packages_verifier() {
 	echo
 	echo "verifying package names..."
 	echo
 	while read package_name; do
 		apt-cache show $package_name >/dev/null
 
-		if [ $? = 0 ]; then
+		if [ $? -eq 0 ]; then
 			echo 0 > $runtime_files_dir/status
+			echo "$package_name" | tee -a $runtime_files_dir/verified_apt_package_names
 		else
 			echo "no package $package_name found"
 			echo 1 > $runtime_files_dir/status
+			exit 1
 		fi
-	done<$runtime_files_dir/packages-names-given-by-user
+	done<$runtime_files_dir/apt_package_names_given_by_user
 }
 
-user_inputer() {
-	echo "enter the names of packages:"
-
+snap_packages_verification() {
+	echo "enter snap packages names:"
 	while read package_name; do 
-		echo $package_name >> $runtime_files_dir/packages-names-given-by-user
+		echo $package_name >> $runtime_files_dir/snap_package_names_given_by_user
 	done
+
+	echo
+	echo "verifying package names..."
+	echo
+	while read package_name; do
+		snap info $package_name >/dev/null
+
+		if [ $? -eq 0 ]; then
+			echo 0 > $runtime_files_dir/status
+			echo "$package_name" | tee -a $runtime_files_dir/verified_snap_package_names
+		else
+			echo "no package $package_name found"
+			echo 1 > $runtime_files_dir/status
+			exit 1
+		fi
+	done<$runtime_files_dir/snap_package_names_given_by_user
 }
 
-user_inputer
-packages_verifier
-packages_distinguisher
+
+echo "what kind of package do you wish to install"
+echo "(s)nap"
+echo "(a)pt"
+echo
+echo -ne "s\na\n" > $runtime_files_dir/input-options
+user-input-validator.sh
+user_input=$(cat $runtime_files_dir/user-input)
+if [ "$user_input" = "a" ]; then
+	apt_packages_verification
+elif [ "$user_input" = "s" ]; then
+	snap_packages_verification
+fi

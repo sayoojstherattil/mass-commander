@@ -90,11 +90,11 @@ packages-verifier.sh
 
 status=$(cat $runtime_files_dir/status)
 
-if [ $status = "1" ]; then
+if [ $status -eq 1 ]; then
 	exit 1
 fi
 
-if [ -f $runtime_files_dir/snap-packages ]; then
+if [ -f $runtime_files_dir/verified_snap_package_names ]; then
 	snap_package_fetcher
 	snap_packages_in_ftp_directory_placer
 	sftp_directory_files_permission_changer
@@ -105,9 +105,9 @@ if [ -f $runtime_files_dir/snap-packages ]; then
 	snap_packages_install_command_generator
 fi
 
-if [ -f $runtime_files_dir/apt-packages ]; then
+if [ -f $runtime_files_dir/verified_apt_package_names ]; then
 	commands-for-clients-to-run.sh "apt update"
-	commands-for-clients-to-run.sh "apt install -y $(cat $runtime_files_dir/apt-packages | tr '\n' ' ')"
+	commands-for-clients-to-run.sh "apt install -y $(cat $runtime_files_dir/verified_apt_package_names | tr '\n' ' ')"
 fi
 
 commander.sh
