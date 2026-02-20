@@ -86,6 +86,13 @@ snap_package_fetcher() {
 
 
 # main
+echo "what kind of package do you wish to install"
+echo "(s)nap"
+echo "(a)pt"
+echo
+echo -ne "s\na\n" > $runtime_files_dir/input-options
+user-input-validator.sh
+
 packages-verifier.sh
 
 status=$(cat $runtime_files_dir/status)

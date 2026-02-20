@@ -47,12 +47,6 @@ snap_packages_verification() {
 }
 
 
-echo "what kind of package do you wish to install"
-echo "(s)nap"
-echo "(a)pt"
-echo
-echo -ne "s\na\n" > $runtime_files_dir/input-options
-user-input-validator.sh
 user_input=$(cat $runtime_files_dir/user-input)
 if [ "$user_input" = "a" ]; then
 	apt_packages_verification
