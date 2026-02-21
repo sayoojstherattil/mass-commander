@@ -44,7 +44,7 @@ ssh_keys_generator() {
 
 
 server_setup() {
-	apt update; apt install arp-scan openssh-server -y
+	apt update; apt install arp-scan openssh-server snapd -y
 
 	echo "enter server ip without subnet"
 	read server_ip
@@ -116,7 +116,7 @@ clients_setup() {
 	done<$working_dir/ip_address_pool
 
 	while read client_ip_address; do
-		ssh -o StrictHostKeyChecking=no $client_ip_address "mv /root/client-side /root/mass-commander ; mv /root/mass-commander/scripts/opener.sh /home; echo '$server_ip/$subnet_mask' | tee /root/mass-commander/permanent-files/permanent-ip-address-with-subnet-mask; useradd -m -s /bin/bash $new_user_username ; echo '$new_user_username:$new_user_password' | chpasswd ; cat /root/mass-commander/scripts/profile-last-part | tee -a $new_user_profile_loc;chown $new_user_username:$new_user_username $new_user_profile_loc;mv /root/display_number /home/display_number_of_this_machine; reboot" &
+		ssh -o StrictHostKeyChecking=no $client_ip_address "apt update; apt install snapd -y; mv /root/client-side /root/mass-commander ; mv /root/mass-commander/scripts/opener.sh /home; echo '$server_ip/$subnet_mask' | tee /root/mass-commander/permanent-files/permanent-ip-address-with-subnet-mask; useradd -m -s /bin/bash $new_user_username ; echo '$new_user_username:$new_user_password' | chpasswd ; cat /root/mass-commander/scripts/profile-last-part | tee -a $new_user_profile_loc;chown $new_user_username:$new_user_username $new_user_profile_loc;mv /root/display_number /home/display_number_of_this_machine; reboot" &
 	done<$working_dir/ip_address_pool
 }
 

@@ -38,11 +38,11 @@ snap_packages_fetching_command_generator() {
 	commands-for-clients-to-run.sh "cd $runtime_files_dir_of_client"
 
 	while read installable_snap_package; do
-		commands-for-clients-to-run.sh "sftp $sftp_username@$sftp_server_ip <<< $'get /data/$snap_package'"
+		commands-for-clients-to-run.sh "sftp $sftp_username@$sftp_server_ip <<< $'get /data/$installable_snap_package'"
 	done<$runtime_files_dir/installable_snap_packages
 
 	while read assert_snap_package; do
-		commands-for-clients-to-run.sh "sftp $sftp_username@$sftp_server_ip <<< $'get /data/$snap_package'"
+		commands-for-clients-to-run.sh "sftp $sftp_username@$sftp_server_ip <<< $'get /data/$assert_snap_package'"
 	done<$runtime_files_dir/assert_snap_packages
 
 	commands-for-clients-to-run.sh "cd - >/dev/null"
@@ -51,10 +51,9 @@ snap_packages_fetching_command_generator() {
 snap_packages_acknowledge_command_generator() {
 	commands-for-clients-to-run.sh "cd $runtime_files_dir_of_client"
 
-	commands-for-clients-to-run.sh "echo asserting snap $snap_package"
-
 	while read assert_snap_package; do
-		commands-for-clients-to-run.sh "snap ack $snap_package"
+		commands-for-clients-to-run.sh "echo asserting snap $assert_snap_package"
+		commands-for-clients-to-run.sh "snap ack $assert_snap_package"
 	done<$runtime_files_dir/assert_snap_packages
 
 	commands-for-clients-to-run.sh "cd - >/dev/null"
@@ -63,10 +62,9 @@ snap_packages_acknowledge_command_generator() {
 snap_packages_install_command_generator() {
 	commands-for-clients-to-run.sh "cd $runtime_files_dir_of_client"
 
-	commands-for-clients-to-run.sh "echo installing snap $snap_package"
-
 	while read installable_snap_package; do 
-		commands-for-clients-to-run.sh "snap install $snap_package"
+		commands-for-clients-to-run.sh "echo installing snap $installable_snap_package"
+		commands-for-clients-to-run.sh "snap install $installable_snap_package"
 	done<$runtime_files_dir/installable_snap_packages
 
 	commands-for-clients-to-run.sh "cd - >/dev/null"
