@@ -1,48 +1,20 @@
 #!/bin/bash
 
 actual_normal_users_finder() {
-#----------------------------------------------------------------------
-# save folders in home directory
-#----------------------------------------------------------------------
+	commands-for-clients-to-run.sh "ls /home | tee -a $runtime_files_dir_of_client/home-dir-folders"
 
-	ls /home | tee -a $runtime_files_dir_of_client/home-dir-folders
-
-#----------------------------------------------------------------------
-# compare and use the common with the /etc/shadow to get actual users
-#----------------------------------------------------------------------
-
-	grep -f $runtime_files_dir_of_client/home-dir-folders /etc/shadow | awk -F':' '{print $1}' > $runtime_files_dir_of_client/actual-normal-users
+	commands-for-clients-to-run.sh "grep -f $runtime_files_dir_of_client/home-dir-folders /etc/shadow | awk -F':' '{print $1}' > $runtime_files_dir_of_client/actual-normal-users"
 }
 
 home_dir_clearer() {
-#----------------------------------------------------------------------
-# clear home dir of each users leaving folders specified in the file
-#----------------------------------------------------------------------
+	commands-for-clients-to-run.sh "while read username; do"
+		commands-for-clients-to-run.sh "ls -a /home/$username > $runtime_files_dir_of_client/contents-of-${username}"
+		commands-for-clients-to-run.sh "rm -rf '$(cat $runtime_files_dir_of_client/contents-of-${username} | tr '\n' ' ')'"
 
-#----------------------------------------------------------------------
-# first clear everything
-#----------------------------------------------------------------------
-
-	while read username; do
-#----------------------------------------------------------------------
-# list contents of that user
-#----------------------------------------------------------------------
-
-		ls -a /home/$username > $runtime_files_dir_of_client/contents-of-${username}
-
-#----------------------------------------------------------------------
-# remove all files
-#----------------------------------------------------------------------
-
-		rm -rf "$(cat $runtime_files_dir_of_client/contents-of-${username} | tr '\n' ' ')"
-
-#----------------------------------------------------------------------
-# then create the dirs told in that file
-#----------------------------------------------------------------------
-		while read folder_name; do
-			mkdir /home/$username/$folder_name
-		done<$permanent_files_dir/default-folders
-	done<$runtime_files_dir_of_client/actual-normal-users
+		commands-for-clients-to-run.sh "while read folder_name; do"
+			commands-for-clients-to-run.sh "mkdir /home/$username/$folder_name"
+		commands-for-clients-to-run.sh "done<$permanent_files_dir/default-folders"
+	commands-for-clients-to-run.sh "done<$runtime_files_dir_of_client/actual-normal-users"
 }
 
 actual_normal_users_finder
