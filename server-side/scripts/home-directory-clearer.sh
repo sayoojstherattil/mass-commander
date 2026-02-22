@@ -1,5 +1,22 @@
 #!/bin/bash
 
+systems_reboot_prompt() {
+	echo "rebooting systems is necessary to perform the operation"
+	echo "proceed? (y)/(n)"
+
+	echo -ne "y\nn\n" > $runtime_files_dir/input-options
+	user-input-validator.sh
+	user_input=$(cat $runtime_files_dir/user-input)
+
+	if [ "$user_input" = "y" ]; then
+		echo "be careful not to use the computers until the second reboot which will happen automatically"
+		systems-rebooter.sh
+	elif [ "$user_input" = "n" ]; then
+		echo "aborting the operation..."
+		exit 1
+	fi
+}
+
 actual_normal_users_finder() {
 	commands-for-clients-to-run.sh "ls /home | tee -a $runtime_files_dir_of_client/home-dir-files"
 
@@ -17,7 +34,10 @@ home_dir_clearer() {
 	commands-for-clients-to-run.sh "done<$runtime_files_dir_of_client/actual-normal-users"
 }
 
+systems_reboot_prompt
 actual_normal_users_finder
 home_dir_clearer
+
+systems-rebooter.sh
 
 commander.sh
