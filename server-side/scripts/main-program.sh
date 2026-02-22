@@ -52,59 +52,30 @@ echo "(c)ustom commanding"
 echo ""
 echo "(S)hutdown systems"
 echo "(R)eboot systems"
+echo "(H)ome dirs clearer"
 
-echo -ne "i\nr\nu\na\nd\nc\nS\nR\n" > $runtime_files_dir/input-options
+echo -ne "i\nr\nu\na\nd\nc\nS\nR\nH\n" > $runtime_files_dir/input-options
 user-input-validator.sh
 echo
 
 user_input=$(cat $runtime_files_dir/user-input)
 
 if [ "$user_input" = "i" ]; then
-	user_choice="install_packages"
-fi
-
-if [ "$user_input" = "r" ]; then
-	user_choice="remove_packages"
-fi
-
-if [ "$user_input" = "u" ]; then
-	user_choice="upgrade_packages"
-fi
-
-if [ "$user_input" = "a" ]; then
-	user_choice="add_users"
-fi
-
-if [ "$user_input" = "d" ]; then
-	user_choice="delete_users"
-fi
-
-if [ "$user_input" = "c" ]; then
-	user_choice="custom_commanding"
-fi
-
-if [ "$user_input" = "S" ]; then
-	user_choice="shutdown_systems"
-fi
-
-if [ "$user_input" = "R" ]; then
-	user_choice="reboot_systems"
-fi
-
-if [ "$user_choice" = "add_users" ]; then
-	user-adder.sh
-elif [ "$user_choice" = "delete_users" ]; then
-	user-deletor.sh
-elif [ "$user_choice" = "install_packages" ]; then
 	packages-installer.sh
-elif [ "$user_choice" = "remove_packages" ]; then
+elif [ "$user_input" = "r" ]; then
 	packages-remover.sh
-elif [ "$user_choice" = "upgrade_packages" ]; then
+elif [ "$user_input" = "u" ]; then
 	packages-upgrader.sh
-elif [ "$user_choice" = "custom_commanding" ]; then
+elif [ "$user_input" = "a" ]; then
+	user-adder.sh
+elif [ "$user_input" = "d" ]; then
+	user-deletor.sh
+elif [ "$user_input" = "c" ]; then
 	custom-commander.sh
-elif [ "$user_choice" = "shutdown_systems" ]; then
+elif [ "$user_input" = "S" ]; then
 	systems-shutdowner.sh
-elif [ "$user_choice" = "reboot_systems" ]; then
+elif [ "$user_input" = "R" ]; then
 	systems-rebooter.sh
+elif [ "$user_input" = "H" ]; then
+	home-directory-clearer.sh
 fi
