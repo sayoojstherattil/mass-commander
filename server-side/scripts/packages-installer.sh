@@ -12,14 +12,6 @@ snap_package_fetcher() {
 	echo
 }
 
-sftp_directory_files_permission_changer() {
-	ls $sftp_directory > $runtime_files_dir/snap_packages_in_sftp
-
-	while read filename; do
-		chmod 644 ${sftp_directory}/${filename}
-	done<$runtime_files_dir/snap_packages_in_sftp
-}
-
 snap_packages_distinguisher() {
 	while read snap_package; do
 		echo "$snap_package" | grep -qe '\.assert'

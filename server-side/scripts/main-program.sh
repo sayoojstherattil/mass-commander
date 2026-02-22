@@ -60,6 +60,9 @@ echo
 
 user_input=$(cat $runtime_files_dir/user-input)
 
+eval $(ssh-agent) >/dev/null 2>&1
+ssh-add ${clients_accesing_private_key} >/dev/null 2>&1
+
 if [ "$user_input" = "i" ]; then
 	packages-installer.sh
 elif [ "$user_input" = "r" ]; then
