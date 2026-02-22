@@ -14,7 +14,7 @@ apt_packages_verification() {
 
 		if [ $? -eq 0 ]; then
 			echo 0 > $runtime_files_dir/status
-			echo "$package_name" | tee -a $runtime_files_dir/verified_apt_package_names
+			(echo "$package_name" | tee -a $runtime_files_dir/verified_apt_package_names) >/dev/null
 		else
 			echo "no package $package_name found"
 			echo 1 > $runtime_files_dir/status
@@ -37,7 +37,7 @@ snap_packages_verification() {
 
 		if [ $? -eq 0 ]; then
 			echo 0 > $runtime_files_dir/status
-			echo "$package_name" | tee -a $runtime_files_dir/verified_snap_package_names
+			(echo "$package_name" | tee -a $runtime_files_dir/verified_snap_package_names) >/dev/null
 		else
 			echo "no package $package_name found"
 			echo 1 > $runtime_files_dir/status
