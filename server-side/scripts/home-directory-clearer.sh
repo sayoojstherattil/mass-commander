@@ -1,5 +1,10 @@
 #!/bin/bash
 
+prompt() {
+	echo -n "$1 [press enter to continue]"
+	read tmp
+}
+
 systems_reboot_prompt() {
 	echo "rebooting systems is necessary to perform the operation"
 	echo "proceed? (y)/(n)"
@@ -9,14 +14,18 @@ systems_reboot_prompt() {
 	user_input=$(cat $runtime_files_dir/user-input)
 
 	if [ "$user_input" = "y" ]; then
-		echo
-		echo -n "be careful not to use the computers until the second reboot which will happen automatically [press enter to continue]"
+		prompt 'be careful not to use the computers until the second reboot which will happen automatically'
 		read tmp
+		echo
 		systems-rebooter.sh
 	elif [ "$user_input" = "n" ]; then
 		echo "aborting the operation..."
 		exit 1
 	fi
+}
+
+systems_back_on_ensurer() {
+	prompt "ensure that all systems are back on the login screen"
 }
 
 actual_normal_users_finder() {
@@ -38,6 +47,7 @@ home_dir_clearer() {
 
 systems_reboot_prompt
 
+systems_back_on_ensurer
 actual_normal_users_finder
 home_dir_clearer
 commander.sh
