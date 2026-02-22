@@ -28,6 +28,10 @@ systems_back_on_ensurer() {
 	prompt "ensure that all systems are back on the login screen"
 }
 
+commands_to_run_of_client_file_clearer() {
+	rm $runtime_files_dir/commands-to-run-of-client
+}
+
 actual_normal_users_finder() {
 	commands-for-clients-to-run.sh "ls /home | tee -a $runtime_files_dir_of_client/home-dir-files"
 
@@ -53,6 +57,7 @@ systems_back_on_ensurer
 
 echo 'clearing home folders...'
 
+commands_to_run_of_client_file_clearer
 actual_normal_users_finder
 home_dir_clearer
 
