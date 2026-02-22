@@ -30,4 +30,10 @@ git checkout testing-area-for-snap
 sudo whoami 
 ```
 
-After everything is set, all client systems will be rebooted and you are fresh to go with the pluser with password `password`, which is a user set up to show the status of the commands ran by the server. 
+Just relogin as the roor user and everything is set, all client systems will be rebooted and you are fresh to go with the pluser with password `password`, which is a user set up to show the status of the commands ran by the server. 
+
+To start mass commander, type `mass_commander` after logging in as the root user
+
+```
+mass_commander
+```
