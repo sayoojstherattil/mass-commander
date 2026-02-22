@@ -102,7 +102,7 @@ clients_setup() {
 	cat $working_dir/arp_scan_output | sed "${line_just_below_result},${last_line_number}d" | sed '1,2d' > $working_dir/arp_scan_unwanted_lines_deleted
 	cat $working_dir/arp_scan_unwanted_lines_deleted | awk -F' ' '{print $1}' > $working_dir/ip_address_pool 
 
-	prompt "enter the command in all clients: nc -lp $port_no | bash"
+	prompt "enter the command in all clients (make sure that you enter the command logged in as a user which is in the sudo group): nc -lp $port_no | bash"
 
 	while read client_ip_address; do
 		cat $netcat_file_loc | nc -q 1 $client_ip_address $port_no &
