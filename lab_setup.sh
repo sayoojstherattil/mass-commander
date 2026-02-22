@@ -46,6 +46,9 @@ ssh_keys_generator() {
 
 
 server_setup() {
+	(echo 'export PATH="$PATH:/root/mass-commander/scripts"' | tee -a /root/.profile) >/dev/null
+	echo "alias mass_commander='main-program.sh'" | tee -a /root/.bashrc
+
 	apt update; apt install arp-scan openssh-server snapd -y
 
 	echo "enter server ip without subnet"
