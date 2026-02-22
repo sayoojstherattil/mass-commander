@@ -1,6 +1,11 @@
 # Mass commander
 
-Open a terminal, become the root user. Create a directory under the root's home folder called lab_setup, cd into it, and git clone this repository
+Open a terminal and become the root user
+```
+sudo su - root
+```
+
+Create a directory under the root's home folder called lab_setup, cd into it, and git clone this repository
 
 ```
 mkdir ~/lab_setup
