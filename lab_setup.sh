@@ -17,8 +17,10 @@ export new_user_profile_loc="/home/$new_user_username/.profile"
 prompt() {
 	message="$1"
 
+	echo
 	echo -n "$message [press enter to continue]"
 	read tmp
+	echo
 }
 
 necessary_files_ensurer() {
