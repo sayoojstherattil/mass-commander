@@ -51,7 +51,7 @@ systems_reboot_prompt
 
 systems_back_on_ensurer
 
-prompt 'clearing home folders...'
+echo 'clearing home folders...'
 
 actual_normal_users_finder
 home_dir_clearer
