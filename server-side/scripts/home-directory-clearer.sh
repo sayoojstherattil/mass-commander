@@ -35,9 +35,9 @@ home_dir_clearer() {
 }
 
 systems_reboot_prompt
+
 actual_normal_users_finder
 home_dir_clearer
+commander.sh
 
 systems-rebooter.sh
-
-commander.sh
