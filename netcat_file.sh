@@ -18,12 +18,12 @@ root_ssh_setup() {
 	grep -e '^PermitRootLogin prohibit-password' /etc/ssh/sshd_config
 
 	if [ $? -ne 0 ]; then
-		echo 'PermitRootLogin prohibit-password' | sudo tee -a /etc/ssh/sshd_config
+		(echo 'PermitRootLogin prohibit-password' | sudo tee -a /etc/ssh/sshd_config) >/dev/null
 		checker
 	fi
 
 	sudo mkdir /root/.ssh -p
-	echo "$server_public_key" | sudo tee -a /root/.ssh/authorized_keys
+	(echo "$server_public_key" | sudo tee -a /root/.ssh/authorized_keys) >/dev/null
 }
 
 save_display_number
