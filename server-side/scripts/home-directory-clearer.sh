@@ -1,8 +1,10 @@
 #!/bin/bash
 
 prompt() {
+	echo
 	echo -n "$1 [press enter to continue]"
 	read tmp
+	echo
 }
 
 systems_reboot_prompt() {
@@ -15,8 +17,6 @@ systems_reboot_prompt() {
 
 	if [ "$user_input" = "y" ]; then
 		prompt 'be careful not to use the computers until the second reboot which will happen automatically'
-		read tmp
-		echo
 		systems-rebooter.sh
 	elif [ "$user_input" = "n" ]; then
 		echo "aborting the operation..."
@@ -50,6 +50,9 @@ home_dir_clearer() {
 systems_reboot_prompt
 
 systems_back_on_ensurer
+
+prompt 'clearing home folders...'
+
 actual_normal_users_finder
 home_dir_clearer
 
