@@ -3,13 +3,13 @@
 systems_reboot_prompt() {
 	echo "rebooting systems is necessary to perform the operation"
 	echo "proceed? (y)/(n)"
-	echo
 
 	echo -ne "y\nn\n" > $runtime_files_dir/input-options
 	user-input-validator.sh
 	user_input=$(cat $runtime_files_dir/user-input)
 
 	if [ "$user_input" = "y" ]; then
+		echo
 		echo -n "be careful not to use the computers until the second reboot which will happen automatically [press enter to continue]"
 		read tmp
 		systems-rebooter.sh
