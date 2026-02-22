@@ -43,6 +43,8 @@ home_dir_clearer() {
 	commands-for-clients-to-run.sh "	cd /home/\${username}"
 	commands-for-clients-to-run.sh "	mkdir -v $(cat $permanent_files_dir/default-folders | tr '\n' ' ')"
 	commands-for-clients-to-run.sh "done<$runtime_files_dir_of_client/actual-normal-users"
+
+	commands-for-clients-to-run.sh "systemctl reboot"
 }
 
 systems_reboot_prompt
@@ -50,6 +52,5 @@ systems_reboot_prompt
 systems_back_on_ensurer
 actual_normal_users_finder
 home_dir_clearer
-commander.sh
 
-systems-rebooter.sh
+commander.sh
