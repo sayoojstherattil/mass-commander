@@ -24,7 +24,7 @@ git checkout testing-area-for-snap
 ./lab_setup.sh
 ```
 
- Follow the prompts and **make sure that you enter the netcat command** (which it will tell you to enter in the client machines) **in client machines as a user which is in the sudo group**. This can be confirmed by running sudo whoami prior to running the netcat command: 
+ Follow the prompts and **make sure that you enter the netcat command** (which it will tell you to enter in the client machines) **in client machines as a user which is in the sudo group** and is **logged in using X11 as the display server**. This can be confirmed by running sudo whoami prior to running the netcat command: 
 
 ```
 sudo whoami 
