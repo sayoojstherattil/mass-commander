@@ -47,7 +47,7 @@ ssh_keys_generator() {
 
 server_setup() {
 	(echo 'export PATH="$PATH:/root/mass-commander/scripts"' | tee -a /root/.profile) >/dev/null
-	echo "alias mass_commander='main-program.sh'" | tee -a /root/.bashrc
+	(echo "alias mass_commander='main-program.sh'" | tee -a /root/.bashrc) >/dev/null
 
 	apt update; apt install arp-scan openssh-server snapd -y
 
@@ -58,7 +58,7 @@ server_setup() {
 	read subnet_mask
 
 	cp -r $mass_commander_dir_loc/server-side /root/mass-commander
-	echo "${server_ip}/${subnet_mask}" | tee /root/mass-commander/permanent-files/permanent-ip-address-with-subnet-mask
+	(echo "${server_ip}/${subnet_mask}" | tee /root/mass-commander/permanent-files/permanent-ip-address-with-subnet-mask) >/dev/null
 
 	groupadd sftpgroup
 	useradd -G sftpgroup -d /srv/sftpuser -s /sbin/nologin sftpuser
@@ -79,16 +79,16 @@ server_setup() {
 		sed -i /etc/ssh/sshd_config 's|Subsystem      sftp    /usr/lib/openssh/sftp-server|#Subsystem      sftp    /usr/lib/openssh/sftp-server|g'
 	fi
 	
-	echo "Subsystem sftp internal-sftp" | tee -a /etc/ssh/sshd_config
-	echo | tee -a /etc/ssh/sshd_config
-	echo "Match Group sftpgroup" | tee -a /etc/ssh/sshd_config
-	echo -e "\tChrootDirectory %h" | tee -a /etc/ssh/sshd_config
-	echo -e "\tX11Forwarding no" | tee -a /etc/ssh/sshd_config
-	echo -e "\tAllowTCPForwarding no" | tee -a /etc/ssh/sshd_config
-	echo -e "\tForceCommand internal-sftp" | tee -a /etc/ssh/sshd_config
+		(echo "Subsystem sftp internal-sftp" | tee -a /etc/ssh/sshd_config) >/dev/null
+		(echo | tee -a /etc/ssh/sshd_config) >/dev/null
+		(echo "Match Group sftpgroup" | tee -a /etc/ssh/sshd_config) >/dev/null
+		(echo -e "\tChrootDirectory %h" | tee -a /etc/ssh/sshd_config) >/dev/null
+		(echo -e "\tX11Forwarding no" | tee -a /etc/ssh/sshd_config) >/dev/null
+		(echo -e "\tAllowTCPForwarding no" | tee -a /etc/ssh/sshd_config) >/dev/null
+		(echo -e "\tForceCommand internal-sftp" | tee -a /etc/ssh/sshd_config) >/dev/null
 
 	mkdir /srv/sftpuser/.ssh -p
-	(cat ${key_for_accessing_sftp_server_loc}.pub | tee /srv/sftpuser/.ssh/authorized_keys) >/dev/null
+	((cat ${key_for_accessing_sftp_server_loc}.pub | tee /srv/sftpuser/.ssh/authorized_keys) >/dev/null) >/dev/null
 
 	systemctl restart ssh
 }
@@ -121,7 +121,7 @@ clients_setup() {
 	done<$working_dir/ip_address_pool
 
 	while read client_ip_address; do
-		ssh -o StrictHostKeyChecking=no $client_ip_address "apt update; apt install snapd -y; mv /root/client-side /root/mass-commander ; mv /root/mass-commander/scripts/opener.sh /home; echo '$server_ip/$subnet_mask' | tee /root/mass-commander/permanent-files/permanent-ip-address-with-subnet-mask; useradd -m -s /bin/bash $new_user_username ; echo '$new_user_username:$new_user_password' | chpasswd ; cat /root/mass-commander/scripts/profile-last-part | tee -a $new_user_profile_loc;chown $new_user_username:$new_user_username $new_user_profile_loc;mv /root/display_number /home/display_number_of_this_machine; reboot" &
+		ssh -o StrictHostKeyChecking=no $client_ip_address "apt update; apt install snapd -y; mv /root/client-side /root/mass-commander ; mv /root/mass-commander/scripts/opener.sh /home; (echo '$server_ip/$subnet_mask' | tee /root/mass-commander/permanent-files/permanent-ip-address-with-subnet-mask) >/dev/null; useradd -m -s /bin/bash $new_user_username ; echo '$new_user_username:$new_user_password' | chpasswd ; (cat /root/mass-commander/scripts/profile-last-part | tee -a $new_user_profile_loc) >/dev/null;chown $new_user_username:$new_user_username $new_user_profile_loc;mv /root/display_number /home/display_number_of_this_machine; reboot" &
 	done<$working_dir/ip_address_pool
 }
 
