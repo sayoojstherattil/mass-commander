@@ -8,13 +8,12 @@ actual_normal_users_finder() {
 
 home_dir_clearer() {
 	commands-for-clients-to-run.sh "while read username; do"
-	commands-for-clients-to-run.sh "	ls -a /home/\${username} > $runtime_files_dir_of_client/contents-of-\${username}"
-	commands-for-clients-to-run.sh "	cat $runtime_files_dir_of_client/contents-of-\${username} | grep -v '\.bashrc' | grep -v '\.profile' | tee $runtime_files_dir_of_client/contents-of-\${username}-other-than-bashrc-and-profile"
-	commands-for-clients-to-run.sh "	rm -v -rf '\$(cat $runtime_files_dir_of_client/contents-of-\${username}-other-than-bashrc-and-profile | tr "\n" " ")'"
-
-	while read folder_name; do
-	commands-for-clients-to-run.sh "	mkdir -v /home/\${username}/$folder_name"
-	done<$permanent_files_dir/default-folders
+	commands-for-clients-to-run.sh "	rm -v -rf /home/${username}"
+	commands-for-clients-to-run.sh "	mkhomedir_helper $username"
+	commands-for-clients-to-run.sh "	(cat $mass_commander_base_dir/profile-last-part | tee -a /home/${username}/.profile) >/dev/null"
+	commands-for-clients-to-run.sh "	chown $username:$username /home/${username}/.profile"
+	commands-for-clients-to-run.sh "	cd /home/${username}"
+	commands-for-clients-to-run.sh "	mkdir -v \"$(cat $permanent_files_dir/default-folders | tr ' ' '\n')\""
 	commands-for-clients-to-run.sh "done<$runtime_files_dir_of_client/actual-normal-users"
 }
 
