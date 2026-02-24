@@ -1,0 +1,3 @@
+root              172.17.142.254   10:39    2:12   0.00s  0.04s sshd: root@notty
+olivia   tty2     -                10:39    4:45  43.38s 43.26s /bin/bash ../opener.sh
+iiab-adm          172.17.142.13    10:38    2:12   0.00s  0.18s sshd: iiab-admin [priv]
