@@ -16,7 +16,6 @@ git clone https://github.com/sayoojstherattil/mass-commander.git
 After cloning, cd into the mass-commander director and check out to testing area for snap:
 ```
 cd mass-commander
-git checkout testing-area-for-snap
 ```
 
  Then, just run the lab setup script
