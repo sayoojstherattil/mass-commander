@@ -23,7 +23,6 @@ if [ -f $runtime_files_dir/verified_snap_package_names ]; then
 fi
 
 if [ -f $runtime_files_dir/verified_apt_package_names ]; then
-	commands-for-clients-to-run.sh "apt update"
 	commands-for-clients-to-run.sh "apt remove -y $(cat $runtime_files_dir/verified_apt_package_names | tr '\n' ' ')"
 fi
 
