@@ -12,6 +12,10 @@ snap_package_fetcher() {
 	echo
 }
 
+snap_files_in_sftp_finder() {
+	(ls $sftp_directory | tee $runtime_files_dir/snap_packages_in_sftp) >/dev/null
+}
+
 snap_packages_distinguisher() {
 	while read snap_package; do
 		echo "$snap_package" | grep -qe '\.assert'
@@ -81,7 +85,7 @@ fi
 
 if [ -f $runtime_files_dir/verified_snap_package_names ]; then
 	snap_package_fetcher
-	sftp_directory_files_permission_changer
+	snap_files_in_sftp_finder
 	snap_packages_distinguisher
 	snap_packages_fetching_command_generator
 	snap_packages_acknowledge_command_generator
