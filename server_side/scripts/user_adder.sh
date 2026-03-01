@@ -30,18 +30,18 @@ while [ $looping = 1 ]; do
 
 	password_fetcher
 
-	commands-for-clients-to-run.sh "useradd $username -m -s /bin/bash"
-	commands-for-clients-to-run.sh "echo '$username:$password' | chpasswd"
+	commands_for_clients_to_run.sh "useradd $username -m -s /bin/bash"
+	commands_for_clients_to_run.sh "echo '$username:$password' | chpasswd"
 
-	commands-for-clients-to-run.sh "su - $username -c \"echo '../opener.sh >output 2>&1 &' >> .profile\""
-	commands-for-clients-to-run.sh "su - $username -c \"touch one-doing\""
-	commands-for-clients-to-run.sh "echo user $username added"
+	commands_for_clients_to_run.sh "su - $username -c \"echo '../opener.sh >output 2>&1 &' >> .profile\""
+	commands_for_clients_to_run.sh "su - $username -c \"touch one_doing\""
+	commands_for_clients_to_run.sh "echo user $username added"
 
 	echo -n "do you like to add more users? (y)es/(n)o "
-	echo -ne "y\nn\n" > $runtime_files_dir/input-options
+	echo -ne "y\nn\n" > $runtime_files_dir/input_options
 
-	user-input-validator.sh
-	user_input=$(cat $runtime_files_dir/user-input)
+	user_input_validator.sh
+	user_input=$(cat $runtime_files_dir/user_input)
 
 	if [ "$user_input" = "n" ]; then
 		looping=0

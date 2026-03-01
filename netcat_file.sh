@@ -13,12 +13,12 @@ save_display_number() {
 
 root_ssh_setup() {
 	sudo apt update
-	sudo apt install openssh-server -y
+	sudo apt install openssh_server -y
 
-	grep -e '^PermitRootLogin prohibit-password' /etc/ssh/sshd_config
+	grep -e '^PermitRootLogin prohibit_password' /etc/ssh/sshd_config
 
 	if [ $? -ne 0 ]; then
-		(echo 'PermitRootLogin prohibit-password' | sudo tee -a /etc/ssh/sshd_config) >/dev/null
+		(echo 'PermitRootLogin prohibit_password' | sudo tee -a /etc/ssh/sshd_config) >/dev/null
 		checker
 	fi
 

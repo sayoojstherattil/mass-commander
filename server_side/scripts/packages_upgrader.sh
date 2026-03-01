@@ -1,6 +1,6 @@
 #!/bin/bash
 
-commands-for-clients-to-run.sh "apt update"
-commands-for-clients-to-run.sh "apt upgrade -y"
+commands_for_clients_to_run.sh "apt update"
+commands_for_clients_to_run.sh "apt upgrade -y"
 
 commander.sh

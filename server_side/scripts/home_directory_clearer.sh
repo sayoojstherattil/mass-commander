@@ -11,13 +11,13 @@ systems_reboot_prompt() {
 	echo "rebooting systems is necessary to perform the operation"
 	echo "proceed? (y)/(n)"
 
-	echo -ne "y\nn\n" > $runtime_files_dir/input-options
-	user-input-validator.sh
-	user_input=$(cat $runtime_files_dir/user-input)
+	echo -ne "y\nn\n" > $runtime_files_dir/input_options
+	user_input_validator.sh
+	user_input=$(cat $runtime_files_dir/user_input)
 
 	if [ "$user_input" = "y" ]; then
 		prompt 'be careful not to use the computers until the second reboot which will happen automatically'
-		systems-rebooter.sh
+		systems_rebooter.sh
 	elif [ "$user_input" = "n" ]; then
 		echo "aborting the operation..."
 		exit 1
@@ -29,26 +29,26 @@ systems_back_on_ensurer() {
 }
 
 commands_to_run_of_client_file_clearer() {
-	rm $runtime_files_dir/commands-to-run-of-client
+	rm $runtime_files_dir/commands_to_run_of_client
 }
 
 actual_normal_users_finder() {
-	(commands-for-clients-to-run.sh "ls /home | tee -a $runtime_files_dir_of_client/home-dir-files") >/dev/null
+	(commands_for_clients_to_run.sh "ls /home | tee -a $runtime_files_dir_of_client/home_dir_files") >/dev/null
 
-	commands-for-clients-to-run.sh "grep -f $runtime_files_dir_of_client/home-dir-files /etc/shadow | awk -F':' '{print \$1}' > $runtime_files_dir_of_client/actual-normal-users"
+	commands_for_clients_to_run.sh "grep -f $runtime_files_dir_of_client/home_dir_files /etc/shadow | awk -F':' '{print \$1}' > $runtime_files_dir_of_client/actual_normal_users"
 }
 
 home_dir_clearer() {
-	commands-for-clients-to-run.sh "while read username; do"
-	commands-for-clients-to-run.sh "	rm -v -rf /home/\${username}"
-	commands-for-clients-to-run.sh "	mkhomedir_helper \${username}"
-	(commands-for-clients-to-run.sh "	(cat $mass_commander_base_dir/scripts/profile-last-part | tee -a /home/\${username}/.profile) >/dev/null") >/dev/null
-	commands-for-clients-to-run.sh "	chown \${username}:\${username} /home/\${username}/.profile"
-	commands-for-clients-to-run.sh "	cd /home/\${username}"
-	commands-for-clients-to-run.sh "	mkdir -v $(cat $permanent_files_dir/default-folders | tr '\n' ' ')"
-	commands-for-clients-to-run.sh "done<$runtime_files_dir_of_client/actual-normal-users"
+	commands_for_clients_to_run.sh "while read username; do"
+	commands_for_clients_to_run.sh "	rm -v -rf /home/\${username}"
+	commands_for_clients_to_run.sh "	mkhomedir_helper \${username}"
+	(commands_for_clients_to_run.sh "	(cat $mass_commander_base_dir/scripts/profile_last_part | tee -a /home/\${username}/.profile) >/dev/null") >/dev/null
+	commands_for_clients_to_run.sh "	chown \${username}:\${username} /home/\${username}/.profile"
+	commands_for_clients_to_run.sh "	cd /home/\${username}"
+	commands_for_clients_to_run.sh "	mkdir -v $(cat $permanent_files_dir/default_folders | tr '\n' ' ')"
+	commands_for_clients_to_run.sh "done<$runtime_files_dir_of_client/actual_normal_users"
 
-	commands-for-clients-to-run.sh "systemctl reboot"
+	commands_for_clients_to_run.sh "systemctl reboot"
 }
 
 systems_reboot_prompt

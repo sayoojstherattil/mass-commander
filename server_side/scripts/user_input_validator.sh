@@ -13,7 +13,7 @@ while [ $input_is_valid = 0 ]; do
 				input_is_valid=1
 				break
 			fi
-		done<$runtime_files_dir/input-options
+		done<$runtime_files_dir/input_options
 
 		if [ $input_is_valid -eq 1 ]; then
 			break
@@ -23,4 +23,4 @@ while [ $input_is_valid = 0 ]; do
 	fi
 done
 
-echo "$input" > $runtime_files_dir/user-input
+echo "$input" > $runtime_files_dir/user_input

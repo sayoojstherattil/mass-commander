@@ -10,7 +10,7 @@ apt_packages_verification() {
 	echo "verifying package names..."
 	echo
 	while read package_name; do
-		apt-cache show $package_name >/dev/null
+		apt_cache show $package_name >/dev/null
 
 		if [ $? -eq 0 ]; then
 			echo 0 > $runtime_files_dir/status
@@ -47,7 +47,7 @@ snap_packages_verification() {
 }
 
 
-user_input=$(cat $runtime_files_dir/user-input)
+user_input=$(cat $runtime_files_dir/user_input)
 if [ "$user_input" = "a" ]; then
 	apt_packages_verification
 elif [ "$user_input" = "s" ]; then
