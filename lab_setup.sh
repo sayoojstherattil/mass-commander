@@ -18,23 +18,16 @@ prompt() {
 	message="$1"
 
 	echo
-	echo -n "$message [press enter to continue]"
+	echo -e "$message"
+	echo " [press enter to continue]"
+
 	read tmp
-	echo
 }
-
-necessary_files_ensurer() {
-	for i in {$netcat_file_loc,$mass_commander_server_dir_loc,$mass_commander_client_dir_loc}; do 
-		if ! [ -f $i ]; then
-			echo "couldnt find $i"
-			exit 1
-		fi
-	done
-}
-
 
 ssh_keys_generator() {
 	prompt 'you are going to enter password for accessing all the client machines. never forget that'
+
+	mkdir -p /root/.ssh
 	ssh-keygen -t ed25519 -f $key_for_accessing_client_machines_loc
 	server_public_key=$(cat ${key_for_accessing_client_machines_loc}.pub)
 
@@ -43,7 +36,6 @@ ssh_keys_generator() {
 	prompt 'generating keys for client machines to access the sftp server'
 	ssh-keygen -t ed25519 -f $key_for_accessing_sftp_server_loc -N ""
 }
-
 
 server_setup() {
 	(echo 'export PATH="$PATH:/root/mass-commander/scripts"' | tee -a /root/.profile) >/dev/null
@@ -62,9 +54,6 @@ server_setup() {
 
 	groupadd sftpgroup
 	useradd -G sftpgroup -d /srv/sftpuser -s /sbin/nologin sftpuser
-
-	prompt 'enter the password for your sftp server'
-	passwd sftpuser	
 
 	mkdir -p /srv/sftpuser
 	chown root /srv/sftpuser
@@ -105,7 +94,7 @@ clients_setup() {
 	cat $working_dir/arp_scan_output | sed "${line_just_below_result},${last_line_number}d" | sed '1,2d' > $working_dir/arp_scan_unwanted_lines_deleted
 	cat $working_dir/arp_scan_unwanted_lines_deleted | awk -F' ' '{print $1}' > $working_dir/ip_address_pool 
 
-	prompt "enter the command in all clients (make sure that you enter the command logged in as a user which is in the sudo group): nc -lp $port_no | bash"
+	prompt "enter the command in all clients (make sure that you enter the command logged in as a user which is in the sudo group):\nnc -lp $port_no | bash"
 
 	while read client_ip_address; do
 		cat $netcat_file_loc | nc -q 1 $client_ip_address $port_no &
@@ -116,8 +105,8 @@ clients_setup() {
 	eval $(ssh-agent)
 	ssh-add $key_for_accessing_client_machines_loc
 	while read client_ip_address; do
-		scp -o StrictHostKeyChecking=no  $key_for_accessing_sftp_server_loc $client_ip_address:.ssh
-		scp -r $mass_commander_dir_loc/client-side $client_ip_address:
+		scp -o StrictHostKeyChecking=no $key_for_accessing_sftp_server_loc $client_ip_address:.ssh &
+		scp -o StrictHostKeyChecking=no -r $mass_commander_dir_loc/client-side $client_ip_address: &
 	done<$working_dir/ip_address_pool
 
 	while read client_ip_address; do
