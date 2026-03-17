@@ -77,7 +77,7 @@ server_setup() {
 		(echo -e "\tForceCommand internal-sftp" | tee -a /etc/ssh/sshd_config) >/dev/null
 
 	mkdir /srv/sftpuser/.ssh -p
-	((cat ${key_for_accessing_sftp_server_loc}.pub | tee /srv/sftpuser/.ssh/authorized_keys) >/dev/null) >/dev/null
+	(cat ${key_for_accessing_sftp_server_loc}.pub | tee /srv/sftpuser/.ssh/authorized_keys) >/dev/null) >/dev/null
 
 	systemctl restart ssh
 }
