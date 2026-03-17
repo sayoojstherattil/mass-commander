@@ -114,7 +114,6 @@ clients_setup() {
 	done<$working_dir/ip_address_pool
 }
 
-necessary_files_ensurer
 ssh_keys_generator
 server_setup
 clients_setup
