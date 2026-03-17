@@ -37,7 +37,7 @@ ssh_keys_generator() {
 	ssh-keygen -t ed25519 -f $key_for_accessing_sftp_server_loc -N ""
 }
 
-server_setup() {
+server_setup_fresh() {
 	(echo 'export PATH="$PATH:/root/mass-commander/scripts"' | tee -a /root/.profile) >/dev/null
 	(echo "alias mass_commander='main-program.sh'" | tee -a /root/.bashrc) >/dev/null
 
@@ -82,7 +82,7 @@ server_setup() {
 	systemctl restart ssh
 }
 
-clients_setup() {
+clients_setup_fresh() {
 	echo "enter port no to use"
 	read port_no
 
@@ -114,6 +114,60 @@ clients_setup() {
 	done<$working_dir/ip_address_pool
 }
 
-ssh_keys_generator
-server_setup
-clients_setup
+
+clients_expander() {
+	prompt 'please ensure that the already set up systems are not connected to the LAN'
+
+	if ! [ -f /root/mass-commander/permanent-files/permanent-ip-address-with-subnet-mask ]; then
+		echo 'permanent files of server not found (ip with subnet mask)'
+		exit 1
+	fi
+
+	permanent_server_ip_with_subnet_mask=$(cat /root/mass-commander/permanent-files/permanent-ip-address-with-subnet-mask)
+
+	echo "enter port no to use for commanding the new client machines"
+	read port_no
+
+	arp-scan "$permanent_server_ip_with_subnet_mask" >$working_dir/arp_scan_output
+
+	last_line_number=$(wc -l $working_dir/arp_scan_output | awk -F' ' '{print $1}')
+	line_just_below_result=$(($last_line_number - 2))
+
+	cat $working_dir/arp_scan_output | sed "${line_just_below_result},${last_line_number}d" | sed '1,2d' > $working_dir/arp_scan_unwanted_lines_deleted
+	cat $working_dir/arp_scan_unwanted_lines_deleted | awk -F' ' '{print $1}' > $working_dir/ip_address_pool 
+
+	prompt "enter the command in all clients (make sure that you enter the command logged in as a user which is in the sudo group):\nnc -lp $port_no | bash"
+
+	while read client_ip_address; do
+		cat $netcat_file_loc | nc -q 1 $client_ip_address $port_no &
+	done<$working_dir/ip_address_pool
+
+	prompt 'make sure all clients have completed the task'
+
+	eval $(ssh-agent)
+	ssh-add $key_for_accessing_client_machines_loc
+	while read client_ip_address; do
+		scp -o StrictHostKeyChecking=no $key_for_accessing_sftp_server_loc $client_ip_address:.ssh &
+		scp -o StrictHostKeyChecking=no -r $mass_commander_dir_loc/client-side $client_ip_address: &
+	done<$working_dir/ip_address_pool
+
+	while read client_ip_address; do
+		ssh -o StrictHostKeyChecking=no $client_ip_address "apt update; apt install snapd -y; mv /root/client-side /root/mass-commander ; mv /root/mass-commander/scripts/opener.sh /home; (echo '$server_ip/$subnet_mask' | tee /root/mass-commander/permanent-files/permanent-ip-address-with-subnet-mask) >/dev/null; useradd -m -s /bin/bash $new_user_username ; echo '$new_user_username:$new_user_password' | chpasswd ; (cat /root/mass-commander/scripts/profile-last-part | tee -a $new_user_profile_loc) >/dev/null;chown $new_user_username:$new_user_username $new_user_profile_loc;mv /root/display_number /home/display_number_of_this_machine; reboot" &
+	done<$working_dir/ip_address_pool
+}
+
+# main area
+
+echo 'is this your fresh setup? (y/n)'
+read expansion_choice
+
+if [ "$expansion_choice" = 'y' ]; then
+	ssh_keys_generator
+	server_setup_fresh
+	clients_setup_fresh
+elif [ "$expansion_choice" = 'n' ]; then
+	clients_expander
+else
+	echo 'invalid choice'
+	exit 1
+fi
