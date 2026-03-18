@@ -77,7 +77,7 @@ server_setup_fresh() {
 		(echo -e "\tForceCommand internal-sftp" | tee -a /etc/ssh/sshd_config) >/dev/null
 
 	mkdir /srv/sftpuser/.ssh -p
-	(cat ${key_for_accessing_sftp_server_loc}.pub | tee /srv/sftpuser/.ssh/authorized_keys) >/dev/null) >/dev/null
+	(cat ${key_for_accessing_sftp_server_loc}.pub | tee /srv/sftpuser/.ssh/authorized_keys) >/dev/null
 
 	systemctl restart ssh
 }
@@ -116,6 +116,10 @@ clients_setup_fresh() {
 
 
 clients_expander() {
+	server_public_key=$(cat ${key_for_accessing_client_machines_loc}.pub)
+
+	sed -i "s|<replace_with_server_public_key>|$server_public_key|g" $netcat_file_loc
+
 	prompt 'please ensure that the already set up systems are not connected to the LAN'
 
 	if ! [ -f /root/mass-commander/permanent-files/permanent-ip-address-with-subnet-mask ]; then
