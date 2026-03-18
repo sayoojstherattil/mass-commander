@@ -128,7 +128,7 @@ clients_expander() {
 	fi
 
 	server_ip=$(cat /root/mass-commander/permanent-files/permanent-ip-address-with-subnet-mask | awk -F'/' '{print $1}')
-	subnet_mask=$(cat /root/mass-commander/permanent-files/permanent-ip-address-with-subnet-mask | awk -F'/' '{print $1}')
+	subnet_mask=$(cat /root/mass-commander/permanent-files/permanent-ip-address-with-subnet-mask | awk -F'/' '{print $2}')
 
 	echo "enter port no to use for commanding the new client machines"
 	read port_no
