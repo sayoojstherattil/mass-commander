@@ -127,12 +127,13 @@ clients_expander() {
 		exit 1
 	fi
 
-	permanent_server_ip_with_subnet_mask=$(cat /root/mass-commander/permanent-files/permanent-ip-address-with-subnet-mask)
+	server_ip=$(cat /root/mass-commander/permanent-files/permanent-ip-address-with-subnet-mask | awk -F'/' '{print $1}')
+	subnet_mask=$(cat /root/mass-commander/permanent-files/permanent-ip-address-with-subnet-mask | awk -F'/' '{print $1}')
 
 	echo "enter port no to use for commanding the new client machines"
 	read port_no
 
-	arp-scan "$permanent_server_ip_with_subnet_mask" >$working_dir/arp_scan_output
+	arp-scan ${server_ip}/${subnet_mask} >$working_dir/arp_scan_output
 
 	last_line_number=$(wc -l $working_dir/arp_scan_output | awk -F' ' '{print $1}')
 	line_just_below_result=$(($last_line_number - 2))
