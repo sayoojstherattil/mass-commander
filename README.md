@@ -60,3 +60,46 @@ To see the magic, just run:
 ```
 mass_commander
 ```
+
+### Expansion installation
+
+To add more `clients` to the existing setup, follow the steps below:
+
+#### Server Side
+
+
+Open a terminal and become the root user
+```
+sudo su -
+```
+
+cd into the `lab_setup` directory, do a git stash and run the `lab_setup.sh` script
+```
+cd ~/lab_setup/mass-commander
+git stash
+./lab_setup.sh
+```
+
+say no (`n`) to the asked question and follow the prompts
+
+#### Client Side
+
+> [!IMPORTANT]
+> If you intend the new `clients` to show the output in real time inside a terminal window, make sure that you perform the following by logging with `X11` as the display server (this can be selected at the login screen)
+
+> [!TIP]
+> It would be easy if you do the expansion when students are using the `clients`. You need to run a command in all the new `clients` to expand the lab automation software, which would be easy that way.
+
+Ensure that the user you are currently logged in is allowed to use `sudo`. To ensure that, run the following command.
+```
+sudo whoami 
+```
+If it return `root`, you are ready to go
+
+Run the netcat command told by the `lab_setup.sh` script which was ran in the `server`
+```
+nc -lp <port no specified by the script> | bash
+```
+After all the new `clients` finish running the command, inform the server by pressing enter. All the new `clients` will reboot when they are done setting up by the `server`.
+
+You are ready to run the lab automation software on the new `clients` once they have successfully rebooted
