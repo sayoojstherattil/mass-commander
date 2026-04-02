@@ -52,4 +52,11 @@ Run the netcat command told by the `lab_setup.sh` script which was ran in the `s
 ```
 nc -lp <port no specified by the script> | bash
 ```
-After all the `clients` finish running the command, inform the server by pressing enter and you are all done!
+After all the `clients` finish running the command, inform the server by pressing enter. All the `clients` will reboot when they are done setting up by the `server`.
+
+Relogin as `root` user in the `server` and you are all done!
+
+To see the magic, just run:
+```
+mass_commander
+```
