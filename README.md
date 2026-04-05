@@ -6,6 +6,7 @@
 ## Requirements
 * `sudo` access to `server` and `clients`
 * `clients` runs `X11` (optional)
+* `git` installed on `server`
 
 ## Installation
 
