@@ -155,7 +155,7 @@ clients_expander() {
 	done<$working_dir/ip_address_pool
 
 	while read client_ip_address; do
-		ssh -o StrictHostKeyChecking=no $client_ip_address 'source /root/gui_feedback_setup.sh; rm /root/home_dir_files ; rm /root/actual_normal_users' &
+		ssh -o StrictHostKeyChecking=no $client_ip_address 'source /root/gui_feedback_setup.sh; rm /root/home_dir_files ; rm /root/actual_normal_users; rm gui_feedback_setup.sh' &
 	done<$working_dir/ip_address_pool
 }
 
