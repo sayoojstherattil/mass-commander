@@ -96,6 +96,8 @@ clients_setup_fresh() {
 
 	prompt 'make sure all clients have completed the task'
 
+	echo "$server_ip/$subnet_mask" > $mass_commander_dir_loc/client-side/permanent-files/permanent-ip-address-with-subnet-mask
+
 	eval $(ssh-agent)
 	ssh-add $key_for_accessing_client_machines_loc
 	while read client_ip_address; do
@@ -111,8 +113,6 @@ clients_setup_fresh() {
 
 
 clients_expander() {
-	echo "$server_ip/$subnet_mask" > $mass_commander_dir_loc/client-side/permanent-files/permanent-ip-address-with-subnet-mask
-
 	server_public_key=$(cat ${key_for_accessing_client_machines_loc}.pub)
 
 	sed -i "s|<replace_with_server_public_key>|$server_public_key|g" $netcat_file_loc
@@ -126,6 +126,8 @@ clients_expander() {
 
 	server_ip=$(cat /root/mass-commander/permanent-files/permanent-ip-address-with-subnet-mask | awk -F'/' '{print $1}')
 	subnet_mask=$(cat /root/mass-commander/permanent-files/permanent-ip-address-with-subnet-mask | awk -F'/' '{print $2}')
+
+	echo "$server_ip/$subnet_mask" > $mass_commander_dir_loc/client-side/permanent-files/permanent-ip-address-with-subnet-mask
 
 	echo "enter port no to use for commanding the new client machines"
 	read port_no
