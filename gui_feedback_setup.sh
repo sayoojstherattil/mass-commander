@@ -18,7 +18,8 @@ while read existing_username; do
 	set +e
 	grep -w '../opener.sh >.opener-output 2>&1 &' /home/$existing_username/.profile || echo '../opener.sh >.opener-output 2>&1 &' >> /home/$existing_username/.profile
 	set -e
-	chown $existing_username:$existing_username /home/$existing_username/.profile
+	touch /home/$existing_username/one-doing
+	chown $existing_username:$existing_username /home/$existing_username -R
 done</root/actual_normal_users
 
 
