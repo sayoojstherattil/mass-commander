@@ -111,7 +111,7 @@ clients_setup_fresh() {
 
 
 clients_expander() {
-	echo "$server_ip/$subnet_mask" > tee $mass_commander_dir_loc/client-side/permanent-files/permanent-ip-address-with-subnet-mask
+	echo "$server_ip/$subnet_mask" > $mass_commander_dir_loc/client-side/permanent-files/permanent-ip-address-with-subnet-mask
 
 	server_public_key=$(cat ${key_for_accessing_client_machines_loc}.pub)
 
