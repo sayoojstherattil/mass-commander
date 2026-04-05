@@ -8,12 +8,6 @@ export netcat_file_loc="$mass_commander_dir_loc/netcat_file.sh"
 export key_for_accessing_sftp_server_loc="/root/.ssh/key_for_accessing_sftp_server"
 export key_for_accessing_client_machines_loc="/root/.ssh/key_for_accessing_client_machines"
 
-export shell_for_new_user="/bin/bash"
-export new_user_username="pluser"
-export new_user_password="password"
-export new_user_profile_loc="/home/$new_user_username/.profile"
-
-
 prompt() {
 	message="$1"
 
@@ -116,6 +110,8 @@ clients_setup_fresh() {
 
 
 clients_expander() {
+	echo "$server_ip/$subnet_mask" > tee $mass_commander_dir_loc/client-side/permanent-files/permanent-ip-address-with-subnet-mask
+
 	server_public_key=$(cat ${key_for_accessing_client_machines_loc}.pub)
 
 	sed -i "s|<replace_with_server_public_key>|$server_public_key|g" $netcat_file_loc
@@ -154,10 +150,11 @@ clients_expander() {
 	while read client_ip_address; do
 		scp -o StrictHostKeyChecking=no $key_for_accessing_sftp_server_loc $client_ip_address:.ssh &
 		scp -o StrictHostKeyChecking=no -r $mass_commander_dir_loc/client-side $client_ip_address: &
+		scp -o StrictHostKeyChecking=no -r $mass_commander_dir_loc/gui_feedback_setup.sh $client_ip_address: &
 	done<$working_dir/ip_address_pool
 
 	while read client_ip_address; do
-		ssh -o StrictHostKeyChecking=no $client_ip_address "apt update; apt install snapd -y; mv /root/client-side /root/mass-commander ; mv /root/mass-commander/scripts/opener.sh /home; (echo '$server_ip/$subnet_mask' | tee /root/mass-commander/permanent-files/permanent-ip-address-with-subnet-mask) >/dev/null; useradd -m -s /bin/bash $new_user_username ; echo '$new_user_username:$new_user_password' | chpasswd ; (cat /root/mass-commander/scripts/profile-last-part | tee -a $new_user_profile_loc) >/dev/null;chown $new_user_username:$new_user_username $new_user_profile_loc;mv /root/display_number /home/display_number_of_this_machine; reboot" &
+		ssh -o StrictHostKeyChecking=no $client_ip_address 'source /root/gui_feedback_setup.sh; rm /root/home_dir_files ; rm /root/actual_normal_users' &
 	done<$working_dir/ip_address_pool
 }
 
