@@ -5,6 +5,7 @@
 
 > [!IMPORTANT]
 > Make sure your that all the systems are up to date; apt might throw errors of broken dependencies otherwise
+> Always take snapshots before this or any kind of task that deals with root privileges
 
 ## Requirements
 * `sudo` access to `server` and `clients`
