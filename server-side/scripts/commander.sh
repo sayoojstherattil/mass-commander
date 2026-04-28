@@ -34,6 +34,7 @@ commander() {
 	echo
 	echo begun
 
+	stty tostop
 	while read ip_address; do
 		ssh -o StrictHostKeyChecking=no root@$ip_address "/root/mass-commander/scripts/client-side.sh > client-side-output">$runtime_files_dir/ssh-output-of-${ip_address} 2>&1 &
 	done<$runtime_files_dir/ip-address-pool
